@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="定位(position)background-position   背景定位 如果，说浮动， 关键在一个 “浮” 字上面， 那么 我们的定位，关键在于一个 “位” 上。 PS: 定位是我们CSS算是数一数二难点的了，但是，你务必要学好它，我们CSS离不开定位，特别是后面的js特效，天天和定位打交道。不要抵触它，反而要爱上它，它可以让我们工作更加轻松哦！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="定位(position)">
+<meta property="og:url" content="https://yichennet.github.io/2020/05/08/%E5%89%8D%E7%AB%AF/%E5%AE%9A%E4%BD%8D/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="定位(position)background-position   背景定位 如果，说浮动， 关键在一个 “浮” 字上面， 那么 我们的定位，关键在于一个 “位” 上。 PS: 定位是我们CSS算是数一数二难点的了，但是，你务必要学好它，我们CSS离不开定位，特别是后面的js特效，天天和定位打交道。不要抵触它，反而要爱上它，它可以让我们工作更加轻松哦！">
+<meta property="og:locale" content="zh—CN">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109172143576-1640662273.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109173725031-1278959223.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109174142752-2075304591.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/08/iBLqajXm3gPWQwR.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/08/O8HPoaeNQMmAX4c.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/08/IPaqUNZ31z7hkjw.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/08/m39osXeET6wPK1a.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/08/kO4speL9lWoZdcP.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109173725031-1278959223.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109231803557-1963873869.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109231956131-50165402.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/05/08/41e6b2c74825688974d343f72268035a.jpg">
+<meta property="article:published_time" content="2020-05-08T14:45:58.994Z">
+<meta property="article:modified_time" content="2020-06-26T12:14:21.665Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109172143576-1640662273.png">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/05/08/%E5%89%8D%E7%AB%AF/%E5%AE%9A%E4%BD%8D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>定位(position) | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/08/%E5%89%8D%E7%AB%AF/%E5%AE%9A%E4%BD%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          定位(position)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-08 22:45:58" itemprop="dateCreated datePublished" datetime="2020-05-08T22:45:58+08:00">2020-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-26 20:14:21" itemprop="dateModified" datetime="2020-06-26T20:14:21+08:00">2020-06-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/08/%E5%89%8D%E7%AB%AF/%E5%AE%9A%E4%BD%8D/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/08/%E5%89%8D%E7%AB%AF/%E5%AE%9A%E4%BD%8D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="定位-position"><a href="#定位-position" class="headerlink" title="定位(position)"></a>定位(position)</h1><p>background-position   背景定位</p>
+<p>如果，说浮动， 关键在一个 “浮” 字上面， 那么 我们的定位，关键在于一个 “位” 上。</p>
+<p>PS: 定位是我们CSS算是数一数二难点的了，但是，你务必要学好它，我们CSS离不开定位，特别是后面的js特效，天天和定位打交道。不要抵触它，反而要爱上它，它可以让我们工作更加轻松哦！</p>
+<a id="more"></a>
+
+
+
+<h2 id="为什么要用定位？"><a href="#为什么要用定位？" class="headerlink" title="为什么要用定位？"></a>为什么要用定位？</h2><p>如果说浮动关键在一个 “浮” 字上面， 那么 我们的定位，关键在于一个 “位” 上。</p>
+<p>我们来思考下定位用于的场景。</p>
+<h4 id="1、打Log标签"><a href="#1、打Log标签" class="headerlink" title="1、打Log标签"></a>1、打Log标签</h4><p>比如你想在商品的图片想打个标签比如：包邮、最新上架等等。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109172143576-1640662273.png" alt="img"></p>
+<p>怎么做比较好呢，如果你要粗暴那就直接ps在图片上添加标签。只是这样有个很大的弊端，比如你要添加新标签你需要重现修图，比如商品之前包邮后面不包邮了，</p>
+<p>那你又需要重新p图。这样肯定是不合适的。那怎么做比较合适？</p>
+<p>其实很简单，将商品图片和标签的标签分开来。然后通过css在商品图片上添加标签。这个时候通常会定位去完成。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109173725031-1278959223.png" alt="img"></p>
+<h4 id="2、切换Banner"><a href="#2、切换Banner" class="headerlink" title="2、切换Banner"></a>2、切换Banner</h4><p>有些商城的首页都会有个Banner，这里 <strong>左右的箭头</strong> 和 <strong>下面的小点点</strong>一般也是用定位来做。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109174142752-2075304591.png" alt="img"></p>
+<h2 id="元素的定位属性"><a href="#元素的定位属性" class="headerlink" title="元素的定位属性"></a>元素的定位属性</h2><p>元素的定位属性主要包括定位模式和边偏移两部分。</p>
+<p>1、边偏移</p>
+<table>
+<thead>
+<tr>
+<th>边偏移属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>top</td>
+<td>顶端偏移量，定义元素相对于其父元素上边线的距离</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>底部偏移量，定义元素相对于其父元素下边线的距离</td>
+</tr>
+<tr>
+<td>left</td>
+<td>左侧偏移量，定义元素相对于其父元素左边线的距离</td>
+</tr>
+<tr>
+<td>right</td>
+<td>右侧偏移量，定义元素相对于其父元素右边线的距离</td>
+</tr>
+</tbody></table>
+<p>也就说，以后定位要和这边偏移搭配使用了， 比如 top: 100px;  left: 30px; 等等</p>
+<p>2、定位模式(定位的分类)</p>
+<p>在CSS中，position属性用于定义元素的定位模式，其基本语法格式如下：</p>
+<p>选择器{position:属性值;}</p>
+<p>position属性的常用值</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static</td>
+<td>自动定位（默认定位方式）</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>相对定位，相对于其原文档流的位置进行定位</td>
+</tr>
+<tr>
+<td>absolute</td>
+<td>绝对定位，相对于其上一个已经定位的父元素进行定位</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>固定定位，相对于浏览器窗口进行定位</td>
+</tr>
+</tbody></table>
+<h2 id="静态定位-static"><a href="#静态定位-static" class="headerlink" title="静态定位(static)"></a>静态定位(static)</h2><p>静态定位是所有元素的默认定位方式，当position属性的取值为static时，可以将元素定位于静态位置。 所谓静态位置就是各个元素在HTML文档流中默认的位置。</p>
+<p>上面的话翻译成白话：  就是网页中所有元素都默认的是静态定位哦！ 其实就是标准流的特性。</p>
+<p>在静态定位状态下，无法通过边偏移属性（top、bottom、left或right）来改变元素的位置。</p>
+<p>PS： 静态定位其实没啥可说的。</p>
+<p>静态定位唯一的用处：  就是 取消定位。 position: static;</p>
+<h2 id="相对定位relative-自恋型"><a href="#相对定位relative-自恋型" class="headerlink" title="相对定位relative(自恋型)"></a>相对定位relative(自恋型)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小笑话： </span><br><span class="line">刚刚看到一个超级超级帅的帅哥，看得我都忍不住想和他搞基了。世间怎会有如此之完美的男人。我和他就这样一动不动的对视着，就仿佛一见钟情。时间也在这一瞬间停止了。直到我的手麻了。才恋恋不舍的放下镜子。。。。</span><br></pre></td></tr></table></figure>
+
+<p>相对定位是将元素相对于它在标准流中的位置进行定位，当position属性的取值为relative时，可以将元素定位于相对位置。</p>
+<p>对元素设置相对定位后，可以通过边偏移属性改变元素的位置，但是它在文档流中的位置仍然保留。如下图所示，即是一个相对定位的效果展示：</p>
+<p><img src="https://i.loli.net/2020/05/08/iBLqajXm3gPWQwR.png" alt="img"></p>
+<p>注意：   </p>
+<ol>
+<li>相对定位最重要的一点是，它可以通过边偏移移动位置，但是原来的所占的位置，继续占有。</li>
+<li>其次，每次移动的位置，是以自己的左上角为基点移动（相对于自己来移动位置）</li>
+</ol>
+<p>就是说，相对定位的盒子仍在标准流中，它后面的盒子仍以标准流方式对待它。（相对定位不脱标）</p>
+<p>如果说浮动的主要目的是 让多个块级元素一行显示，那么定位的主要价值就是 移动位置， 让盒子到我们想要的位置上去。</p>
+<h2 id="绝对定位absolute-拼爹型"><a href="#绝对定位absolute-拼爹型" class="headerlink" title="绝对定位absolute (拼爹型)"></a>绝对定位absolute (拼爹型)</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">小笑话：</span><br><span class="line"></span><br><span class="line">吃早饭时，老婆往儿子碗里放了两个煎蛋，儿子全给了我，还一本正经地说：“爸爸，多吃点，男人养家不容易。” &lt;<span class="keyword">br/&gt;</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">我一阵感动，刚想夸他两句。 </span></span><br><span class="line"></span><br><span class="line">儿子接着说：“以后全靠你让我拼爹了！”</span><br></pre></td></tr></table></figure>
+
+<p>　[注意] 如果文档可滚动，绝对定位元素会随着它滚动，因为元素最终会相对于正常流的某一部分定位。</p>
+<p>当position属性的取值为absolute时，可以将元素的定位模式设置为绝对定位。</p>
+<p>注意：    绝对定位最重要的一点是，它可以通过边偏移移动位置，但是它完全脱标，完全不占位置。</p>
+<h3 id="父级没有定位"><a href="#父级没有定位" class="headerlink" title="父级没有定位"></a>父级没有定位</h3><p>若所有父元素都没有定位，以浏览器当前屏幕为准对齐(document文档)。</p>
+<p><img src="https://i.loli.net/2020/05/08/O8HPoaeNQMmAX4c.png" alt="img"></p>
+<h3 id="父级有定位"><a href="#父级有定位" class="headerlink" title="父级有定位)"></a>父级有定位)</h3><p>绝对定位是将元素依据最近的已经定位（绝对、固定或相对定位）的父元素（祖先）进行定位。 </p>
+<p><img src="https://i.loli.net/2020/05/08/IPaqUNZ31z7hkjw.png" alt="img"></p>
+<blockquote>
+</blockquote>
+<h3 id="子绝父相"><a href="#子绝父相" class="headerlink" title="子绝父相"></a>子绝父相</h3><p>这个“子绝父相”太重要了，是我们学习定位的口诀，时时刻刻记住的。</p>
+<p>这句话的意思是 子级是绝对定位的话， 父级要用相对定位。</p>
+<p>首先， 我们说下， 绝对定位是将元素依据最近的已经定位绝对、固定或相对定位）的父元素（祖先）进行定位。</p>
+<p>就是说， 子级是绝对定位，父亲只要是定位即可（不管父亲是绝对定位还是相对定位，甚至是固定定位都可以），就是说， 子绝父绝，子绝父相都是正确的。</p>
+<p>但是，在我们网页布局的时候， 最常说的 子绝父相是怎么来的呢？ 请看如下图：</p>
+<p><img src="https://i.loli.net/2020/05/08/m39osXeET6wPK1a.png" alt="img"></p>
+<p>所以，我们可以得出如下结论：</p>
+<p>因为子级是绝对定位，不会占有位置， 可以放到父盒子里面的任何一个地方。</p>
+<p>父盒子布局时，需要占有位置，因此父亲只能是 相对定位. </p>
+<p>这就是子绝父相的由来。</p>
+<h2 id="绝对定位的盒子水平-垂直居中"><a href="#绝对定位的盒子水平-垂直居中" class="headerlink" title="绝对定位的盒子水平/垂直居中"></a>绝对定位的盒子水平/垂直居中</h2><p>普通的盒子是左右margin 改为 auto就可， 但是对于绝对定位就无效了</p>
+<p>定位的盒子也可以水平或者垂直居中，有一个算法。</p>
+<ol>
+<li><p>首先left 50%   父盒子的一半大小</p>
+</li>
+<li><p>然后走自己外边距负的一半值就可以了 margin-left。</p>
+</li>
+</ol>
+<h2 id="固定定位fixed-认死理型"><a href="#固定定位fixed-认死理型" class="headerlink" title="固定定位fixed(认死理型)"></a>固定定位fixed(认死理型)</h2><p>固定定位是绝对定位的一种特殊形式，类似于 正方形是一个特殊的 矩形。它以浏览器窗口作为参照物来定义网页元素。当position属性的取值为fixed时，即可将元素的定位模式设置为固定定位。</p>
+<p>当对元素设置固定定位后，它将脱离标准文档流的控制，始终依据浏览器窗口来定义自己的显示位置。不管浏览器滚动条如何滚动也不管浏览器窗口的大小如何变化，该元素都会始终显示在浏览器窗口的固定位置。</p>
+<p>固定定位有两点：</p>
+<ol>
+<li><p>固定定位的元素跟父亲没有任何关系，只认浏览器。</p>
+</li>
+<li><p>固定定位完全脱标，不占有位置，不随着滚动条滚动。</p>
+</li>
+</ol>
+<p>ie6等低版本浏览器不支持固定定位。</p>
+<h2 id="叠放次序（z-index）"><a href="#叠放次序（z-index）" class="headerlink" title="叠放次序（z-index）"></a>叠放次序（z-index）</h2><p>当对多个元素同时设置定位时，定位元素之间有可能会发生重叠。</p>
+<p><img src="https://i.loli.net/2020/05/08/kO4speL9lWoZdcP.png" alt="img"></p>
+<p>在CSS中，要想调整重叠定位元素的堆叠顺序，可以对定位元素应用z-index层叠等级属性，其取值可为正整数、负整数和0。</p>
+<p>比如：  z-index: 2;       font-weight: 700  </p>
+<p>注意：</p>
+<ol>
+<li><p>z-index的默认属性值是0，取值越大，定位元素在层叠元素中越居上。</p>
+</li>
+<li><p>如果取值相同，则根据书写顺序，后来居上。</p>
+</li>
+<li><p>后面数字一定不能加单位。</p>
+</li>
+<li><p>只有相对定位，绝对定位，固定定位有此属性，其余标准流，浮动，静态定位都无此属性，亦不可指定此属性。</p>
+</li>
+</ol>
+<h1 id="四种定位总结"><a href="#四种定位总结" class="headerlink" title="四种定位总结"></a>四种定位总结</h1><table>
+<thead>
+<tr>
+<th>定位模式</th>
+<th>是否脱标占有位置</th>
+<th>是否可以使用边偏移</th>
+<th>移动位置基准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态static</td>
+<td>不脱标，正常模式</td>
+<td>不可以</td>
+<td>正常模式</td>
+</tr>
+<tr>
+<td>相对定位relative</td>
+<td>脱标，占有位置</td>
+<td>可以</td>
+<td>相对自身位置移动（自恋型）</td>
+</tr>
+<tr>
+<td>绝对定位absolute</td>
+<td>完全脱标，不占有位置</td>
+<td>可以</td>
+<td>相对于定位父级移动位置（拼爹型）</td>
+</tr>
+<tr>
+<td>固定定位fixed</td>
+<td>完全脱标，不占有位置</td>
+<td>可以</td>
+<td>相对于浏览器移动位置（认死理型）</td>
+</tr>
+</tbody></table>
+<h1 id="定位模式转换"><a href="#定位模式转换" class="headerlink" title="定位模式转换"></a>定位模式转换</h1><p>跟 浮动一样， 元素添加了 绝对定位和固定定位之后， 元素模式也会发生转换， 都转换为 行内块模式， </p>
+<p>行内块 的宽度和高度 跟内容有关系   </p>
+<p>** 因此 比如 行内元素 如果添加了 绝对定位或者 固定定位后 浮动后，可以不用转换模式，直接给高度和宽度就可以了。**</p>
+<h1 id="元素的显示与隐藏"><a href="#元素的显示与隐藏" class="headerlink" title="元素的显示与隐藏"></a>元素的显示与隐藏</h1><p>在CSS中有三个显示和隐藏的单词比较常见，我们要区分开，他们分别是 display visibility 和 overflow。</p>
+<p>他们的主要目的是让一个元素在页面中消失，但是不在文档源码中删除。 最常见的是网站广告，当我们点击类似关闭不见了，但是我们重新刷新页面，它们又会出现和你玩躲猫猫！！</p>
+<h2 id="display-显示"><a href="#display-显示" class="headerlink" title="display 显示"></a>display 显示</h2><p>display 设置或检索对象是否及如何显示。</p>
+<p>display : none 隐藏对象 与它相反的是 display:block 除了转换为块级元素之外，同时还有显示元素的意思。</p>
+<p>特点： 隐藏之后，不再保留位置。</p>
+<h2 id="visibility-可见性"><a href="#visibility-可见性" class="headerlink" title="visibility 可见性"></a>visibility 可见性</h2><p>设置或检索是否显示对象。</p>
+<p>visible : 　对象可视</p>
+<p>hidden : 　对象隐藏</p>
+<p>特点： 隐藏之后，继续保留原有位置。（停职留薪）</p>
+<h2 id="overflow-溢出"><a href="#overflow-溢出" class="headerlink" title="overflow 溢出"></a>overflow 溢出</h2><p>检索或设置当对象的内容超过其指定高度及宽度时如何管理内容。</p>
+<p>visible : 　不剪切内容也不添加滚动条。</p>
+<p>auto : 　 超出自动显示滚动条，不超出不显示滚动条</p>
+<p>hidden : 　不显示超过对象尺寸的内容，超出的部分隐藏掉</p>
+<p>scroll : 　不管超出内容否，总是显示滚动条</p>
+<h2 id="经典示例"><a href="#经典示例" class="headerlink" title="经典示例"></a>经典示例</h2><h4 id="1、打上log标记"><a href="#1、打上log标记" class="headerlink" title="1、打上log标记"></a>1、打上log标记</h4><p><img src="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109173725031-1278959223.png" alt="img"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">示例</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>log标签<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">	div &#123;</span><br><span class="line">		width: 310px;</span><br><span class="line">		height: 190px;</span><br><span class="line"><span class="css">		<span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#ccc</span>;</span></span><br><span class="line">		margin: 100px auto; </span><br><span class="line"><span class="css">		<span class="selector-tag">position</span>: <span class="selector-tag">relative</span>;  <span class="comment">/*父选择相对定位*/</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.top</span> &#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>; <span class="comment">/*子取相对定位*/</span></span></span><br><span class="line"><span class="css">		<span class="selector-tag">top</span>: 0;             <span class="comment">/*位置 左上*/</span></span></span><br><span class="line">		left: 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/log.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">"top"</span>&gt;</span>     <span class="comment">&lt;!-- log的图片 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/goods.jpg"</span> <span class="attr">height</span>=<span class="string">"190"</span> <span class="attr">width</span>=<span class="string">"310"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span> <span class="comment">&lt;!-- 商品图片，长和宽和父div大小一致 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果就是上面的最终结果。</p>
+<h4 id="2、定位水平居中"><a href="#2、定位水平居中" class="headerlink" title="2、定位水平居中"></a>2、定位水平居中</h4><p>加了定位 浮动的的盒子 margin 0 auto 失效了</p>
+<p>代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>水平居中<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">	div &#123;</span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		background-color: pink;</span><br><span class="line">		position: absolute;</span><br><span class="line"><span class="css">		<span class="comment">/*加了定位 浮动的的盒子  margin 0 auto 失效了*/</span></span></span><br><span class="line">		left: 50%;</span><br><span class="line"><span class="css">		<span class="selector-tag">margin-left</span>: <span class="selector-tag">-100px</span>;  <span class="comment">/*减去总宽度一般*/</span></span></span><br><span class="line">		top: 50%;</span><br><span class="line"><span class="css">		<span class="selector-tag">margin-top</span>: <span class="selector-tag">-100px</span>;   <span class="comment">/*减去总高度一般*/</span></span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个这个div就处于整个页面的居中了，这里我们来说明下下面这两个的意思</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">margin-left</span>: -<span class="number">100px</span>;  <span class="comment">/*减去总宽度一般*/</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109231803557-1963873869.png" alt="img"></p>
+<h4 id="3、轮播图"><a href="#3、轮播图" class="headerlink" title="3、轮播图"></a>3、轮播图</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>轮播图<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">	* &#123;</span><br><span class="line">		margin: 0;</span><br><span class="line">		padding: 0;</span><br><span class="line">	&#125;</span><br><span class="line">	li &#123;</span><br><span class="line">		list-style: none;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.tb</span> &#123;</span></span><br><span class="line">		width: 520px;</span><br><span class="line">		height: 280px;</span><br><span class="line">		background-color: pink;</span><br><span class="line">		margin: 100px auto;</span><br><span class="line">		position: relative;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.tb</span> <span class="selector-tag">a</span> &#123;</span></span><br><span class="line">		width: 24px;</span><br><span class="line">		height: 36px;</span><br><span class="line">		</span><br><span class="line">		display: block;</span><br><span class="line">		position: absolute;</span><br><span class="line">		top: 50%;</span><br><span class="line">		margin-top: -18px;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.left</span> &#123;</span></span><br><span class="line">		left: 0;</span><br><span class="line">		background: url(images/left.png) no-repeat;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.right</span> &#123;</span></span><br><span class="line">		right: 0;</span><br><span class="line">		background: url(images/right.png) no-repeat;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-class">.tb</span> <span class="selector-tag">ul</span> &#123;</span></span><br><span class="line">		width: 70px;</span><br><span class="line">		height: 13px;</span><br><span class="line"><span class="css">		<span class="selector-tag">background</span>: <span class="selector-tag">rgba</span>(255, 255, 255, <span class="selector-class">.3</span>);</span></span><br><span class="line"><span class="css">		<span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>; <span class="comment">/* 加定位*/</span></span></span><br><span class="line">		bottom: 18px;</span><br><span class="line"><span class="css">		<span class="selector-tag">left</span>: 50%; <span class="comment">/*水平走父容器的一半*/</span></span></span><br><span class="line"><span class="css">		<span class="selector-tag">margin-left</span>: <span class="selector-tag">-35px</span>; <span class="comment">/*左走自己的一半*/</span></span></span><br><span class="line">		border-radius: 8px;</span><br><span class="line"> 	&#125;</span><br><span class="line"><span class="css"> 	<span class="selector-class">.tb</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> &#123;</span></span><br><span class="line"> 		width: 8px;</span><br><span class="line"> 		height: 8px;</span><br><span class="line"><span class="css"> 		<span class="selector-tag">background-color</span>: <span class="selector-id">#fff</span>;</span></span><br><span class="line"> 		float: left;</span><br><span class="line"> 		margin: 3px;</span><br><span class="line"> 		border-radius: 50%;</span><br><span class="line"> 	&#125;</span><br><span class="line"><span class="css"> 	<span class="selector-class">.tb</span> <span class="selector-class">.current</span> &#123;</span></span><br><span class="line"><span class="css"> 		<span class="selector-tag">background-color</span>: <span class="selector-id">#f40</span>;</span></span><br><span class="line"> 	&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tb"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/tb.jpg"</span> &gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"current"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<p><img src="https://img2018.cnblogs.com/blog/1090617/201911/1090617-20191109231956131-50165402.png" alt="img"></p>
+<h1 id="总结定位的思维导图："><a href="#总结定位的思维导图：" class="headerlink" title="总结定位的思维导图："></a>总结定位的思维导图：</h1><p><img src="https://wx1.sbimg.cn/2020/05/08/41e6b2c74825688974d343f72268035a.jpg" alt="Image text"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/08/Blog/%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%9A%84%E7%A6%8F%E5%88%A9%EF%BC%9F%E6%8E%A2%E7%B4%A2%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%B0%8F%E7%A7%98%E5%AF%86%EF%BC%88%E6%B2%B9%E7%8C%B4%E6%8F%92%E4%BB%B6%EF%BC%89/" rel="prev" title="大学生的福利？探索浏览器的小秘密（油猴插件）">
+      <i class="fa fa-chevron-left"></i> 大学生的福利？探索浏览器的小秘密（油猴插件）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/13/mysql/%E5%88%9B%E5%BB%BA%E8%A7%86%E5%9B%BE%E5%92%8C%E7%B4%A2%E5%BC%95/" rel="next" title="创建视图">
+      创建视图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定位-position"><span class="nav-number">1.</span> <span class="nav-text">定位(position)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用定位？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用定位？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、打Log标签"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1、打Log标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、切换Banner"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2、切换Banner</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素的定位属性"><span class="nav-number">1.2.</span> <span class="nav-text">元素的定位属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态定位-static"><span class="nav-number">1.3.</span> <span class="nav-text">静态定位(static)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相对定位relative-自恋型"><span class="nav-number">1.4.</span> <span class="nav-text">相对定位relative(自恋型)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绝对定位absolute-拼爹型"><span class="nav-number">1.5.</span> <span class="nav-text">绝对定位absolute (拼爹型)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父级没有定位"><span class="nav-number">1.5.1.</span> <span class="nav-text">父级没有定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父级有定位"><span class="nav-number">1.5.2.</span> <span class="nav-text">父级有定位)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子绝父相"><span class="nav-number">1.5.3.</span> <span class="nav-text">子绝父相</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绝对定位的盒子水平-垂直居中"><span class="nav-number">1.6.</span> <span class="nav-text">绝对定位的盒子水平&#x2F;垂直居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#固定定位fixed-认死理型"><span class="nav-number">1.7.</span> <span class="nav-text">固定定位fixed(认死理型)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#叠放次序（z-index）"><span class="nav-number">1.8.</span> <span class="nav-text">叠放次序（z-index）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四种定位总结"><span class="nav-number">2.</span> <span class="nav-text">四种定位总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位模式转换"><span class="nav-number">3.</span> <span class="nav-text">定位模式转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元素的显示与隐藏"><span class="nav-number">4.</span> <span class="nav-text">元素的显示与隐藏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#display-显示"><span class="nav-number">4.1.</span> <span class="nav-text">display 显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#visibility-可见性"><span class="nav-number">4.2.</span> <span class="nav-text">visibility 可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#overflow-溢出"><span class="nav-number">4.3.</span> <span class="nav-text">overflow 溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典示例"><span class="nav-number">4.4.</span> <span class="nav-text">经典示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、打上log标记"><span class="nav-number">4.4.0.1.</span> <span class="nav-text">1、打上log标记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、定位水平居中"><span class="nav-number">4.4.0.2.</span> <span class="nav-text">2、定位水平居中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、轮播图"><span class="nav-number">4.4.0.3.</span> <span class="nav-text">3、轮播图</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结定位的思维导图："><span class="nav-number">5.</span> <span class="nav-text">总结定位的思维导图：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

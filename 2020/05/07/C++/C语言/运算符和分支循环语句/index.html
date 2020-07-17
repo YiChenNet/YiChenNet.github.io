@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="运算符和分支循环语句extern： 1表示声明。 没有内存空间。 不能提升。  const： 1限定一个变量为只读变量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运算符和分支循环语句">
+<meta property="og:url" content="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="运算符和分支循环语句extern： 1表示声明。 没有内存空间。 不能提升。  const： 1限定一个变量为只读变量。">
+<meta property="og:locale" content="zh—CN">
+<meta property="article:published_time" content="2020-05-07T05:17:47.255Z">
+<meta property="article:modified_time" content="2020-05-26T01:17:45.643Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>运算符和分支循环语句 | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          运算符和分支循环语句
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 13:17:47" itemprop="dateCreated datePublished" datetime="2020-05-07T13:17:47+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 09:17:45" itemprop="dateModified" datetime="2020-05-26T09:17:45+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="运算符和分支循环语句"><a href="#运算符和分支循环语句" class="headerlink" title="运算符和分支循环语句"></a>运算符和分支循环语句</h2><p>extern：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">表示声明。 没有内存空间。 不能提升。</span><br></pre></td></tr></table></figure>
+
+<p>const：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">限定一个变量为只读变量。</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>volatile：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">防止编译器优化代码。</span><br><span class="line"></span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> flg = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>register：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">定义一个寄存器变量。没有内存地址。</span><br><span class="line"></span><br><span class="line"><span class="keyword">register</span> <span class="keyword">int</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>字符串：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C语言中，用双引号引着的一串字符，称之为字符串。一定有一个结束标记<span class="string">'\0'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> ch = ‘A’;  一个字节</span><br><span class="line"></span><br><span class="line"><span class="string">"abc"</span>  --&gt; <span class="string">'a'</span><span class="string">'b'</span><span class="string">'c'</span><span class="string">'\0'</span></span><br><span class="line"></span><br><span class="line">‘a’ 不等价 “a”（<span class="string">'a'</span><span class="string">'\0'</span>）</span><br></pre></td></tr></table></figure>
+
+<p>printf函数：</p>
+<pre><code>%s：打印字符串， 挨着从字符串的第一个字符开始打印，打印到&apos;\0&apos;结束。
+
+%d：打印整数
+
+%c：打印字符
+
+%x：打印16进制数
+
+%u：打印无符号
+
+%m.n: 打印实型时用到，一共有 m 位(整数、小数、小数点)，n位小数。
+
+%0m.nf: 其中 f：表示打印实型，一共有 m 位(整数、小数、小数点)，n位小数。 0：表示不足 m 位时，用0凑够m位。
+
+%%： 显示一个%。 转义字符&apos;\&apos; 对 % 转义无效。
+
+%Ns：显示N个字符的字符串。不足N用空格向左填充。
+
+%0Ns：显示N个字符的字符串。不足N用0向左填充。
+
+%-Ns：显示N个字符的字符串。不足N用空格向右填充。c</code></pre><p>putchar函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输出一个 字符 到屏幕。</span><br><span class="line"></span><br><span class="line">直接使用 ASCII 码。</span><br><span class="line"></span><br><span class="line">不能输出字符串。</span><br><span class="line"></span><br><span class="line">‘abc’既不是一个有效字符，也不是一个有效字符串。</span><br><span class="line"></span><br><span class="line">常用<span class="built_in">putchar</span>(<span class="string">'\n'</span>);来打印换行。</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>scanf函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">从键盘接收用户输入。</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 接收 整数 %d</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a, b, c;  创建变量空间， 等待接收用户输入。</span><br><span class="line"></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 接收 字符 %c</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> a, b, c;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%c %c %c"</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 接收 字符串 %s</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> str[<span class="number">10</span>];	<span class="comment">// 定义一个数组，用来接收用户输入的 字符串。</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>, str);	<span class="comment">// 变量名要取地址传递给 scanf， 数组名本身表示地址，不用 &amp; 符。</span></span><br><span class="line"></span><br><span class="line">接收字符串：</span><br><span class="line"></span><br><span class="line">	<span class="number">1</span>） <span class="built_in">scanf</span> 具有安全隐患。如果存储空间不足，数据能存储到内存中，但不被保护。【空间不足不要使用】</span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>） <span class="built_in">scanf</span> 函数接收字符串时， 碰到 空格 和 换行 会自动终止。不能使用 <span class="built_in">scanf</span> 的 %s 接收带有空格的字符串。</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​    将 #define _CRT_SECURE_NO_WARNINGS  添加到程序 第一行。 解决scanf 4996错误</p>
+<p>getchar()函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">从键盘获取用户输入的 一个字符。</span><br><span class="line"></span><br><span class="line">返回该获取的字符的 ASCII 码。</span><br></pre></td></tr></table></figure>
+
+
+<p>算数运算符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">先 * / % 后 + -</span><br><span class="line"></span><br><span class="line">除法运算后，得到的结果赋值给整型变量时，取整数部分。</span><br><span class="line"></span><br><span class="line">除<span class="number">0</span> ：错误操作。不允许。</span><br><span class="line"></span><br><span class="line">对<span class="number">0</span>取余：错误操作。不允许。</span><br><span class="line"></span><br><span class="line">不允许对小数取余。余数不能是 小数。 <span class="number">35</span> % <span class="number">3.4</span>;</span><br><span class="line"></span><br><span class="line">对负数取余，结果为余数的绝对值。<span class="number">10</span> % <span class="number">-3</span>;  --》 <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>++ 和 –：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">前缀自增、自减：</span><br><span class="line"></span><br><span class="line">	先自增/自减， 在取值。</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	++a;		<span class="comment">// a = a+1;</span></span><br><span class="line"></span><br><span class="line">后缀自增、自减:</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a  = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	a++;		<span class="comment">// a = a+1;</span></span><br><span class="line"></span><br><span class="line">	先取值， 再自增/自减。</span><br></pre></td></tr></table></figure>
+
+<p>赋值运算：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">a += <span class="number">10</span>;  <span class="comment">// a = a+10;</span></span><br><span class="line"></span><br><span class="line">a -= <span class="number">30</span>;  <span class="comment">// a = a-30;</span></span><br><span class="line"></span><br><span class="line">a %= <span class="number">5</span>;	  <span class="comment">// a = a % 5;</span></span><br></pre></td></tr></table></figure>
+
+<p>比较运算符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">== 判等。</span><br><span class="line"></span><br><span class="line">!= 不等于.</span><br><span class="line"></span><br><span class="line">&lt; 小于</span><br><span class="line"></span><br><span class="line">&lt;= 小于等于	</span><br><span class="line"></span><br><span class="line">&gt; 大于</span><br><span class="line"></span><br><span class="line">&gt;= 大于等于</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">13</span> &lt; var &lt; <span class="number">16</span>; ==&gt; var &gt; <span class="number">13</span> &amp;&amp; var &lt; <span class="number">16</span>;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑运算符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>为假，非<span class="number">0</span>为真。（<span class="number">1</span>）</span><br><span class="line"></span><br><span class="line">逻辑非：!</span><br><span class="line"></span><br><span class="line">	非真为假， 非假为真。</span><br><span class="line"></span><br><span class="line">逻辑与： &amp;&amp;（并且）</span><br><span class="line"></span><br><span class="line">	同真为真，其余为假。</span><br><span class="line"></span><br><span class="line">逻辑或：|| （或）</span><br><span class="line"></span><br><span class="line">	有真为真。同假为假。</span><br></pre></td></tr></table></figure>
+
+<p>运算符优先级：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[]() &gt; ++ -- (后缀高于前缀) (强转) <span class="keyword">sizeof</span> &gt; 算数运算（先乘除取余，后加减）&gt; </span><br><span class="line"></span><br><span class="line">比较运算 &gt; 逻辑运算 &gt; 三目运算（条件运算）&gt; 赋值运算 &gt; 逗号运算</span><br></pre></td></tr></table></figure>
+
+
+<p>三目运算符： ? :</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">表达式<span class="number">1</span> ？ 表达式<span class="number">2</span> : 表达式<span class="number">3</span></span><br><span class="line"></span><br><span class="line">表达式<span class="number">1</span> 是一个判别表达式。 如果为真。整个三目运算，取值表达式<span class="number">2</span>。</span><br><span class="line"></span><br><span class="line">			    如果为假。整个三目运算，取值表达式<span class="number">3</span>。</span><br><span class="line"></span><br><span class="line">默认结合性。自右向左。</span><br></pre></td></tr></table></figure>
+
+<p>类型转换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">隐式类型转换：</span><br><span class="line"></span><br><span class="line">	由编译器自动完成。</span><br><span class="line"></span><br><span class="line">	由赋值产生的类型转换。 小--》大 没问题。 大 --》 小 有可能发生数据丢失。</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> r = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">float</span> s = <span class="number">3.14</span> * r * r;</span><br><span class="line"></span><br><span class="line">	<span class="number">321</span>:	<span class="number">256</span> <span class="number">128</span> <span class="number">64</span> <span class="number">32</span> <span class="number">16</span> <span class="number">8</span> <span class="number">4</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line">		<span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> </span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> ch  = <span class="number">0</span>   <span class="number">1</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> 	</span><br><span class="line"></span><br><span class="line">强制类型转换：</span><br><span class="line"></span><br><span class="line">	语法：	（目标类型）带转换变量</span><br><span class="line"></span><br><span class="line">		（目标类型）带转换表达式</span><br><span class="line"></span><br><span class="line">	大多数用于函数调用期间，实参给形参传值。</span><br></pre></td></tr></table></figure>
+
+
+<p>if分支语句：匹配一个范围.属于模糊匹配.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (判别表达式<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	判别表达式为真，执行代码。</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(判别表达式<span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">	判别表达式<span class="number">1</span>为假，并且判别表达式<span class="number">2</span>，执行代码。</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(判别表达式<span class="number">3</span>)</span><br><span class="line">&#123;c</span><br><span class="line">	判别表达式<span class="number">1</span>为假，判别表达式<span class="number">2</span>为假，判别表达式<span class="number">3</span>， 执行代码。</span><br><span class="line">&#125;</span><br><span class="line">。。。</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	以上所有判断表达式都为假， 执行代码。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>练习：三只小猪称体重：</p>
+<pre><code>屏幕输入三只小猪的重量。借助if分支语句，找出最重的小猪重量。</code></pre><p>switch 分支：精确匹配.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(判别表达式)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>：</span><br><span class="line">		执行语句<span class="number">1</span>；</span><br><span class="line">		<span class="keyword">break</span>;			<span class="comment">// 防止case穿透</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		执行语句<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		执行语句<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> N:</span><br><span class="line">		执行语句N;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		其他情况的统一处理;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> 穿透：</span><br><span class="line"></span><br><span class="line">	在一个<span class="keyword">case</span>分支中如果,没有<span class="keyword">break</span>;那么它会向下继续执行下一个<span class="keyword">case</span>分支.</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>while循环:</p>
+<pre><code>while(条件判别表达式)
+{
+
+    循环体.
+}</code></pre><p>练习：敲7：1–100数数， 逢7和7的倍数，敲桌子。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span>的倍数：	num % <span class="number">7</span> == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">个位含<span class="number">7</span>：	num % <span class="number">10</span> == <span class="number">7</span></span><br><span class="line"></span><br><span class="line">十位含<span class="number">7</span>：	num / <span class="number">10</span> == <span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+
+<p>do while 循环:</p>
+<pre><code>无论如何先执行循环体一次。然后在判断是否继续循环。
+
+do {
+
+    循环体
+
+} while (条件判别表达式);</code></pre><p>​<br>练习：求水仙花数。 一个三位数。各个位上的数字的立方和等于本数字。      234   861</p>
+<pre><code>100 -- 999
+
+int num  = 100;
+
+个位数： int a = num % 10;           a*a*a;
+
+十位数： int b = num / 10 % 10; 
+
+百位数： int c = num / 100;</code></pre><p>​    </p>
+<p>​    </p>
+<p>​        </p>
+<p>​    </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/" rel="prev" title="指针和字符串">
+      <i class="fa fa-chevron-left"></i> 指针和字符串
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" rel="next" title="DCN神州数码无线常用配置">
+      DCN神州数码无线常用配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符和分支循环语句"><span class="nav-number">1.</span> <span class="nav-text">运算符和分支循环语句</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

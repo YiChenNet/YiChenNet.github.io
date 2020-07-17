@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="指针基础指针和内存单元 指针： 地址。  内存单元： 计算机中内存最小的存储单位。——内存单元。大小一个字节。 每一个内存单元都有一个唯一的编号（数）。         称这个内存单元的编号为 “地址”。  指针变量：存地址的变量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指针和字符串">
+<meta property="og:url" content="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="指针基础指针和内存单元 指针： 地址。  内存单元： 计算机中内存最小的存储单位。——内存单元。大小一个字节。 每一个内存单元都有一个唯一的编号（数）。         称这个内存单元的编号为 “地址”。  指针变量：存地址的变量。">
+<meta property="og:locale" content="zh—CN">
+<meta property="article:published_time" content="2020-05-07T05:17:47.246Z">
+<meta property="article:modified_time" content="2020-05-26T01:18:16.032Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>指针和字符串 | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          指针和字符串
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 13:17:47" itemprop="dateCreated datePublished" datetime="2020-05-07T13:17:47+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 09:18:16" itemprop="dateModified" datetime="2020-05-26T09:18:16+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="指针基础"><a href="#指针基础" class="headerlink" title="指针基础"></a>指针基础</h2><p>指针和内存单元</p>
+<pre><code>指针： 地址。
+
+内存单元： 计算机中内存最小的存储单位。——内存单元。大小一个字节。 每一个内存单元都有一个唯一的编号（数）。
+
+       称这个内存单元的编号为 “地址”。
+
+指针变量：存地址的变量。</code></pre><a id="more"></a>
+
+<p>指针定义和使用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = &amp;a;			<span class="keyword">int</span>* p;--- windows;	<span class="keyword">int</span> *p ---Linux       <span class="keyword">int</span> * p ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a, *p, *q, b;</span><br><span class="line"></span><br><span class="line">*p = <span class="number">250</span>;			指针的 解引用。 间接引用。</span><br><span class="line"></span><br><span class="line">*p ： 将p变量的内容取出，当成地址看待，找到该地址对应的内存空间。</span><br><span class="line"></span><br><span class="line">	如果做左值： 存数据到空间中。</span><br><span class="line"></span><br><span class="line">	如果做右值： 取出空间中的内容。</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>任意“指针”类型大小：
+
+    指针的大小与类型 无关。 只与当前使用的平台架构有关。   32位：4字节。     64位： 8字节。</code></pre><p>野指针：<br>    1) 没有一个有效的地址空间的指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">int</span> *p;</span><br><span class="line"></span><br><span class="line">	*p = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>）p变量有一个值，但该值不是可访问的内存区域。</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> *p = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	*p = <span class="number">2000</span>;</span><br><span class="line"></span><br><span class="line">【杜绝野指针】</span><br></pre></td></tr></table></figure>
+
+<p>空指针：<br>    int *p = NULL;     #define NULL ((void *)0)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*p 时 p所对应的存储空间一定是一个 无效的访问区域。</span><br></pre></td></tr></table></figure>
+
+
+<p>万能指针/泛型指针（void *）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">可以接收任意一种变量地址。但是，在使用【必须】借助“强转”具体化数据类型。</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> ch = <span class="string">'R'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> *p;  <span class="comment">// 万能指针、泛型指针</span></span><br><span class="line">	</span><br><span class="line">	p = &amp;ch;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c\n"</span>, *(<span class="keyword">char</span> *)p);</span><br></pre></td></tr></table></figure>
+
+<p>const关键字：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">修饰变量：</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = &amp;a;</span><br><span class="line"></span><br><span class="line">*p = <span class="number">650</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>修饰指针：
+
+const int *p;
+
+    可以修改 p
+
+    不可以修改 *p。
+
+int const *p;
+
+    同上。
+
+int * const p;
+
+    可以修改 *p
+
+    不可以修改 p。
+
+const int *const p;
+
+    不可以修改 p。
+
+    不可以修改 *p。
+
+总结：const 向右修饰，被修饰的部分即为只读。
+
+
+常用：在函数形参内，用来限制指针所对应的内存空间为只读。</code></pre><p>指针和数组： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">数组名：  </span><br><span class="line">	【数组名是地址常量】 --- 不可以被赋值。	 ++ / -- / += / -= / %= / /=  (带有副作用的运算符)</span><br><span class="line"></span><br><span class="line">	指针是变量。可以用数组名给指针赋值。 ++ -- </span><br><span class="line"></span><br><span class="line">取数组元素：</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>,<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> *p = arr;  </span><br><span class="line"></span><br><span class="line">	arr[i] == *(arr+<span class="number">0</span>) == p[<span class="number">0</span>] == *(p+<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">指针和数组区别：</span><br><span class="line"></span><br><span class="line">	<span class="number">1.</span> 指针是变量。数组名为常量。</span><br><span class="line"></span><br><span class="line">	<span class="number">2.</span> <span class="keyword">sizeof</span>(指针) ===》 <span class="number">4</span>字节 / <span class="number">8</span>字节</span><br><span class="line"></span><br><span class="line">	   <span class="keyword">sizeof</span>(数组) ===》 数组的实际字节数。</span><br><span class="line"></span><br><span class="line">指针++ 操作数组：</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> arr[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> *p = arr;		</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, *p);</span><br><span class="line">		p++;  <span class="comment">// p = p+1;   一次加过一个int大小。 一个元素。</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	p的值会随着循环不断变化。打印结束后，p指向一块无效地址空间(野指针)。</span><br></pre></td></tr></table></figure>
+
+<p>指针加减运算：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">数据类型对指针的作用：</span><br><span class="line">	</span><br><span class="line">	<span class="number">1</span>）间接引用：</span><br><span class="line"></span><br><span class="line">		决定了从指针存储的地址开始，向后读取的字节数。  （与指针本身存储空间无关。）</span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>）加减运算：</span><br><span class="line"></span><br><span class="line">		决定了指针进行 +<span class="number">1</span>/<span class="number">-1</span> 操作向后加过的 字节数。</span><br><span class="line"></span><br><span class="line">指针 * / % ： error!!!</span><br><span class="line"></span><br><span class="line">指针 +- 整数：</span><br><span class="line"></span><br><span class="line">	<span class="number">1</span>) 普通指针变量+-整数</span><br><span class="line"></span><br><span class="line">		<span class="keyword">char</span> *p; 打印 p 、 p+<span class="number">1</span>  偏过 <span class="number">1</span> 字节。</span><br><span class="line"></span><br><span class="line">		short*p; 打印 p 、 p+<span class="number">1</span>  偏过 <span class="number">2</span> 字节。</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span>  *p; 打印 p 、 p+<span class="number">1</span>  偏过 <span class="number">4</span> 字节。		</span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>）在数组中+- 整数</span><br><span class="line"></span><br><span class="line">		short arr[] = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>&#125;;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> *p = arr;</span><br><span class="line"></span><br><span class="line">		p+<span class="number">3</span>;			<span class="comment">// 向右(后)偏过 3 个元素</span></span><br><span class="line"></span><br><span class="line">		p<span class="number">-2</span>;			<span class="comment">// 向前(左)偏过 2 个元素</span></span><br><span class="line"></span><br><span class="line">	<span class="number">3</span>）&amp;数组名 + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">		加过一个 数组的大小（数组元素个数 x <span class="keyword">sizeof</span>（数组元素类型））</span><br><span class="line"></span><br><span class="line">指针 +- 指针：</span><br><span class="line"></span><br><span class="line">	指针 + 指针： error！！！</span><br><span class="line"></span><br><span class="line">	指针 - 指针：</span><br><span class="line"></span><br><span class="line">		<span class="number">1</span>） 普通变量来说， 语法允许。无实际意义。【了解】</span><br><span class="line"></span><br><span class="line">		<span class="number">2</span>） 数组来说：偏移过的元素个数。</span><br></pre></td></tr></table></figure>
+
+
+<p>指针实现 strlen 函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[] = <span class="string">"hello"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *p = str;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (*p != <span class="string">'\0'</span>)</span><br><span class="line">&#123;</span><br><span class="line">	p++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p-str; 即为 数组有效元素的个数。</span><br></pre></td></tr></table></figure>
+
+
+<p>指针比较运算：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>） 普通变量来说， 语法允许。无实际意义。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>） 数组来说：	地址之间可以进行比较大小。</span><br><span class="line"></span><br><span class="line">		可以得到，元素存储的先后顺序。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>） <span class="keyword">int</span> *p;</span><br><span class="line"></span><br><span class="line">    p = <span class="literal">NULL</span>;		<span class="comment">// 这两行等价于： int *p = NULL;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>)</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" p is not NULL"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" p is NULL"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>指针数组：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">一个存储地址的数组。数组内部所有元素都是地址。</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>) </span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">int</span> c = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> *arr[] = &#123;&amp;a, &amp;b, &amp;c&#125;; <span class="comment">// 数组元素为 整型变量 地址</span></span><br><span class="line"><span class="number">2</span>) </span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a[] = &#123; <span class="number">10</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> b[] = &#123; <span class="number">20</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> c[] = &#123; <span class="number">30</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> *arr[] = &#123; a, b, c &#125;; <span class="comment">// 数组元素为 数组 地址。	</span></span><br><span class="line"></span><br><span class="line">指针数组本质，是一个二级指针。</span><br><span class="line"></span><br><span class="line">二维数组， 也是一个二级指针。</span><br></pre></td></tr></table></figure>
+
+
+<p>多级指针：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = &amp;a;  				一级指针是 变量的地址。</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> **pp = &amp;p;				二级指针是 一级指针的地址。</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ***ppp = &amp;pp;			三级指针是 二级指针的地址。	</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ****pppp = &amp;ppp;			四级指针是 三级指针的地址。	【了解】</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>多级指针，不能  跳跃定义！</code></pre><p>​<br>​    对应关系：<br>​    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ppp == &amp;pp;			三级指针</span><br><span class="line"></span><br><span class="line">*ppp == pp == &amp;p; 			二级指针</span><br><span class="line"></span><br><span class="line">**ppp == *pp == p == &amp;a				一级指针c</span><br><span class="line"></span><br><span class="line">***ppp == **pp == *p == a				普通整型变量</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>*p ： 将p变量的内容取出，当成地址看待，找到该地址对应的内存空间。
+
+    如果做左值： 存数据到空间中。
+
+    如果做右值： 取出空间中的内容。</code></pre><p>===================================================================================================================================</p>
+<p>指针和函数：</p>
+<pre><code>传值和传址：
+
+
+指针做函数参数：
+
+数组做函数参数：
+
+指针做函数返回值：
+
+数组做函数返回值：</code></pre><p>练习：比较两个字符串：</p>
+<pre><code>比较 str1 和 str2， 如果相同返回0， 不同则依次比较ASCII码，str1 &gt; str2 返回1，否则返回-1</code></pre><p>练习：字符串拷贝：</p>
+<p>练习：在字符串中查找字符出现的位置：</p>
+<p>​    </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="prev" title="指针和字符串">
+      <i class="fa fa-chevron-left"></i> 指针和字符串
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/" rel="next" title="运算符和分支循环语句">
+      运算符和分支循环语句 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#指针基础"><span class="nav-number">1.</span> <span class="nav-text">指针基础</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

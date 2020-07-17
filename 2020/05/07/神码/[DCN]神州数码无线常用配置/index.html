@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="AP管理AC发现AP二层发现12DCWS-6028(P)(config-wireless)#discovery vlan-list 1 &#x2F;&#x2F;指定VLAN发现列表DCWS-6028(P)(config-wireless)# ap database xx-xx-xx-xx-xx-xx  &#x2F;&#x2F;添加AP MAC地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DCN神州数码无线常用配置">
+<meta property="og:url" content="https://yichennet.github.io/2020/05/07/%E7%A5%9E%E7%A0%81/[DCN]%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="AP管理AC发现AP二层发现12DCWS-6028(P)(config-wireless)#discovery vlan-list 1 &#x2F;&#x2F;指定VLAN发现列表DCWS-6028(P)(config-wireless)# ap database xx-xx-xx-xx-xx-xx  &#x2F;&#x2F;添加AP MAC地址">
+<meta property="og:locale" content="zh—CN">
+<meta property="og:image" content="https://i.loli.net/2018/03/11/5aa536dc8b2bb.png">
+<meta property="article:published_time" content="2020-05-07T08:45:08.806Z">
+<meta property="article:modified_time" content="2020-05-26T01:22:30.483Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="无线">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/03/11/5aa536dc8b2bb.png">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/05/07/%E7%A5%9E%E7%A0%81/[DCN]%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>DCN神州数码无线常用配置 | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/07/%E7%A5%9E%E7%A0%81/[DCN]%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DCN神州数码无线常用配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 16:45:08" itemprop="dateCreated datePublished" datetime="2020-05-07T16:45:08+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 09:22:30" itemprop="dateModified" datetime="2020-05-26T09:22:30+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">神州数码</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="AP管理"><a href="#AP管理" class="headerlink" title="AP管理"></a>AP管理</h3><h4 id="AC发现AP"><a href="#AC发现AP" class="headerlink" title="AC发现AP"></a>AC发现AP</h4><h5 id="二层发现"><a href="#二层发现" class="headerlink" title="二层发现"></a>二层发现</h5><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">DCWS-6028</span>(P)(config-wireless)<span class="selector-id">#discovery</span> <span class="selector-tag">vlan-list</span> <span class="selector-tag">1</span> <span class="comment">//指定VLAN发现列表</span></span><br><span class="line"><span class="selector-tag">DCWS-6028</span>(P)(config-wireless)# <span class="selector-tag">ap</span> <span class="selector-tag">database</span> <span class="selector-tag">xx-xx-xx-xx-xx-xx</span>  <span class="comment">//添加AP MAC地址</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h5 id="三层发现"><a href="#三层发现" class="headerlink" title="三层发现"></a>三层发现</h5><h4 id="AP发现AC"><a href="#AP发现AC" class="headerlink" title="AP发现AC"></a>AP发现AC</h4><p><strong><em>AP配置</em></strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DCN-WLAN-AP# <span class="keyword">set</span> management static-ip <span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span>  <span class="comment">//配置静态IP</span></span><br><span class="line">DCN-WLAN-AP# <span class="keyword">set</span> management static-mask <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span>  <span class="comment">//配置掩码</span></span><br><span class="line">DCN-WLAN-AP# <span class="keyword">set</span> static-ip-route gateway <span class="number">192.168</span><span class="number">.2</span><span class="number">.2</span>   <span class="comment">//配置默认网关</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>AC配置</em></strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DCWS<span class="number">-6028</span>(P)(config-wireless)# discovery ip-list <span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span>  <span class="comment">//指定AP IP</span></span><br><span class="line">DCWS<span class="number">-6028</span>(P)(config-wireless)# ap database xx-xx-xx-xx-xx-xx  <span class="comment">//添加AP MAC地址</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="AP静态发现"><a href="#AP静态发现" class="headerlink" title="AP静态发现"></a>AP静态发现</h5><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DCN-WLAN-AP# <span class="keyword">set</span> managed-ap <span class="keyword">switch</span>-address<span class="number">-1</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>	<span class="comment">//设置第一个AC地址</span></span><br><span class="line">DCN-WLAN-AP# <span class="keyword">set</span> managed-ap <span class="keyword">switch</span>-address<span class="number">-2</span> <span class="number">192.168</span><span class="number">.2</span><span class="number">.2</span>	<span class="comment">//设置第二个AC地址</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Option下发AC地址"><a href="#Option下发AC地址" class="headerlink" title="Option下发AC地址"></a>Option下发AC地址</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dhcp pool ap</span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(dhcp-ap-config)</span></span><span class="selector-id">#option</span> <span class="number">43</span> hex <span class="number">01040</span>A090005	<span class="comment">//0104为固定值，后接IP地址16进制</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="AP认证"><a href="#AP认证" class="headerlink" title="AP认证"></a>AP认证</h4><h5 id="无验证"><a href="#无验证" class="headerlink" title="无验证"></a>无验证</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> authentication <span class="attribute">none</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="MAC地址验证"><a href="#MAC地址验证" class="headerlink" title="MAC地址验证"></a>MAC地址验证</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> authe mac <span class="comment">//设置AP验证方式为mac地址验证</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> database xx-xx-xx-xx-xx-xx <span class="comment">//手动添加AP database 条目</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="密码验证"><a href="#密码验证" class="headerlink" title="密码验证"></a>密码验证</h5><p><strong><em>AP配置</em></strong></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">AP</span># <span class="keyword">set</span> managed-<span class="keyword">ap</span> pass-phrase 12345678	<span class="comment">//设置认证密码</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>AC配置</em></strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> authentication pass-phrase </span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> database xx-xx-xx-xx-xx-xx            </span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-ap)</span></span><span class="selector-id">#password</span> plain <span class="number">12345678</span>	<span class="comment">//设置AP认证密码</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="序列号认证"><a href="#序列号认证" class="headerlink" title="序列号认证"></a>序列号认证</h5><p><strong><em>AP操作</em></strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="keyword">get</span> <span class="keyword">system</span> </span><br><span class="line">Property          <span class="keyword">Value</span></span><br><span class="line"><span class="comment">---------------------------------------------------------------</span></span><br><span class="line">model             Wireless Infrastructure Platform Reference AP</span><br><span class="line"><span class="keyword">version</span>           <span class="number">2.0</span><span class="number">.20</span><span class="number">.15</span></span><br><span class="line">altversion        <span class="number">2.0</span><span class="number">.20</span><span class="number">.15</span></span><br><span class="line">protocol-<span class="keyword">version</span>  <span class="number">2</span></span><br><span class="line">base-mac          xx:xx:xx:xx:xx:xx</span><br><span class="line"><span class="type">serial</span>-number     WL013210FA24000118	//序列号</span><br><span class="line"><span class="keyword">system</span>-<span class="type">name</span>       </span><br><span class="line"><span class="keyword">system</span>-contact    </span><br><span class="line"><span class="keyword">system</span>-<span class="keyword">location</span>   </span><br><span class="line">apmode            fit</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>AC操作</em></strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#wireless </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span># ap authentication serial-num</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span># ap database xx-xx-xx-xx-xx-xx </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>)</span>#serial-num WL013210FA24000118</span><br></pre></td></tr></table></figure>
+
+<h4 id="AP逃生"><a href="#AP逃生" class="headerlink" title="AP逃生"></a>AP逃生</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> prof <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-ap-profile)</span></span><span class="selector-id">#ap</span> escape <span class="comment">//开启AP逃生模式</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="修改AP配置文件"><a href="#修改AP配置文件" class="headerlink" title="修改AP配置文件"></a>修改AP配置文件</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-ap)</span></span><span class="selector-id">#profile</span> <span class="number">3</span> <span class="comment">//在AP配置模式下()</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="修改AP管理VLAN"><a href="#修改AP管理VLAN" class="headerlink" title="修改AP管理VLAN"></a>修改AP管理VLAN</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AC(config-ap-profile)#management<span class="built_in"> vlan </span>4094 </span><br><span class="line">AC(config-ap-profile)#wireless ap<span class="built_in"> profile </span>apply 1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="用户接入"><a href="#用户接入" class="headerlink" title="用户接入"></a>用户接入</h3><h4 id="用户认证方式"><a href="#用户认证方式" class="headerlink" title="用户认证方式"></a>用户认证方式</h4><h5 id="WEP认证"><a href="#WEP认证" class="headerlink" title="WEP认证"></a>WEP认证</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#Sec</span> mode static-wep 	<span class="comment">//设置认证方式为WEP</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#wep</span> key length <span class="number">64</span>		<span class="comment">//设置key长度，64为5位，128为13位</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#wep</span> key type ascii		<span class="comment">//设置WEP密钥类型</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#wep</span> key  <span class="number">1</span> <span class="number">12345</span>		<span class="comment">//设置WEP密钥</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="WPA个人版"><a href="#WPA个人版" class="headerlink" title="WPA个人版"></a>WPA个人版</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#network</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#Sec</span> mode wpa-per 	<span class="comment">//设置认证方式为WPA个人版</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#wpa</span> ciphers tkip 	<span class="comment">//设置WPA加密方式为Tkip</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#wpa</span> key tikp123456789	<span class="comment">//设置WPA密钥</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="WPA企业版"><a href="#WPA企业版" class="headerlink" title="WPA企业版"></a>WPA企业版</h5><p><strong><em>认证服务器配置</em></strong></p>
+<blockquote>
+<p>略</p>
+</blockquote>
+<p><strong><em>AC配置</em></strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#dot1x enable      <span class="comment">//开启dot1x认证</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#radius-server authentication host <span class="number">172.16</span>.<span class="number">5.164</span> key <span class="number">0</span> <span class="number">123</span> <span class="comment">//设置服务器地址和key</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#radius source-ipv4 <span class="number">172.16</span>.<span class="number">5.233</span>  <span class="comment">//设置源地址</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#radius nas-ipv4 <span class="number">172.16</span>.<span class="number">5.233</span>     <span class="comment">//设置NAS地址</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#aaa enable</span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#!</span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#aaa group server radius <span class="number">2012</span>    <span class="comment">//设置AAA组</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">sg</span>-<span class="params">radius</span>)</span># server <span class="number">172.16</span>.<span class="number">5.164</span>    <span class="comment">//添加服务器</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">sg</span>-<span class="params">radius</span>)</span>#!</span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>)</span>#wireless</span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">wireless</span>)</span># radius server-name auth <span class="number">2012</span> <span class="comment">//调用AAA服务器组</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">wireless</span>)</span># network <span class="number">1</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">network</span>)</span>#  radius server-name auth <span class="number">2012</span>    <span class="comment">//调用AAA服务器组</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">network</span>)</span>#  security mode wpa-enterprise    <span class="comment">//设置无线企业认证</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">network</span>)</span>#  ssid radius</span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">network</span>)</span>#  vlan <span class="number">20</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">network</span>)</span>#!</span><br></pre></td></tr></table></figure>
+
+<h4 id="本地Portal认证"><a href="#本地Portal认证" class="headerlink" title="本地Portal认证"></a>本地Portal认证</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#captive-portal    <span class="comment">//进入captive-portal模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>)</span>#enable    <span class="comment">//开启Protal功能</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>)</span>#authentication-<span class="keyword">type</span> internal    <span class="comment">//认证类型为内置Protal</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>)</span>#user user1    <span class="comment">//创建并设置用户 user1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">local</span>-<span class="params">user</span>)</span>#password <span class="number">123456</span>    <span class="comment">//设置账户的密码为 123456</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">local</span>-<span class="params">user</span>)</span>#group <span class="number">0</span>    <span class="comment">//用户加入组 group 0</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">local</span>-<span class="params">user</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>)</span>#configuration <span class="number">1</span>    <span class="comment">//进入captive-portal 配置1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">instance</span>)</span>#enable    <span class="comment">//开启此配置</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">instance</span>)</span>#verification local    <span class="comment">//设置验证模式为本地</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">instance</span>)</span>#group <span class="number">0</span>    <span class="comment">//绑定Group 0 组</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">instance</span>)</span>#auth-<span class="keyword">method</span> mac-ip-based    <span class="comment">//设置认证方式为基于MAC-IP</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">cp</span>-<span class="params">instance</span>)</span>#interface ws-network <span class="number">1</span>    <span class="comment">//绑定无线网络 (对应配置下发时的 Network 对应一个VAP)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="动态黑名单"><a href="#动态黑名单" class="headerlink" title="动态黑名单"></a>动态黑名单</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#dynamic-blacklist</span> <span class="comment">//开启动态黑名单功能</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#network</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#mac</span> authentication local <span class="comment">//开启MAC本地验证</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="MAC认证"><a href="#MAC认证" class="headerlink" title="MAC认证"></a>MAC认证</h4><blockquote>
+<p>只允许已添加MAC的终端连接AP，或阻止已添加MAC的终端连接AP</p>
+</blockquote>
+<p>只允许已添加MAC的终端连接AP</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#mac-authentication-modewhite-list</span>	<span class="comment">//开启MAC白名单模式</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#known-client</span> <span class="number">00</span>-<span class="number">11</span>-<span class="number">11</span>-<span class="number">11</span>-<span class="number">11</span>-<span class="number">11</span> action global-action	<span class="comment">//添加MAC地址</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#network</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-network)</span></span><span class="selector-id">#mac</span> authentication local	<span class="comment">//开启MAC本地认证</span></span><br></pre></td></tr></table></figure>
+
+<p>阻止已添加MAC的终端连接AP</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#mac-authentication-modeblack-list</span>	<span class="comment">//开启黑名单模式</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#known-client</span> <span class="number">00</span>-<span class="number">22</span>-<span class="number">22</span>-<span class="number">22</span>-<span class="number">22</span>-<span class="number">22</span>action global-action	<span class="comment">//添加MAC地址</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#network</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-network)</span></span><span class="selector-id">#mac</span> authentication local	<span class="comment">//开启MAC本地认证</span></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后需下发AP生效</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DCWS<span class="number">-6028</span>#wireless approfile apply <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="最大接入用户数"><a href="#最大接入用户数" class="headerlink" title="最大接入用户数"></a>最大接入用户数</h4><p>最大接入10个用户</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#max-clients</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>用户老化时间为300秒</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#offline-detect</span> idle-timeout <span class="number">300</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="限制接入时间"><a href="#限制接入时间" class="headerlink" title="限制接入时间"></a>限制接入时间</h4><p>星期一 09:00 到 18:00 不允许接入无线网络</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DCWS(config-network)#time-limit <span class="keyword">from</span> <span class="number">09</span>:<span class="number">00</span> to <span class="number">18</span>:<span class="number">00</span> weekday monday</span><br></pre></td></tr></table></figure>
+
+<h4 id="ARP抑制"><a href="#ARP抑制" class="headerlink" title="ARP抑制"></a>ARP抑制</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AC(config)#<span class="built_in"> wireless </span></span><br><span class="line">AC(config-wireless)#network 1 </span><br><span class="line">AC(config-network)# arp-suppression</span><br></pre></td></tr></table></figure>
+
+<h4 id="Anti-flood"><a href="#Anti-flood" class="headerlink" title="Anti-flood"></a>Anti-flood</h4><p>防止AP泛洪攻击，检测时间为10分钟，最大连接次数为5次，老化时间为60分钟</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AC(config-wireless)#<span class="built_in"> wireless </span>ap anti-flood</span><br><span class="line">AC(config-wireless)#<span class="built_in"> wireless </span>ap anti-flood interval 10</span><br><span class="line">AC(config-wireless)#<span class="built_in"> wireless </span>ap anti-flood max-conn-count 5</span><br><span class="line">AC(config-wireless)#<span class="built_in"> wireless </span>ap anti-flood agetime 60</span><br></pre></td></tr></table></figure>
+
+<h4 id="隐藏SSID"><a href="#隐藏SSID" class="headerlink" title="隐藏SSID"></a>隐藏SSID</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">network</span>)</span>#hide-ssid</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="射频管理"><a href="#射频管理" class="headerlink" title="射频管理"></a>射频管理</h3><h4 id="调整射频工作模式"><a href="#调整射频工作模式" class="headerlink" title="调整射频工作模式"></a>调整射频工作模式</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> profile <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-ap-profile)</span></span><span class="selector-id">#radio</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-ap-profile-radio)</span></span><span class="selector-id">#mode</span> bg-n</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置AP的功率和信道"><a href="#设置AP的功率和信道" class="headerlink" title="设置AP的功率和信道"></a>设置AP的功率和信道</h4><p>调整完需重启AP生效</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DCWS<span class="number">-6028</span>(config-wireless)#ap database <span class="number">00</span><span class="number">-03</span><span class="number">-0f</span><span class="number">-19</span><span class="number">-71</span>-e0</span><br><span class="line">DCWS<span class="number">-6028</span>(config-ap)#radio <span class="number">1</span> channel <span class="number">11</span></span><br><span class="line">The valid AP entry <span class="keyword">is</span> updated. This AP <span class="keyword">is</span> already managed, to update the managed AP configuration with the new value(s) you need to reset the AP.</span><br><span class="line">DCWS<span class="number">-6028</span>(config-ap)#radio <span class="number">1</span> power <span class="number">50</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="自动信道调整"><a href="#自动信道调整" class="headerlink" title="自动信道调整"></a>自动信道调整</h4><blockquote>
+<p>自动信道调整有三种方式：手动触发、周期性触发和固定时间触发</p>
+<p>如果为AP设置了固定信道，则不能对此AP进行自动信道调整</p>
+<p>自动信道调整功能默认是开启的</p>
+</blockquote>
+<h5 id="手动触发方式"><a href="#手动触发方式" class="headerlink" title="手动触发方式"></a>手动触发方式</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028(config-wireless)#channel-planbgn mode<span class="built_in"> manual </span></span><br><span class="line">DCWS-6028#wireless channel-plan bgnstart</span><br><span class="line">wirelessCalculate80211ChannelAdjustment successfuly added proposed entry <span class="keyword">to</span> <span class="attribute">ap</span>=00-03-0f-19-71-e0</span><br><span class="line">  </span><br><span class="line">DCWS-6028#wirelesschannel-plan bgn apply</span><br></pre></td></tr></table></figure>
+
+<h5 id="周期性触发方式"><a href="#周期性触发方式" class="headerlink" title="周期性触发方式"></a>周期性触发方式</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#channel-plan</span> bgnmode interval</span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#channel-plan</span> bgninterval <span class="number">720</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="固定时间触发方式"><a href="#固定时间触发方式" class="headerlink" title="固定时间触发方式"></a>固定时间触发方式</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#channel-plan</span> bgnmode time</span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#channel-plan</span> bgntime <span class="number">23</span>:<span class="number">00</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="自动功率调整"><a href="#自动功率调整" class="headerlink" title="自动功率调整"></a>自动功率调整</h4><blockquote>
+<p>自动功率调整有两种方式：手动触发和周期性触发</p>
+<p>如果为AP配置了固定功率，则不能对此AP进行自动功率调整</p>
+</blockquote>
+<h5 id="手动触发方式-1"><a href="#手动触发方式-1" class="headerlink" title="手动触发方式"></a>手动触发方式</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028(config-wireless)#ap<span class="built_in"> profile </span>1</span><br><span class="line">DCWS-6028(config-ap-profile)#radio 1</span><br><span class="line">DCWS-6028(config-ap-profile-radio)#power auto </span><br><span class="line">DCWS-6028(config-wireless)#power-plan mode manual</span><br><span class="line">DCWS-6028#wireless power-plan start</span><br><span class="line">DCWS-6028#wireless power-plan apply</span><br></pre></td></tr></table></figure>
+
+<h5 id="周期性触发方式-1"><a href="#周期性触发方式-1" class="headerlink" title="周期性触发方式"></a>周期性触发方式</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#approfile</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-ap-profile)</span></span><span class="selector-id">#radio</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-ap-profile-radio)</span></span><span class="selector-id">#power</span> <span class="attribute">auto</span> </span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-ap-profile-radio)</span></span>#exit</span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-ap-profile)</span></span>#exit</span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#power-plan</span> mode interval </span><br><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(config-wireless)</span></span><span class="selector-id">#power-plan</span> interval <span class="number">720</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="支持速率集"><a href="#支持速率集" class="headerlink" title="支持速率集"></a>支持速率集</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>- <span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#mode bg </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>- <span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#rate basic <span class="number">54</span> <span class="comment">//设置基本速率集</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#rate supported <span class="number">54</span> <span class="comment">//设置支持速率集</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="流量转发"><a href="#流量转发" class="headerlink" title="流量转发"></a>流量转发</h3><h4 id="无线隔离"><a href="#无线隔离" class="headerlink" title="无线隔离"></a>无线隔离</h4><p>同一SSID(同一VLAN)下无线隔离</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#network</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span>#station-isolation</span><br></pre></td></tr></table></figure>
+
+<p>同一radio下用户隔离</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">wireless</span>)</span>#ap profile <span class="number">1</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#radio <span class="number">1</span></span><br><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#station-isolation</span><br></pre></td></tr></table></figure>
+
+<h4 id="无线强制漫游"><a href="#无线强制漫游" class="headerlink" title="无线强制漫游"></a>无线强制漫游</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#force-roaming</span> mode <span class="attribute">auto</span> //开启自动强制漫游功能</span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#force-roaming</span> mode <span class="attribute">auto</span> interval <span class="number">15</span>  //自动强制漫游功能的执行周期为<span class="number">15</span>分钟。</span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#force-roaming</span> rssi-threshold <span class="number">10</span>   <span class="comment">//设置RSSI阈值，为10%</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#force-roaming</span> denial-count <span class="number">5</span>       <span class="comment">//设置自动强制漫游拒绝次数门限为5次</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#force-roaming</span> denial-timeout <span class="number">1</span>  <span class="comment">//设置拒绝次数门限老化为1小时</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#force-roaming</span> hysteresis <span class="number">4</span>    <span class="comment">//设置符合强制漫游的信号强度差值为4%.</span></span><br><span class="line">DCWS<span class="selector-id">#wireless</span> force-roaming client aa-aa-aa-aa-aa-aa start  <span class="comment">//手动发起漫游功能</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分布式转发"><a href="#分布式转发" class="headerlink" title="分布式转发"></a>分布式转发</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS-6028</span><span class="params">(P)</span><span class="params">(config-network)</span></span><span class="selector-id">#dist-tunnel</span> <span class="comment">//该Network的流量开启分布式转发</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="集中转发"><a href="#集中转发" class="headerlink" title="集中转发"></a>集中转发</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">wireless</span>)</span>#l2tunnel vlan-<span class="built_in">list</span> add <span class="number">10</span>;<span class="number">20</span>	<span class="comment">//设置VLAN10 VLAN20的流量为集中转发</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="限速"><a href="#限速" class="headerlink" title="限速"></a>限速</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> client-qos	<span class="comment">//开启AP QoS</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-wireless)</span></span><span class="selector-id">#network</span> <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#client-qos</span> bandwidth-limit down <span class="number">5120</span>	<span class="comment">//限速下行速率为5Mb/s</span></span><br><span class="line"><span class="function"><span class="title">DCWS</span><span class="params">(config-network)</span></span><span class="selector-id">#client-qos</span> bandwidth-limit up <span class="number">2048</span>		<span class="comment">//限速上行速率为2Mb/s</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="时空公平调度"><a href="#时空公平调度" class="headerlink" title="时空公平调度"></a>时空公平调度</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#schedule-mode preferred	<span class="comment">//开启时空公平调度</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="常用维护命令"><a href="#常用维护命令" class="headerlink" title="常用维护命令"></a>常用维护命令</h3><h4 id="AC常用维护命令"><a href="#AC常用维护命令" class="headerlink" title="AC常用维护命令"></a>AC常用维护命令</h4><p><strong>查看AP的注册和配置状态</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028#show<span class="built_in"> wireless </span>ap status </span><br><span class="line">	    MAC<span class="built_in"> Address </span>                                           Configuration                </span><br><span class="line">	 (*)<span class="built_in"> Peer </span>Managed <span class="built_in"> IP Address Profile </span>Status     Status           Age      </span><br><span class="line">	------------------ --------------- ------- ------- ------------- -------------- -------------</span><br><span class="line">	 00-03-0f-19-71-e0 192.168.1.10    1  Managed Success   d:00:00:01</span><br><span class="line">	Total Access Points<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span> 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看AP的注册失败信息</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028#show<span class="built_in"> wireless </span>ap failure status</span><br></pre></td></tr></table></figure>
+
+<p><strong>下发配置</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DCWS<span class="number">-6028</span>#wireless approfile apply <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置硬件类型</strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">DCWS(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#hwtype <span class="number">29</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>查看硬件版本</strong>1</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DCWS(config-ap-profile)#show wir ap 00-03-0f-5b-f0-e0 status | i Type</span><br><span class="line">Hardware Type<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span> 29 - WL8200-I2, Indoor Dual Radio a/n/ac, b/g/n</span><br><span class="line">CPU Type<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>. AR9344-533</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看硬件版本2</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DCWS<span class="comment">#show vendor | i WL8200-I2</span></span><br><span class="line">                          <span class="number">29</span> WL8200-I2        R1    WL8200-I2, Indoor Dual Radio a<span class="regexp">/n/</span>ac, b<span class="regexp">/g/</span>n</span><br></pre></td></tr></table></figure>
+
+<p>查看AC的无线状态，可以看到无线功能是否开启，无线IP地址信息，国家代码信息，管理的AP数量等</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028# show<span class="built_in"> wireless </span></span><br><span class="line">DCWS-6028# show<span class="built_in"> wireless </span>status</span><br></pre></td></tr></table></figure>
+
+<p>查看AP的详细信息，可以看到AP的MAC地址、IP地址、硬件类型及型号、软件版本、序列号等</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028#showwireless ap 00-03-0f-19-71-e0 status </span><br><span class="line">  MACaddress<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span> 00-03-0f-19-71-e0</span><br><span class="line">  Location<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.</span><br><span class="line">  IPAddress<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>. 192.168.1.10</span><br><span class="line"> <span class="built_in"> IP </span>SubnetMask<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>. 255.255.255.0</span><br><span class="line">  … …</span><br></pre></td></tr></table></figure>
+
+<p>查看AP的射频信息</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028#show<span class="built_in"> wireless </span>ap radio status </span><br><span class="line">	 DCWS-6028#show<span class="built_in"> wireless </span>ap 00-03-0f-19-71-e0 radio status </span><br><span class="line">	     MAC<span class="built_in"> Address </span>                                                    Transmit     Auth. </span><br><span class="line">	 (*)<span class="built_in"> Peer </span>Managed   Location        Radio Channel Power (%) Clients</span><br><span class="line">	     ------------------       -----------          -----       -------    --------         -------</span><br><span class="line">	 00-03-0f-19-71-e0                           1           11          100            0      </span><br><span class="line">                                                                  2          149         100            0</span><br></pre></td></tr></table></figure>
+
+<p>查看无线终端信息</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DCWS-6028#show<span class="built_in"> wireless client </span>status      </span><br><span class="line">	   MAC<span class="built_in"> Address </span>                                                            </span><br><span class="line">	 (*)<span class="built_in"> Peer </span>Managed  VAP MAC<span class="built_in"> Address </span>SSID  Status<span class="built_in"> Network </span>Time </span><br><span class="line"> 	     ------------------            -----------------          -------   ---------      -----------</span><br><span class="line">	 00-1c-bf-21-85-90 00-03-0f-19-71-e1       wlan    Auth    0d:00:00:05</span><br><span class="line">	Total Clients Associated <span class="keyword">To</span> Local Switch<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>. 1</span><br><span class="line">	Total Clients Associated <span class="keyword">To</span><span class="built_in"> Peer </span>Switches<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span> 0</span><br></pre></td></tr></table></figure>
+
+<p>重启AP，可以重启所有AP，也可以单独重启某一台AP</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DCWS<span class="number">-6028</span>#wireless ap reset</span><br><span class="line">DCWS<span class="number">-6028</span>#wireless ap reset <span class="number">00</span><span class="number">-03</span><span class="number">-0f</span><span class="number">-19</span><span class="number">-71</span>-e0</span><br></pre></td></tr></table></figure>
+
+<h4 id="AP常用维护命令"><a href="#AP常用维护命令" class="headerlink" title="AP常用维护命令"></a>AP常用维护命令</h4><p><strong>获取地址信息</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="builtin-name">get</span> management </span><br><span class="line">Property                   Value</span><br><span class="line">--------------------------------------------</span><br><span class="line">vlan-id                    1</span><br><span class="line">interface                  brvlan1</span><br><span class="line">static-ip                  192.168.2.1</span><br><span class="line">static-mask                255.255.255.0</span><br><span class="line">ip                         192.168.2.1</span><br><span class="line">mask                       255.255.255.0</span><br><span class="line">ipv6                       </span><br><span class="line">ipv6-prefix-length         0</span><br><span class="line">mac                        xx:xx:xx:xx:xx:xx</span><br><span class="line">dhcp-status                up</span><br><span class="line">dhcpv6-status              up</span><br><span class="line">ipv6-status                up</span><br><span class="line">ipv6-autoconfig-status     up</span><br><span class="line">static-ipv6                </span><br><span class="line">static-ipv6-prefix-length  0</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置IP地址信息</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="keyword">set</span> management static-ip <span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span> <span class="comment">//设置IP</span></span><br><span class="line">AP# <span class="keyword">set</span> static-ip-route management gateway <span class="number">192.168</span><span class="number">.2</span><span class="number">.254</span>    <span class="comment">//配置网关</span></span><br><span class="line">AP# <span class="keyword">set</span> management static-mask <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span>  <span class="comment">//设置掩码</span></span><br><span class="line">AP# <span class="keyword">set</span> management dhcp-status down <span class="comment">//关闭DHCP</span></span><br><span class="line">AP# <span class="keyword">set</span> management dhcp-status up   <span class="comment">//开启DHCP</span></span><br><span class="line">AP# <span class="keyword">set</span> managed-ap <span class="keyword">switch</span>-address<span class="number">-1</span> <span class="number">1.1</span><span class="number">.1</span><span class="number">.1</span> <span class="comment">//设置主AC地址</span></span><br><span class="line">AP# <span class="keyword">set</span> managed-ap <span class="keyword">switch</span>-address<span class="number">-2</span> <span class="number">2.2</span><span class="number">.2</span><span class="number">.2</span> <span class="comment">//设置备用AC地址</span></span><br><span class="line">AP# <span class="keyword">set</span> managed-ap <span class="keyword">switch</span>-address<span class="number">-2</span> <span class="number">3.3</span><span class="number">.3</span><span class="number">.3</span> <span class="comment">//设置备用AC地址</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置管理VLAN</strong></p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="keyword">set</span> management <span class="comment">vlan-id 1</span></span><br></pre></td></tr></table></figure>
+
+<p>*<em>重置AP *</em></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DCN-WLAN-AP<span class="meta"># factory-reset</span></span><br></pre></td></tr></table></figure>
+
+<p>瘦AP转胖AP</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AP<span class="meta">#switch-apmode fat</span></span><br></pre></td></tr></table></figure>
+
+<p>胖AP转瘦AP</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">AP</span>#switch-apmode <span class="keyword">fit</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="配置原则关系图解"><a href="#配置原则关系图解" class="headerlink" title="配置原则关系图解"></a>配置原则关系图解</h3><p><img src="https://i.loli.net/2018/03/11/5aa536dc8b2bb.png" alt="无线配置原则"></p>
+<p>转载来源：<a href="https://blog.ikozn.com/post/无线常用配置/" target="_blank" rel="noopener">https://blog.ikozn.com/post/%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A0%E7%BA%BF/" rel="tag"># 无线</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/" rel="prev" title="运算符和分支循环语句">
+      <i class="fa fa-chevron-left"></i> 运算符和分支循环语句
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/" rel="next" title="DCN浅谈无线VLAN的设置">
+      DCN浅谈无线VLAN的设置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AP管理"><span class="nav-number">1.</span> <span class="nav-text">AP管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AC发现AP"><span class="nav-number">1.1.</span> <span class="nav-text">AC发现AP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#二层发现"><span class="nav-number">1.1.1.</span> <span class="nav-text">二层发现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三层发现"><span class="nav-number">1.1.2.</span> <span class="nav-text">三层发现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AP发现AC"><span class="nav-number">1.2.</span> <span class="nav-text">AP发现AC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AP静态发现"><span class="nav-number">1.2.1.</span> <span class="nav-text">AP静态发现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Option下发AC地址"><span class="nav-number">1.2.2.</span> <span class="nav-text">Option下发AC地址</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AP认证"><span class="nav-number">1.3.</span> <span class="nav-text">AP认证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#无验证"><span class="nav-number">1.3.1.</span> <span class="nav-text">无验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MAC地址验证"><span class="nav-number">1.3.2.</span> <span class="nav-text">MAC地址验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#密码验证"><span class="nav-number">1.3.3.</span> <span class="nav-text">密码验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#序列号认证"><span class="nav-number">1.3.4.</span> <span class="nav-text">序列号认证</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AP逃生"><span class="nav-number">1.4.</span> <span class="nav-text">AP逃生</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改AP配置文件"><span class="nav-number">1.5.</span> <span class="nav-text">修改AP配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改AP管理VLAN"><span class="nav-number">1.6.</span> <span class="nav-text">修改AP管理VLAN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户接入"><span class="nav-number">2.</span> <span class="nav-text">用户接入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户认证方式"><span class="nav-number">2.1.</span> <span class="nav-text">用户认证方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#WEP认证"><span class="nav-number">2.1.1.</span> <span class="nav-text">WEP认证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WPA个人版"><span class="nav-number">2.1.2.</span> <span class="nav-text">WPA个人版</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WPA企业版"><span class="nav-number">2.1.3.</span> <span class="nav-text">WPA企业版</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地Portal认证"><span class="nav-number">2.2.</span> <span class="nav-text">本地Portal认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态黑名单"><span class="nav-number">2.3.</span> <span class="nav-text">动态黑名单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAC认证"><span class="nav-number">2.4.</span> <span class="nav-text">MAC认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最大接入用户数"><span class="nav-number">2.5.</span> <span class="nav-text">最大接入用户数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限制接入时间"><span class="nav-number">2.6.</span> <span class="nav-text">限制接入时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP抑制"><span class="nav-number">2.7.</span> <span class="nav-text">ARP抑制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Anti-flood"><span class="nav-number">2.8.</span> <span class="nav-text">Anti-flood</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏SSID"><span class="nav-number">2.9.</span> <span class="nav-text">隐藏SSID</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#射频管理"><span class="nav-number">3.</span> <span class="nav-text">射频管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调整射频工作模式"><span class="nav-number">3.1.</span> <span class="nav-text">调整射频工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置AP的功率和信道"><span class="nav-number">3.2.</span> <span class="nav-text">设置AP的功率和信道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动信道调整"><span class="nav-number">3.3.</span> <span class="nav-text">自动信道调整</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手动触发方式"><span class="nav-number">3.3.1.</span> <span class="nav-text">手动触发方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#周期性触发方式"><span class="nav-number">3.3.2.</span> <span class="nav-text">周期性触发方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#固定时间触发方式"><span class="nav-number">3.3.3.</span> <span class="nav-text">固定时间触发方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动功率调整"><span class="nav-number">3.4.</span> <span class="nav-text">自动功率调整</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手动触发方式-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">手动触发方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#周期性触发方式-1"><span class="nav-number">3.4.2.</span> <span class="nav-text">周期性触发方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持速率集"><span class="nav-number">3.5.</span> <span class="nav-text">支持速率集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流量转发"><span class="nav-number">4.</span> <span class="nav-text">流量转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无线隔离"><span class="nav-number">4.1.</span> <span class="nav-text">无线隔离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无线强制漫游"><span class="nav-number">4.2.</span> <span class="nav-text">无线强制漫游</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式转发"><span class="nav-number">4.3.</span> <span class="nav-text">分布式转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集中转发"><span class="nav-number">4.4.</span> <span class="nav-text">集中转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限速"><span class="nav-number">4.5.</span> <span class="nav-text">限速</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时空公平调度"><span class="nav-number">4.6.</span> <span class="nav-text">时空公平调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用维护命令"><span class="nav-number">5.</span> <span class="nav-text">常用维护命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AC常用维护命令"><span class="nav-number">5.1.</span> <span class="nav-text">AC常用维护命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AP常用维护命令"><span class="nav-number">5.2.</span> <span class="nav-text">AP常用维护命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置原则关系图解"><span class="nav-number">6.</span> <span class="nav-text">配置原则关系图解</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

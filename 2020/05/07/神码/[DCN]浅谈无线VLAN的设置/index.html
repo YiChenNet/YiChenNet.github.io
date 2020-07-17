@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh—CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[DCN]浅谈无线VLAN的设置首先我们来看一个常见的错误配置方式 拓扑 需求1.网络拓扑如上图所示，AC是无线控制器，其E1&#x2F;0&#x2F;1口连接着AP的LAN1口 2.按照 表1-1 完成无线网络的配置.使用户连接WLAN使能够获取对应VLAN的IP地址。AP地址通过DHCP下发，为192.168.3.10。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DCN浅谈无线VLAN的设置">
+<meta property="og:url" content="https://yichennet.github.io/2020/05/07/%E7%A5%9E%E7%A0%81/[DCN]%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="逸晨のBlog">
+<meta property="og:description" content="[DCN]浅谈无线VLAN的设置首先我们来看一个常见的错误配置方式 拓扑 需求1.网络拓扑如上图所示，AC是无线控制器，其E1&#x2F;0&#x2F;1口连接着AP的LAN1口 2.按照 表1-1 完成无线网络的配置.使用户连接WLAN使能够获取对应VLAN的IP地址。AP地址通过DHCP下发，为192.168.3.10。">
+<meta property="og:locale" content="zh—CN">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa600e2bb5a2.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa57b1fe9738.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa57c1f5f96d.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa57c1f5f96d.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa58ea17ceb9.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa600e2bb5a2.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa600abe2514.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa601ee7c5d5.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa60313a8a84.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa60f0615b3b.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa60f8f5b204.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/12/5aa61045a552d.png">
+<meta property="article:published_time" content="2020-05-07T08:46:58.657Z">
+<meta property="article:modified_time" content="2020-05-26T01:22:16.898Z">
+<meta property="article:author" content="逸晨">
+<meta property="article:tag" content="无线">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/03/12/5aa600e2bb5a2.png">
+
+<link rel="canonical" href="https://yichennet.github.io/2020/05/07/%E7%A5%9E%E7%A0%81/[DCN]%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh—CN'
+  };
+</script>
+
+  <title>DCN浅谈无线VLAN的设置 | 逸晨のBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">逸晨のBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/07/%E7%A5%9E%E7%A0%81/[DCN]%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DCN浅谈无线VLAN的设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 16:46:58" itemprop="dateCreated datePublished" datetime="2020-05-07T16:46:58+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 09:22:16" itemprop="dateModified" datetime="2020-05-26T09:22:16+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">神州数码</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="DCN-浅谈无线VLAN的设置"><a href="#DCN-浅谈无线VLAN的设置" class="headerlink" title="[DCN]浅谈无线VLAN的设置"></a>[DCN]浅谈无线VLAN的设置</h1><p>首先我们来看一个常见的错误配置方式</p>
+<h3 id="拓扑"><a href="#拓扑" class="headerlink" title="拓扑"></a><strong>拓扑</strong></h3><p><img src="https://i.loli.net/2018/03/12/5aa600e2bb5a2.png" alt="拓扑"></p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a><strong>需求</strong></h3><p>1.网络拓扑如上图所示，AC是无线控制器，其E1/0/1口连接着AP的LAN1口</p>
+<p>2.按照 表1-1 完成无线网络的配置.使用户连接WLAN使能够获取对应VLAN的IP地址。AP地址通过DHCP下发，为192.168.3.10。</p>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th align="left">VLAN</th>
+<th align="left">SVI接口地址</th>
+<th align="left">说明</th>
+<th align="left">对应SSID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">192.168.1.254/24</td>
+<td align="left">用户VLAN</td>
+<td align="left">VLAN1-Wireless-LAB</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">192.168.2.254/24</td>
+<td align="left">用户VLAN</td>
+<td align="left">VLAN2-Wireless-LAB</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">192.168.3.254/24</td>
+<td align="left">管理 and 用户VLAN</td>
+<td align="left">VLAN3-Wireless-LAB</td>
+</tr>
+</tbody></table>
+<p>表1-1</p>
+<h3 id="配置及实现"><a href="#配置及实现" class="headerlink" title="配置及实现"></a><strong>配置及实现</strong></h3><h4 id="1-AP上线"><a href="#1-AP上线" class="headerlink" title="1.AP上线"></a>1.AP上线</h4><h4 id="划分VLAN和设置SVI接口地址"><a href="#划分VLAN和设置SVI接口地址" class="headerlink" title="划分VLAN和设置SVI接口地址"></a>划分VLAN和设置SVI接口地址</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#vlan <span class="number">2</span>		<span class="comment">//创建VLAN2</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">vlan2</span>)</span>#vlan <span class="number">3</span>		<span class="comment">//创建VLAN3</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">vlan3</span>)</span>#<span class="built_in">int</span> vlan <span class="number">1</span> 	<span class="comment">//进入Vlan1的SVI接口</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan1</span>)</span>#ip ad <span class="number">192.168</span>.<span class="number">1.254</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置IP地址	</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan1</span>)</span>#<span class="built_in">int</span> vlan <span class="number">2</span>		<span class="comment">//进入VLAN2的SVI接口</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan2</span>)</span>#ip ad <span class="number">192.168</span>.<span class="number">2.254</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置IP地址</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan2</span>)</span>#<span class="built_in">int</span> vlan <span class="number">3</span>		<span class="comment">//进入VLAN3的SVI接口</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan3</span>)</span>#ip ad <span class="number">192.168</span>.<span class="number">3.254</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置IP地址</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">ethernet1</span><span class="operator">/</span>0<span class="operator">/</span>1)</span>#sw mo trunk 		<span class="comment">//更改接口模式为Trunk</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan3</span>)</span>#<span class="built_in">int</span> e1/<span class="number">0</span>/<span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">ethernet1</span><span class="operator">/</span>0<span class="operator">/</span>1)</span>#sw mo trunk </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">ethernet1</span><span class="operator">/</span>0<span class="operator">/</span>1)</span>#switchport trunk native vlan <span class="number">3</span>		<span class="comment">//设置Native VLAN为VLAN3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="2-开启DHCP功能，自动下发地址。"><a href="#2-开启DHCP功能，自动下发地址。" class="headerlink" title="2 开启DHCP功能，自动下发地址。"></a>2 开启DHCP功能，自动下发地址。</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dhcp pool vlan1 		<span class="comment">//创建地址池</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan1-config)</span></span><span class="selector-id">#network-address</span> <span class="number">192.168</span>.<span class="number">1.0</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置下发网段</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan1-config)</span></span><span class="number">#def</span>ault-router <span class="number">192.168</span>.<span class="number">1.254</span>		</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan1-config)</span></span>#!</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dhcp pool vlan2		<span class="comment">//创建地址池</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan2-config)</span></span><span class="selector-id">#network-address</span> <span class="number">192.168</span>.<span class="number">2.0</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置下发网段</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan2-config)</span></span><span class="number">#def</span>ault-router <span class="number">192.168</span>.<span class="number">2.254</span> 		<span class="comment">//设置网关</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan2-config)</span></span>#!</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dhcp pool vlan3       <span class="comment">//创建地址池                </span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan3-config)</span></span><span class="selector-id">#network-address</span> <span class="number">192.168</span>.<span class="number">3.0</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置下发网段</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan3-config)</span></span><span class="number">#def</span>ault-router <span class="number">192.168</span>.<span class="number">3.254</span>		<span class="comment">//设置网关</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan3-config)</span></span>#!</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#service</span> dhcp		<span class="comment">//开启DHCP服务</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="3-DHCP静态绑定AP地址"><a href="#3-DHCP静态绑定AP地址" class="headerlink" title="3 DHCP静态绑定AP地址"></a>3 DHCP静态绑定AP地址</h4><p><strong>AC</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">AC(config)#show ip dh binding 		<span class="comment">//查看DHCP绑定</span></span><br><span class="line">Total dhcp binding items: <span class="number">1</span>, the matched: <span class="number">1</span></span><br><span class="line">IP address          Hardware address         Lease expiration         Type</span><br><span class="line"><span class="number">192.168</span><span class="number">.3</span><span class="number">.1</span>         <span class="number">00</span><span class="number">-03</span><span class="number">-0</span>F<span class="number">-5</span>B-F0-E0        Mon Jan <span class="number">02</span> <span class="number">00</span>:<span class="number">30</span>:<span class="number">00</span> <span class="number">2006</span> Dynamic</span><br><span class="line"></span><br><span class="line">AC(config)#ip dhcp pool AP		<span class="comment">//添加DHCP池</span></span><br><span class="line">AC(dhcp-ap-config)#hardware-address <span class="number">00</span><span class="number">-03</span><span class="number">-0</span>F<span class="number">-5</span>B-F0-E0		<span class="comment">//绑定MAC地址</span></span><br><span class="line">AC(dhcp-ap-config)#host <span class="number">192.168</span><span class="number">.3</span><span class="number">.10</span>		<span class="comment">//绑定IP</span></span><br><span class="line">AC(dhcp-ap-config)#<span class="keyword">default</span>-router <span class="number">192.168</span><span class="number">.3</span><span class="number">.254</span>		<span class="comment">//设置网关</span></span><br><span class="line">AC(dhcp-ap-config)#!</span><br><span class="line">AC(config)#show ip dh binding                </span><br><span class="line">Total dhcp binding items: <span class="number">1</span>, the matched: <span class="number">1</span></span><br><span class="line">IP address          Hardware address         Lease expiration         Type</span><br><span class="line"><span class="number">192.168</span><span class="number">.3</span><span class="number">.10</span>        <span class="number">00</span><span class="number">-03</span><span class="number">-0</span>F<span class="number">-5</span>B-F0-E0        Infinite                 Manual</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>AP</strong></p>
+<p>重启的DHCP功能</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="keyword">set</span> management <span class="comment">dhcp-status down</span>	//关闭<span class="comment">DHCP</span>获取地址</span><br><span class="line">AP# <span class="keyword">set</span> <span class="comment">management dhcp-status up</span>  	//开启<span class="comment">DHCP</span>获取地址</span><br><span class="line">AP# get <span class="comment">management</span> </span><br><span class="line">Property                   <span class="comment">Value</span></span><br><span class="line">--------------------------------------------</span><br><span class="line">vlan-id                    <span class="comment">1</span></span><br><span class="line">interface                  <span class="comment">brvlan1</span></span><br><span class="line">static-ip                  <span class="comment">192.168.1.10</span></span><br><span class="line">static-mask                <span class="comment">255.255.255.0</span></span><br><span class="line">ip                         <span class="comment">192.168.3.10</span>		//获取到了<span class="comment">192.168.3.10</span></span><br><span class="line">mask                       <span class="comment">255.255.255.0</span></span><br><span class="line">ipv6                       </span><br><span class="line">ipv6-prefix-length         <span class="comment">0</span></span><br><span class="line">mac                        <span class="comment">00:03:0F:5B:F0:E0</span></span><br><span class="line">dhcp-status                <span class="comment">up</span></span><br><span class="line">dhcpv6-status              <span class="comment">down</span></span><br><span class="line">ipv6-status                <span class="comment">up</span></span><br><span class="line">ipv6-autoconfig-status     <span class="comment">up</span></span><br><span class="line">static-ipv6                </span><br><span class="line">static-ipv6-prefix-length  <span class="comment">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="4-开启AC无线功能"><a href="#4-开启AC无线功能" class="headerlink" title="4 开启AC无线功能"></a>4 开启AC无线功能</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#no</span> <span class="attribute">auto</span>-ip-assign 		//关闭无线地址选举</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#static-ip</span> <span class="number">192.168</span>.<span class="number">3.254</span>		<span class="comment">//设置静态无线地址</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#discovery</span> vlan-list <span class="number">3</span>		<span class="comment">//设置二层发现VLAN</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> authentication <span class="attribute">none</span> 		//关闭AP验证</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#enable</span> 		<span class="comment">//开启无线功能</span></span><br><span class="line">查看AP状态</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#show</span> wir ap status </span><br><span class="line"></span><br><span class="line">    MAC Address                                                            Configuration                </span><br><span class="line"> (*) Peer Managed  IP Address                              Profile Status     Status           Age      </span><br><span class="line">------------------ --------------------------------------- ------- ------- ------------- --------------</span><br><span class="line"> <span class="number">00</span>-<span class="number">03</span>-<span class="number">0</span>f-<span class="number">5</span>b-f0-e0 <span class="number">192.168</span>.<span class="number">3.10</span>                            <span class="number">1</span>       Managed Failure       <span class="number">0</span>d:<span class="number">00</span>:<span class="number">00</span>:<span class="number">07</span></span><br><span class="line"></span><br><span class="line">Total Access Points............................ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="5-无线配置"><a href="#5-无线配置" class="headerlink" title="5 无线配置"></a>5 无线配置</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#wireless 		<span class="comment">//进入无线全局模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span>#network <span class="number">1</span>		<span class="comment">//进入network配置模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#ssid VLAN1-Wireless-LAB		<span class="comment">//设置SSID</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#security mode none 	<span class="comment">//关闭用户认证</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#vlan <span class="number">1</span>		<span class="comment">//设置VLAN</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#network <span class="number">2</span>		<span class="comment">//进入network配置模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#ssid VLAN2-Wireless-LAB</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#security mode none 		<span class="comment">//关闭用户认证</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#vlan <span class="number">2</span>		<span class="comment">//设置VLAN</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#network <span class="number">3</span>		<span class="comment">//进入network配置模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#ssid VLAN3-Wireless-LAB</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#security mode none 		<span class="comment">//关闭用户认证</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#vlan <span class="number">3</span>		<span class="comment">//设置VLAN</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span>#ap profile <span class="number">1</span>		<span class="comment">//进入profile 1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#hwtype <span class="number">29</span>		<span class="comment">//设置硬件号</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#radio <span class="number">1</span>		<span class="comment">//进入radio配置模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#vap <span class="number">1</span>		<span class="comment">//进入vap配置模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#enable 		<span class="comment">//开启vap</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#vap <span class="number">2</span>		<span class="comment">//进入VAP配置模式</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#enable 	<span class="comment">//开启VAP</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#exit</span><br><span class="line">AC#wir ap prof ap <span class="number">1</span>		<span class="comment">//下发配置文件</span></span><br><span class="line">All configurations will be send <span class="keyword">to</span> the aps associated <span class="keyword">to</span> this profile <span class="keyword">and</span> associated clients on these aps will be disconnected. Are you sure you want <span class="keyword">to</span> apply the profile configuration? <span class="literal">[Y<span class="operator">/</span>N]</span> y</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="6-测试"><a href="#6-测试" class="headerlink" title="6.测试"></a>6.测试</h4><p>配置文件下发之后，稍等一会，就可以搜索到无线信号了。</p>
+<p><img src="https://i.loli.net/2018/03/12/5aa57b1fe9738.png" alt="WIFI列表"></p>
+<p>接着我们连上去试试</p>
+<p>首先我们连接VLAN1的</p>
+<p>结果发现</p>
+<p><img src="https://i.loli.net/2018/03/12/5aa57c1f5f96d.png" alt="VLAN1连接"></p>
+<p>竟然获取到了VLAN3的地址</p>
+<p>接下来我们再连接VLAN2的试试</p>
+<p><img src="https://i.loli.net/2018/03/12/5aa57c1f5f96d.png" alt="VLAN2连接"></p>
+<p>发现是正常的</p>
+<p>最后再来连接VLAN3</p>
+<p><img src="https://i.loli.net/2018/03/12/5aa58ea17ceb9.png" alt="VLAN3连接"></p>
+<p>发现根本获取不到IP地址</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><h4 id="1-拓扑"><a href="#1-拓扑" class="headerlink" title="1.拓扑"></a>1.拓扑</h4><p><img src="https://i.loli.net/2018/03/12/5aa600e2bb5a2.png" alt="拓扑"></p>
+<h4 id="2-VLAN-1-用户上线过程"><a href="#2-VLAN-1-用户上线过程" class="headerlink" title="2.VLAN 1 用户上线过程"></a>2.VLAN 1 用户上线过程</h4><p><img src="https://i.loli.net/2018/03/12/5aa600abe2514.png" alt="VLAN DHCP过程"></p>
+<p><strong>(1).</strong>当用户连接到无线网络之后，客户端发送<code>DHCP DISCOVER</code>广播包来请求IP地址</p>
+<p><strong>(2).</strong>AP默认的转发方式为本地转发，所以<code>DHCP DISCOVER</code>报文到达AP之后802.11帧便被转换成以太网帧。不打VLAN TAG，将数据包转发给交换机。</p>
+<p><strong>(3).</strong>我们在交换机的E1/0/1接口上配置了命令 <code>switchport trunk native vlan 3</code>,所以当没有VLAN Tag的帧到达交换机的时候，被打上VLAN 3的标签.</p>
+<p><strong>(4).</strong>所以最后导致了Client获取到了VLAN3网段的地址</p>
+<blockquote>
+<p>VLAN1的数据AP不打标签</p>
+</blockquote>
+<h4 id="3-VLAN-2-用户上线过程"><a href="#3-VLAN-2-用户上线过程" class="headerlink" title="3.VLAN 2 用户上线过程"></a>3.VLAN 2 用户上线过程</h4><p><img src="https://i.loli.net/2018/03/12/5aa601ee7c5d5.png" alt="VLAN2上线"></p>
+<p><strong>(1).</strong>当用户连接到无线网络之后，客户端发送<code>DHCP DISCOVER</code>广播包来请求IP地址</p>
+<p><strong>(2).</strong>AP默认的转发方式为本地转发，所以<code>DHCP DISCOVER</code>报文到达AP之后802.11帧便被转换成以太网帧。</p>
+<p>打上<code>VLAN 2</code> TAG，将数据包转发给交换机。</p>
+<p><strong>(3).</strong>交换机收到该帧，不对帧进行任何处理，直接放行，最后帧在VLAN2内传播。</p>
+<p><strong>(4).</strong>所以客户机可以获取到正确的地址。</p>
+<h4 id="4-VLAN-3-用户上线过程"><a href="#4-VLAN-3-用户上线过程" class="headerlink" title="4.VLAN 3 用户上线过程"></a>4.VLAN 3 用户上线过程</h4><p><img src="https://i.loli.net/2018/03/12/5aa60313a8a84.png" alt="VLAN3上线"></p>
+<p><strong>(1).</strong>当用户连接到无线网络之后，客户端发送<code>DHCP DISCOVER</code>广播包来请求IP地址</p>
+<p><strong>(2).</strong>AP默认的转发方式为本地转发，所以<code>DHCP DISCOVER</code>报文到达AP之后802.11帧便被转换成以太网帧。</p>
+<p><strong>(3).</strong>打上<code>VLAN 3</code> TAG，将数据包转发给交换机，然而交换机上配置了<code>switchport trunk native vlan 3</code>，导致交换机丢包，该SSID下所有数据都不能通过交换机，所以最终也不能获取地址。</p>
+<hr>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>让我们重新做一遍</p>
+<h4 id="1-设置VLAN"><a href="#1-设置VLAN" class="headerlink" title="1.设置VLAN"></a>1.设置VLAN</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>)</span>#vlan <span class="number">2</span>		<span class="comment">//创建VLAN2</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">vlan2</span>)</span>#vlan <span class="number">3</span>		<span class="comment">//创建VLAN3</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">vlan3</span>)</span>#<span class="built_in">int</span> vlan <span class="number">1</span> 	<span class="comment">//进入Vlan1的SVI接口</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan1</span>)</span>#ip ad <span class="number">192.168</span>.<span class="number">1.254</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置IP地址	</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan1</span>)</span>#<span class="built_in">int</span> vlan <span class="number">2</span>		<span class="comment">//进入VLAN2的SVI接口</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan2</span>)</span>#ip ad <span class="number">192.168</span>.<span class="number">2.254</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置IP地址</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan2</span>)</span>#<span class="built_in">int</span> vlan <span class="number">3</span>		<span class="comment">//进入VLAN3的SVI接口</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan3</span>)</span>#ip ad <span class="number">192.168</span>.<span class="number">3.254</span> <span class="number">255.255</span>.<span class="number">255.0</span>		<span class="comment">//设置IP地址</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan3</span>)</span>#<span class="built_in">int</span> e1/<span class="number">0</span>/<span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">ethernet1</span><span class="operator">/</span>0<span class="operator">/</span>1)</span>#sw mo trunk 		<span class="comment">//更改接口模式为Trunk</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意，这里不设置Native VLAN</strong></p>
+<h4 id="2-设置DHCP"><a href="#2-设置DHCP" class="headerlink" title="2.设置DHCP"></a>2.设置DHCP</h4><p><strong>AP</strong></p>
+<p>设置管理VLAN</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="keyword">set</span> management <span class="comment">vlan-id 3</span>	//设置管理<span class="comment">VLAN</span>为<span class="comment">VLAN3</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>设置管理VLAN之后，从AP发出的管理/控制报文都会打上VLAN 3的TAG，也可以接受带VLAN3 TAG的管理报文。</p>
+</blockquote>
+<p><strong>AC</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dh pool VLAN1</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan1-config)</span></span><span class="selector-id">#network-address</span> <span class="number">192.168</span>.<span class="number">1.0</span> <span class="number">255.255</span>.<span class="number">255.0</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan1-config)</span></span><span class="number">#def</span>ault-router <span class="number">192.168</span>.<span class="number">1.254</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan1-config)</span></span>#!                    </span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dh pool VLAN2</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan2-config)</span></span><span class="selector-id">#network-address</span> <span class="number">192.168</span>.<span class="number">2.0</span> <span class="number">255.255</span>.<span class="number">255.0</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan2-config)</span></span><span class="number">#def</span>ault-router <span class="number">192.168</span>.<span class="number">2.254</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan2-config)</span></span>#!</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#ip</span> dh pool VLAN3</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan3-config)</span></span><span class="selector-id">#network-address</span> <span class="number">192.168</span>.<span class="number">3.0</span> <span class="number">255.255</span>.<span class="number">255.0</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan3-config)</span></span><span class="number">#def</span>ault-router <span class="number">192.168</span>.<span class="number">3.254</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(dhcp-vlan3-config)</span></span>#!</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config)</span></span><span class="selector-id">#service</span> dhcp</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="3-静态绑定DHCP"><a href="#3-静态绑定DHCP" class="headerlink" title="3.静态绑定DHCP"></a>3.静态绑定DHCP</h4><p><strong>AC</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">AC(config)#show<span class="built_in"> ip </span>dh binding </span><br><span class="line">Total dhcp binding items: 1, the matched: 1</span><br><span class="line">IP<span class="built_in"> address </span>        <span class="built_in"> Hardware address </span>       <span class="built_in"> Lease </span>expiration         Type</span><br><span class="line">192.168.3.1         aa-aa-aa-aa-aa-aa        Mon Jan 02 00:12:00 2006 Dynamic</span><br><span class="line">AC(config)#ip dhcp<span class="built_in"> pool </span>AP</span><br><span class="line">AC(dhcp-ap-config)#hardware-address aa-aa-aa-aa-aa-aa</span><br><span class="line">AC(dhcp-ap-config)#host 192.168.3.10</span><br><span class="line">AC(dhcp-ap-config)#default-router 192.168.3.254</span><br><span class="line">AC(dhcp-ap-config)#!</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>AP</strong></p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AP# <span class="keyword">set</span> management <span class="comment">dhcp-status down</span></span><br><span class="line">AP# <span class="keyword">set</span> <span class="comment">management dhcp-status up</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="4-开启无线功能"><a href="#4-开启无线功能" class="headerlink" title="4.开启无线功能"></a>4.开启无线功能</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#no</span> <span class="attribute">auto</span>-ip-assign </span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#static-ip</span> <span class="number">192.168</span>.<span class="number">3.254</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#ap</span> authe <span class="attribute">none</span> </span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span><span class="selector-id">#discovery</span> vlan-list <span class="number">3</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-wireless)</span></span>#enable</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="5-配置无线"><a href="#5-配置无线" class="headerlink" title="5.配置无线"></a>5.配置无线</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span>#network <span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#ssid VLAN1-Wireless-LAB</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#vlan <span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#network <span class="number">2</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#ssid VLAN2-Wireless-LAB</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#vlan <span class="number">2</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#network <span class="number">3</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#ssid VLAN3-Wireless-LAB</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#vlan <span class="number">3</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">network</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">wireless</span>)</span>#ap profile <span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#hwtype <span class="number">29</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#management vlan <span class="number">3</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#radio <span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#vap <span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#enable </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#vap <span class="number">2</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#enable </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">vap</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>-<span class="params">radio</span>)</span>#!</span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">ap</span>-<span class="params">profile</span>)</span>#!</span><br><span class="line">AC#wireless ap prof ap <span class="number">1</span></span><br><span class="line">All configurations will be send <span class="keyword">to</span> the aps associated <span class="keyword">to</span> this profile <span class="keyword">and</span> associated clients on these aps will be disconnected. Are you sure you want <span class="keyword">to</span> apply the profile configuration? <span class="literal">[Y<span class="operator">/</span>N]</span> y</span><br><span class="line">AP Profile apply is <span class="keyword">in</span> progress.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="6-测试-1"><a href="#6-测试-1" class="headerlink" title="6.测试"></a>6.测试</h4><p><strong>VLAN1</strong></p>
+<p><img src="https://i.loli.net/2018/03/12/5aa60f0615b3b.png" alt="VLAN1"></p>
+<p><strong>VLAN2</strong></p>
+<p><img src="https://i.loli.net/2018/03/12/5aa60f8f5b204.png" alt="VLAN2"></p>
+<p><strong>VLAN3</strong></p>
+<p><img src="https://i.loli.net/2018/03/12/5aa61045a552d.png" alt="VLAN3"></p>
+<p>可以发现，这次一切都正常了。</p>
+<hr>
+<h3 id="失误发生的原因"><a href="#失误发生的原因" class="headerlink" title="失误发生的原因"></a>失误发生的原因</h3><p>这个配置错误出现的原因主要有以下两点:</p>
+<p><strong>1.</strong>对<code>network</code>配置模型下<code>vlan</code>的命令有所误解</p>
+<p>这个命令是设置VLAN表示，设置无线用户的数据在经过AP之后应打上的VLAN TAG，而不是说这个无线信号数据是哪个VLAN，就设置成哪个VLAN。</p>
+<p><strong>2.</strong>无线管理VLAN的设置</p>
+<p>一般来说，我们设置管理VLAN的时候都是将接口设置为Trunk，并更改接口的本征VLAN.大多数情况下这样子是没有问题的.但是当管理VLAN和用户VLAN是同一个，并且不是VLAN1的时候，情况就有些尴尬.</p>
+<p>如上面的第一个实验，当管理和用户VLAN都是VLAN3的时候，我们一般都是这么设置的:</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">vlan3</span>)</span>#<span class="built_in">int</span> e1/<span class="number">0</span>/<span class="number">1</span></span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">ethernet1</span><span class="operator">/</span>0<span class="operator">/</span>1)</span>#sw mo trunk </span><br><span class="line"><span class="constructor">AC(<span class="params">config</span>-<span class="params">if</span>-<span class="params">ethernet1</span><span class="operator">/</span>0<span class="operator">/</span>1)</span>#switchport trunk native vlan <span class="number">3</span>		<span class="comment">//设置Native VLAN为VLAN3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>更改接口的本征VLAN</em></strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-network)</span></span><span class="selector-id">#network</span> <span class="number">3</span>		<span class="comment">//进入network配置模式</span></span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-network)</span></span><span class="selector-id">#ssid</span> VLAN3-Wireless-LAB</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-network)</span></span><span class="selector-id">#security</span> mode <span class="attribute">none</span> 		//关闭用户认证</span><br><span class="line"><span class="function"><span class="title">AC</span><span class="params">(config-network)</span></span><span class="selector-id">#vlan</span> <span class="number">3</span>		<span class="comment">//设置VLAN</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>在Network下设置VLAN标识</em></strong></p>
+<p>如果这么设置，AP转发连接到Network 3的用户流量的时候，就会打上VLAN 3的TAG并发送出去，然而我们的AC接口也将接口的本征VLAN修改为了VLAN3。一但AC收到AP发来带有VLAN 3 TAG的数据帧时，就会将帧丢弃，这就这就导致了我们连上了Network 3却无法访问网络.</p>
+<p>解决方法有两种</p>
+<p><strong>1.</strong>将network中的vlan标识改回vlan1</p>
+<p>如此，当AP转发Network的流量时，就不会打上VLAN TAG，AC接收到数据帧之后，会根据本征VLAN打上VLAN TAG，然后在AC中进行转发。</p>
+<p>此方法的代价就是VLAN1不能用来转发无线流量(不能当做用户VLAN).</p>
+<p><strong>2.</strong>请看[解决问题]篇</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>当你的管理VLAN与用户VLAN是同一个VLAN且不是VLAN1的时候，要么放弃使用VLAN1转发数据。</p>
+<p>要么在AP上设置管理VLAN.</p>
+<p>转载来源：<a href="https://blog.ikozn.com/post/DCN-浅谈无线VLAN的设置/" target="_blank" rel="noopener">https://blog.ikozn.com/post/DCN-%E6%B5%85%E8%B0%88%E6%97%A0%E7%BA%BFVLAN%E7%9A%84%E8%AE%BE%E7%BD%AE/</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A0%E7%BA%BF/" rel="tag"># 无线</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/%E7%A5%9E%E7%A0%81/%5BDCN%5D%E7%A5%9E%E5%B7%9E%E6%95%B0%E7%A0%81%E6%97%A0%E7%BA%BF%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" rel="prev" title="DCN神州数码无线常用配置">
+      <i class="fa fa-chevron-left"></i> DCN神州数码无线常用配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/08/Blog/%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%9A%84%E7%A6%8F%E5%88%A9%EF%BC%9F%E6%8E%A2%E7%B4%A2%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%B0%8F%E7%A7%98%E5%AF%86%EF%BC%88%E6%B2%B9%E7%8C%B4%E6%8F%92%E4%BB%B6%EF%BC%89/" rel="next" title="大学生的福利？探索浏览器的小秘密（油猴插件）">
+      大学生的福利？探索浏览器的小秘密（油猴插件） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DCN-浅谈无线VLAN的设置"><span class="nav-number">1.</span> <span class="nav-text">[DCN]浅谈无线VLAN的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑"><span class="nav-number">1.0.1.</span> <span class="nav-text">拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.0.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置及实现"><span class="nav-number">1.0.3.</span> <span class="nav-text">配置及实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-AP上线"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">1.AP上线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#划分VLAN和设置SVI接口地址"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">划分VLAN和设置SVI接口地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-开启DHCP功能，自动下发地址。"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">2 开启DHCP功能，自动下发地址。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-DHCP静态绑定AP地址"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">3 DHCP静态绑定AP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-开启AC无线功能"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">4 开启AC无线功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-无线配置"><span class="nav-number">1.0.3.6.</span> <span class="nav-text">5 无线配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-测试"><span class="nav-number">1.0.3.7.</span> <span class="nav-text">6.测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">1.0.4.</span> <span class="nav-text">问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-拓扑"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">1.拓扑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-VLAN-1-用户上线过程"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">2.VLAN 1 用户上线过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-VLAN-2-用户上线过程"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">3.VLAN 2 用户上线过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-VLAN-3-用户上线过程"><span class="nav-number">1.0.4.4.</span> <span class="nav-text">4.VLAN 3 用户上线过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">1.0.5.</span> <span class="nav-text">解决问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-设置VLAN"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">1.设置VLAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-设置DHCP"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">2.设置DHCP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-静态绑定DHCP"><span class="nav-number">1.0.5.3.</span> <span class="nav-text">3.静态绑定DHCP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-开启无线功能"><span class="nav-number">1.0.5.4.</span> <span class="nav-text">4.开启无线功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-配置无线"><span class="nav-number">1.0.5.5.</span> <span class="nav-text">5.配置无线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-测试-1"><span class="nav-number">1.0.5.6.</span> <span class="nav-text">6.测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#失误发生的原因"><span class="nav-number">1.0.6.</span> <span class="nav-text">失误发生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.0.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逸晨"
+      src="/images/tx.jpeg">
+  <p class="site-author-name" itemprop="name">逸晨</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YiChenNet" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YiChenNet" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1605732986@qq.com" title="E-Mail → mailto:1605732986@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/6407604695" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;6407604695" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逸晨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">117k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'uJtl3uLuOiFKO26QncHHBcDq-gzGzoHsz',
+      appKey     : 'Ft83hPuo2K0B3aGr0N7CWt5w',
+      placeholder: "留下邮箱，有回复时你将收到提醒，邮箱不会被公开。",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
