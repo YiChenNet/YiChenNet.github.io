@@ -20,25 +20,29 @@
     var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="BUUCTF-[极客大挑战 2019]EasySQL1探测注入点：​    发现是get注入 ​      返回报错，说明存在注入点  绕过姿势：万能密码12http:&#x2F;&#x2F;945778a2-73c9-4cde-b709-3f97d7403b65.node3.buuoj.cn&#x2F;check.php?username&#x3D;admin&#39; or &#39;1&#39;&#x3D;&#39;1 &amp;password&#x3D;admin&#39;  or &#39;">
+  <meta name="description" content="题目：binwalk&amp;&amp;foremost来源：sysctf本题涉及的知识点： zip_伪加密binwalk的使用foremost的使用 隐写文件 解题思路：通过winhex多次查看数据内容，进行猜测和解题 解题步骤：拿到题目，发现zip文件是加密的，打开winhex看看存不存在zip伪加密  这样就取出了里面out.jpg这张图片了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BUUCTF-[极客大挑战 2019]EasySQL1">
-<meta property="og:url" content="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-[%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019]EasySQL1/index.html">
+<meta property="og:title" content="binwalk&amp;&amp;foremost">
+<meta property="og:url" content="https://yichennet.github.io/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9Abinwalk&&foremost/index.html">
 <meta property="og:site_name" content="逸晨のBlog">
-<meta property="og:description" content="BUUCTF-[极客大挑战 2019]EasySQL1探测注入点：​    发现是get注入 ​      返回报错，说明存在注入点  绕过姿势：万能密码12http:&#x2F;&#x2F;945778a2-73c9-4cde-b709-3f97d7403b65.node3.buuoj.cn&#x2F;check.php?username&#x3D;admin&#39; or &#39;1&#39;&#x3D;&#39;1 &amp;password&#x3D;admin&#39;  or &#39;">
+<meta property="og:description" content="题目：binwalk&amp;&amp;foremost来源：sysctf本题涉及的知识点： zip_伪加密binwalk的使用foremost的使用 隐写文件 解题思路：通过winhex多次查看数据内容，进行猜测和解题 解题步骤：拿到题目，发现zip文件是加密的，打开winhex看看存不存在zip伪加密  这样就取出了里面out.jpg这张图片了">
 <meta property="og:locale" content="zh—CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggzqcff10xj312s0fpjxl.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggzqlht199j31hc0dcdmp.jpg">
-<meta property="article:published_time" content="2020-07-22T06:45:22.145Z">
-<meta property="article:modified_time" content="2020-07-22T06:48:45.734Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghegp5410hj30ul0a1ab0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh1m4y06j30oh03zt8z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh2nvbd8j30jk02j3yl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh4jn9lfj30n106udg5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh5ilc5ej30be044aa5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh7bscf4j30wu0eiabo.jpg">
+<meta property="article:published_time" content="2020-08-05T07:42:21.967Z">
+<meta property="article:modified_time" content="2020-08-05T07:45:45.157Z">
 <meta property="article:author" content="逸晨">
 <meta property="article:tag" content="信息安全">
 <meta property="article:tag" content="CTF-题目">
-<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="MISC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggzqcff10xj312s0fpjxl.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghegp5410hj30ul0a1ab0.jpg">
 
-<link rel="canonical" href="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-[%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019]EasySQL1/">
+<link rel="canonical" href="https://yichennet.github.io/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9Abinwalk&&foremost/">
 
 
 <script id="page-configurations">
@@ -51,7 +55,7 @@
   };
 </script>
 
-  <title>BUUCTF-[极客大挑战 2019]EasySQL1 | 逸晨のBlog</title>
+  <title>binwalk&&foremost | 逸晨のBlog</title>
   
 
 
@@ -200,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-[%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019]EasySQL1/">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9Abinwalk&&foremost/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tx.jpeg">
@@ -213,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BUUCTF-[极客大挑战 2019]EasySQL1
+          binwalk&&foremost
         </h1>
 
         <div class="post-meta">
@@ -224,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-07-22 14:45:22 / 修改时间：14:48:45" itemprop="dateCreated datePublished" datetime="2020-07-22T14:45:22+08:00">2020-07-22</time>
+              <time title="创建时间：2020-08-05 15:42:21 / 修改时间：15:45:45" itemprop="dateCreated datePublished" datetime="2020-08-05T15:42:21+08:00">2020-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,8 +256,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DEasySQL1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DEasySQL1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9Abinwalk&&foremost/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9Abinwalk&&foremost/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -263,7 +267,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>572</span>
+              <span>417</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -282,36 +286,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="BUUCTF-极客大挑战-2019-EasySQL1"><a href="#BUUCTF-极客大挑战-2019-EasySQL1" class="headerlink" title="BUUCTF-[极客大挑战 2019]EasySQL1"></a>BUUCTF-[极客大挑战 2019]EasySQL1</h2><h3 id="探测注入点："><a href="#探测注入点：" class="headerlink" title="探测注入点："></a>探测注入点：</h3><p>​    发现是get注入</p>
-<p>​    <img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggzqcff10xj312s0fpjxl.jpg" alt="get"></p>
-<p> 返回报错，说明存在注入点</p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggzqlht199j31hc0dcdmp.jpg" alt="12"></p>
-<h3 id="绕过姿势：万能密码"><a href="#绕过姿势：万能密码" class="headerlink" title="绕过姿势：万能密码"></a>绕过姿势：万能密码</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">945778</span>a2<span class="number">-73</span>c9<span class="number">-4</span>cde-b709<span class="number">-3</span>f97d7403b65.node3.buuoj.cn/<span class="keyword">check</span>.php?</span><br><span class="line">username=<span class="keyword">admin</span><span class="string">' or '</span><span class="number">1</span><span class="string">'='</span><span class="number">1</span> &amp;<span class="keyword">password</span>=<span class="keyword">admin</span><span class="string">'  or '</span><span class="number">1</span><span class="string">'='</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-
+        <h2 id="题目：binwalk-amp-amp-foremost"><a href="#题目：binwalk-amp-amp-foremost" class="headerlink" title="题目：binwalk&amp;&amp;foremost"></a>题目：binwalk&amp;&amp;foremost</h2><p>来源：sysctf<br>本题涉及的知识点：</p>
+<p>zip_伪加密<br>binwalk的使用<br>foremost的使用</p>
+<p>隐写文件</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>通过winhex多次查看数据内容，进行猜测和解题</p>
+<h3 id="解题步骤："><a href="#解题步骤：" class="headerlink" title="解题步骤："></a>解题步骤：</h3><p>拿到题目，发现zip文件是加密的，打开winhex看看存不存在zip伪加密</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghegp5410hj30ul0a1ab0.jpg" alt="zip"></p>
+<p>这样就取出了里面out.jpg这张图片了</p>
 <a id="more"></a>
 
-<p><strong>万能密码表</strong>（收集于网络）</p>
+<h2 id="BUUCTF-二维码"><a href="#BUUCTF-二维码" class="headerlink" title="BUUCTF-二维码"></a>BUUCTF-二维码</h2><p>第一次尝试用binwalk查看是否有隐藏文件</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh1m4y06j30oh03zt8z.jpg" alt="yc"></p>
+<p>然后再用foremost拿下这个文件</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh2nvbd8j30jk02j3yl.jpg" alt="12"></p>
+<p>拿到这个zip之后，他又是一个加密文件<br>老办法，上才艺</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh4jn9lfj30n106udg5.jpg" alt="123"></p>
+<p>最后拿到的居然是</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh5ilc5ej30be044aa5.jpg" alt="密文"></p>
+<p>人傻了！！！！</p>
+<p>最后问了班里的巨佬才知道，这tm的是拼音</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gheh7bscf4j30wu0eiabo.jpg" alt="5421"></p>
+<p>最后拿到了flag</p>
+<p>sysctf{眚毗姊薿稔奭暨哿?}</p>
+<p>进行拆分，以0区分</p>
 <table>
 <thead>
 <tr>
-<th align="center">语言</th>
-<th align="center">万能密码</th>
+<th>88421</th>
+<th>122</th>
+<th>48</th>
+<th>2244</th>
+<th>4</th>
+<th>142242</th>
+<th>248</th>
+<th>122</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">PHP</td>
-<td align="center">‘or 1=1/*<br/>“or “a”=”a<br/>“or 1=1–<br/>“or”=”<br/>“or”=”a’=’a<br/>“or1=1–<br/>“or=or”<br/>‘’or’=’or’<br/>‘) or (‘a’=’a<br/>‘.).or.(‘.a.’=’.a<br/>‘or 1=1<br/>‘or 1=1– <br />‘or 1=1/*<br/>‘or”=”a’=’a<br/>‘or’ ‘1’=’1’<br/>‘or’’=’<br/>‘or’’=’’or’’=’<br/>‘or’=’1’<br/>‘or’=’or’<br />‘or.’a.’=’a<br/>‘or1=1–<br/>1’or’1’=’1<br/>a’or’ 1=1–<br/>a’or’1=1–<br/>or ‘a’=’a’<br/>or 1=1–<br/>or1=1–</td>
+<td>23</td>
+<td>5</td>
+<td>12</td>
+<td>12</td>
+<td>4</td>
+<td>15</td>
+<td>14</td>
+<td>5</td>
 </tr>
 <tr>
-<td align="center">asp aspx</td>
-<td align="center">“or “a”=”a<br/>‘.).or.(‘.a.’=’.a<br/>or 1=1–<br/>‘or 1=1–<br/>a’or’ 1=1–<br/>“or 1=1–<br/>‘or.’a.’=’a<br/>“or”=”a’=’a<br/>‘or’’=’<br/>or’=’or’</td>
-</tr>
-<tr>
-<td align="center">jsp</td>
-<td align="center">1’or’1’=’1<br/>admin’ or 1=1/*</td>
+<td>W</td>
+<td>E</td>
+<td>L</td>
+<td>L</td>
+<td>D</td>
+<td>O</td>
+<td>N</td>
+<td>E</td>
 </tr>
 </tbody></table>
-
+<p>sysctf{WELLDONE}</p>
+<p>但是好像是小写的，所以本题的flag为</p>
+<p>sysctf{welldone}</p>
+<h3 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h3>
     </div>
 
     
@@ -322,7 +357,7 @@
           <div class="post-tags">
               <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"># 信息安全</a>
               <a href="/tags/CTF-%E9%A2%98%E7%9B%AE/" rel="tag"># CTF-题目</a>
-              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/MISC/" rel="tag"># MISC</a>
           </div>
 
         
@@ -331,12 +366,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/" rel="prev" title="http://123.57.233.79:2222/ upload实战">
-      <i class="fa fa-chevron-left"></i> http://123.57.233.79:2222/ upload实战
+    <a href="/2020/07/26/CTF-%E9%A2%98%E7%9B%AE/Misc/SYSCTF-MISC/" rel="prev" title="SYSCTF-MISC">
+      <i class="fa fa-chevron-left"></i> SYSCTF-MISC
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019%5DBabySQL-1/" rel="next" title="BUUCTF-[极客大挑战 2019]BabySQL 1">
-      BUUCTF-[极客大挑战 2019]BabySQL 1 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Crypto/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/" rel="next" title="变异凯撒">
+      变异凯撒 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -397,7 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-极客大挑战-2019-EasySQL1"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF-[极客大挑战 2019]EasySQL1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#探测注入点："><span class="nav-number">1.1.</span> <span class="nav-text">探测注入点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过姿势：万能密码"><span class="nav-number">1.2.</span> <span class="nav-text">绕过姿势：万能密码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目：binwalk-amp-amp-foremost"><span class="nav-number">1.</span> <span class="nav-text">题目：binwalk&amp;&amp;foremost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">1.1.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤："><span class="nav-number">1.2.</span> <span class="nav-text">解题步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-二维码"><span class="nav-number">2.</span> <span class="nav-text">BUUCTF-二维码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拓展："><span class="nav-number">2.1.</span> <span class="nav-text">拓展：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -413,7 +448,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -486,12 +521,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">125k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

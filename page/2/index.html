@@ -191,6 +191,678 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/buuctf-[%E5%BC%BA%E7%BD%91%E6%9D%AF-2019]%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/" class="post-title-link" itemprop="url">buuctf-[强网杯 2019]随便注 1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-20 10:49:27" itemprop="dateCreated datePublished" datetime="2020-07-20T10:49:27+08:00">2020-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-22 14:48:55" itemprop="dateModified" datetime="2020-07-22T14:48:55+08:00">2020-07-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">CTF-题目</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="buuctf-强网杯-2019-随便注-1"><a href="#buuctf-强网杯-2019-随便注-1" class="headerlink" title="buuctf-[强网杯 2019]随便注 1"></a>buuctf-[强网杯 2019]随便注 1</h2><h3 id="初期探测过程："><a href="#初期探测过程：" class="headerlink" title="初期探测过程："></a>初期探测过程：</h3><ol>
+<li><h4 id="探测注入点"><a href="#探测注入点" class="headerlink" title="探测注入点"></a>探测注入点</h4><p>输入1’发现存在注入点</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8i9a06fj31gq05vq3v.jpg" alt="1"></p>
+</li>
+<li><h4 id="查询字段数"><a href="#查询字段数" class="headerlink" title="查询字段数"></a>查询字段数</h4><p>输入<code>1&#39; order by 5%23</code></p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8la48p4j30ya096aax.jpg" alt="2"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Bugku-成绩单 注入测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-20 10:23:13" itemprop="dateCreated datePublished" datetime="2020-07-20T10:23:13+08:00">2020-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-22 14:48:01" itemprop="dateModified" datetime="2020-07-22T14:48:01+08:00">2020-07-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">CTF-题目</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>73</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Bugku-成绩单-注入测试"><a href="#Bugku-成绩单-注入测试" class="headerlink" title="Bugku-成绩单 注入测试"></a>Bugku-成绩单 注入测试</h2><h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2sujr3zj30ym0evdh7.jpg" alt="分析.png"></p>
+<h4 id="寻找注入点："><a href="#寻找注入点：" class="headerlink" title="寻找注入点："></a>寻找注入点：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2t3yqrrj315q0fgjsm.jpg" alt="注入点.png"></p>
+<h4 id="寻找字段数："><a href="#寻找字段数：" class="headerlink" title="寻找字段数："></a>寻找字段数：</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/WEB/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/" class="post-title-link" itemprop="url">初识蚁剑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-17 14:32:22" itemprop="dateCreated datePublished" datetime="2020-07-17T14:32:22+08:00">2020-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-22 14:50:21" itemprop="dateModified" datetime="2020-07-22T14:50:21+08:00">2020-07-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>678</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="木马"><a href="#木马" class="headerlink" title="木马"></a>木马</h2><h3 id="一句话木马（小马）"><a href="#一句话木马（小马）" class="headerlink" title="一句话木马（小马）"></a>一句话木马（小马）</h3><h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>​    就是让web容器把我们上传的文件当成脚本解析的过程简单来说一句话就是将你想要的操作交给服务器来执行,达到能任意增删改查文件的效果</p>
+<h4 id="入侵条件："><a href="#入侵条件：" class="headerlink" title="入侵条件："></a>入侵条件：</h4><ul>
+<li>木马上传成功，未被杀（成功过狗）</li>
+<li>知道木马的路径在哪</li>
+<li>上传的木马能正常运行</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/17/python/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/17/python/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">基于requests库的爬虫和注入工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-17 14:32:20" itemprop="dateCreated datePublished" datetime="2020-07-17T14:32:20+08:00">2020-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-18 07:48:41" itemprop="dateModified" datetime="2020-07-18T07:48:41+08:00">2020-07-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/17/python/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/17/python/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基于requests库的爬虫"><a href="#基于requests库的爬虫" class="headerlink" title="基于requests库的爬虫"></a>基于requests库的爬虫</h2><p>采用re+requests+os+threading+time爬取burst下面的高质量图片</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggp363yowaj31h70n7b29.jpg" alt="图片"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/17/python/%E5%9F%BA%E4%BA%8Erequests%E5%BA%93%E7%9A%84%E7%88%AC%E8%99%AB%E5%92%8C%E6%B3%A8%E5%85%A5%E5%B7%A5%E5%85%B7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">初识文件包含漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-17 14:32:20" itemprop="dateCreated datePublished" datetime="2020-07-17T14:32:20+08:00">2020-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-22 14:50:05" itemprop="dateModified" datetime="2020-07-22T14:50:05+08:00">2020-07-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="文件包含的概述"><a href="#文件包含的概述" class="headerlink" title="文件包含的概述"></a>文件包含的概述</h2><p>如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行及敏感信息泄露，主要包括本地文件包含和远程文件包含两种形式</p>
+<p>常见的文件包含函数有：</p>
+<p>PHP：Include()、Require()、Include_once()、Require_once()</p>
+<p>ASP：include file()、include virtual()</p>
+<p>JSP/Servlet：ava.io.file()、java.io.filereader().</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tx.jpeg">
+      <meta itemprop="name" content="逸晨">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逸晨のBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">初识文件上传漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-17 14:32:20" itemprop="dateCreated datePublished" datetime="2020-07-17T14:32:20+08:00">2020-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-22 14:50:12" itemprop="dateModified" datetime="2020-07-22T14:50:12+08:00">2020-07-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="文件上传漏洞简介"><a href="#文件上传漏洞简介" class="headerlink" title="文件上传漏洞简介"></a>文件上传漏洞简介</h2><p>​    文件上传，顾名思义就是上传文件的功能行为，之所以会被发展为危害严重的漏洞，是程序没有对访客提交的数据进行检验或者过滤不严，可以直接提交修改过的数据绕过扩展名的检验。文件上传漏洞可以说是日常渗透测试用得最多的一个漏洞，因为用它获得服务器权限最快最直接。</p>
+<h2 id="漏洞的原理"><a href="#漏洞的原理" class="headerlink" title="漏洞的原理"></a>漏洞的原理</h2><pre><code>网站WEB应用都有一些文件上传功能，比如文档、图片、头像、视频上传，当上传功能的实现代码没有严格校验上传文件的后缀和文件类型时，就可以上传任意文件甚至是可执行文件后门</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
     <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/17/%E7%8E%AF%E5%A2%83/%E5%88%9D%E8%AF%86Docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -675,742 +1347,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/06/WEB/sqli-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%EF%BC%881-10%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tx.jpeg">
-      <meta itemprop="name" content="逸晨">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逸晨のBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/06/WEB/sqli-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%EF%BC%881-10%EF%BC%89/" class="post-title-link" itemprop="url">sqli-源码分析-(1-10)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-06 10:37:27" itemprop="dateCreated datePublished" datetime="2020-07-06T10:37:27+08:00">2020-07-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 14:49:44" itemprop="dateModified" datetime="2020-07-22T14:49:44+08:00">2020-07-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/06/WEB/sqli-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%EF%BC%881-10%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/06/WEB/sqli-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%EF%BC%881-10%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>590</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="sqli-源码分析-1-10"><a href="#sqli-源码分析-1-10" class="headerlink" title="sqli-源码分析-(1-10)"></a>sqli-源码分析-(1-10)</h1><h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><h4 id="文件写入："><a href="#文件写入：" class="headerlink" title="文件写入："></a>文件写入：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gggyzea9grj30la0cxt9h.jpg" alt="图片"></p>
-<h4 id="初始化查询语句："><a href="#初始化查询语句：" class="headerlink" title="初始化查询语句："></a>初始化查询语句：</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/06/WEB/sqli-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%EF%BC%881-10%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/05/WEB/sqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tx.jpeg">
-      <meta itemprop="name" content="逸晨">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逸晨のBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/WEB/sqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">sqlmap基本使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-05 14:54:18" itemprop="dateCreated datePublished" datetime="2020-07-05T14:54:18+08:00">2020-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 14:49:50" itemprop="dateModified" datetime="2020-07-22T14:49:50+08:00">2020-07-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/05/WEB/sqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/05/WEB/sqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Sqlmap是一种开源的渗透测试工具，可以自动检测和利用SQL注入漏洞以及接入该数据库的服务器。它拥有非常强大的检测引擎、具有多种特性的渗透测试器、通过数据库指纹提取访问底层文件系统并通过外带连接执行命令</p>
-<h5 id="支持的数据库："><a href="#支持的数据库：" class="headerlink" title="支持的数据库："></a>支持的数据库：</h5><blockquote>
-<p>MySQL, Oracle, PostgreSQL, Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite, Firebird, Sybase and SAP MaxDB</p>
-</blockquote>
-<h5 id="SQL注入技术："><a href="#SQL注入技术：" class="headerlink" title="SQL注入技术："></a>SQL注入技术：</h5><blockquote>
-<p>boolean-based blind, time-based blind, error-based, UNION query, stacked queries and out-of-band</p>
-</blockquote>
-<h5 id="枚举数据："><a href="#枚举数据：" class="headerlink" title="枚举数据："></a>枚举数据：</h5><blockquote>
-<p>users, password hashes, privileges, roles, databases, tables and columns</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/05/WEB/sqlmap%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/06/28/WEB/sql%E6%B3%A8%E5%85%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tx.jpeg">
-      <meta itemprop="name" content="逸晨">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逸晨のBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/28/WEB/sql%E6%B3%A8%E5%85%A5/" class="post-title-link" itemprop="url">sqli-1到10</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-28 10:51:57" itemprop="dateCreated datePublished" datetime="2020-06-28T10:51:57+08:00">2020-06-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 14:49:58" itemprop="dateModified" datetime="2020-07-22T14:49:58+08:00">2020-07-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/28/WEB/sql%E6%B3%A8%E5%85%A5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/28/WEB/sql%E6%B3%A8%E5%85%A5/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第一关字符型注入-解析过程"><a href="#第一关字符型注入-解析过程" class="headerlink" title="第一关字符型注入 解析过程"></a>第一关字符型注入 解析过程</h1><h3 id="1-查询字段："><a href="#1-查询字段：" class="headerlink" title="1.查询字段："></a>1.查询字段：</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attr">id=</span><span class="number">1</span>' <span class="keyword">order</span> <span class="title">by</span> <span class="number">5</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://segmentfault.com/img/bVben0J?w=367&h=34" alt="图片描述"></p>
-<p>采用折半查找，找到一个最大的不报错的数字，则为该表的字段长度，这里为3；</p>
-<h3 id="2-查询回显点："><a href="#2-查询回显点：" class="headerlink" title="2.查询回显点："></a>2.查询回显点：</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=' union select <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://segmentfault.com/img/bVben0Q?w=309&h=134" alt="图片描述"></p>
-<p>由图可知回显点为第二、第三个字段，所以我们之后查询的内容要放在第二、第三字段才会显示；</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/28/WEB/sql%E6%B3%A8%E5%85%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/06/26/%E5%90%8E%E7%AB%AF/PHP%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tx.jpeg">
-      <meta itemprop="name" content="逸晨">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逸晨のBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/26/%E5%90%8E%E7%AB%AF/PHP%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">PHP入门笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-26 20:11:49" itemprop="dateCreated datePublished" datetime="2020-06-26T20:11:49+08:00">2020-06-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-08 09:26:21" itemprop="dateModified" datetime="2020-07-08T09:26:21+08:00">2020-07-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/26/%E5%90%8E%E7%AB%AF/PHP%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/26/%E5%90%8E%E7%AB%AF/PHP%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据表达"><a href="#数据表达" class="headerlink" title="数据表达"></a>数据表达</h1><h2 id="PHP的基本语法规则"><a href="#PHP的基本语法规则" class="headerlink" title="PHP的基本语法规则"></a>PHP的基本语法规则</h2><ul>
-<li><h3 id="PHP标记"><a href="#PHP标记" class="headerlink" title="PHP标记"></a>PHP标记</h3><p>PHP语言，是一种可以嵌入到“html”代码中的后台处理语言（程序）</p>
-<p>我们常用以下几种方式：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第一种:</span></span><br><span class="line"><span class="meta">&lt;?php</span> 代码.... <span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#第二种：</span></span><br><span class="line">&lt;script language= <span class="string">"php"</span> &gt;代码....&lt;/script&gt;</span><br><span class="line">    </span><br><span class="line"><span class="comment">#第三种:</span></span><br><span class="line"><span class="meta">&lt;?</span> 代码.... <span class="meta">?&gt;</span>	<span class="comment">#需要到php.ini中进行配置：short_open_tag = On</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong></p>
-<blockquote>
-<p>纯PHP代码：可以省略标记结尾符</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/26/%E5%90%8E%E7%AB%AF/PHP%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/06/26/%E7%8E%AF%E5%A2%83/%E5%9C%A8Centos%E4%B8%8B%E9%83%A8%E7%BD%B2web%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tx.jpeg">
-      <meta itemprop="name" content="逸晨">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逸晨のBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/26/%E7%8E%AF%E5%A2%83/%E5%9C%A8Centos%E4%B8%8B%E9%83%A8%E7%BD%B2web%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">在Centos下部署web服务器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-26 18:46:55 / 修改时间：18:59:35" itemprop="dateCreated datePublished" datetime="2020-06-26T18:46:55+08:00">2020-06-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/26/%E7%8E%AF%E5%A2%83/%E5%9C%A8Centos%E4%B8%8B%E9%83%A8%E7%BD%B2web%E6%9C%8D%E5%8A%A1%E5%99%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/26/%E7%8E%AF%E5%A2%83/%E5%9C%A8Centos%E4%B8%8B%E9%83%A8%E7%BD%B2web%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="在Centos下部署web服务器"><a href="#在Centos下部署web服务器" class="headerlink" title="在Centos下部署web服务器"></a>在Centos下部署web服务器</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>采取<strong>LAMP</strong>作为基础环境，分别为：Centos+Apache+Mysql+PhP;</p>
-<p>这个环境拥有高强度的兼容性，比较受目前IT届的欢迎</p>
-<p><strong>LAMP工作原理：</strong></p>
-<ol>
-<li>发送Apache的PHP访问请求</li>
-<li>对于PHP文件会用libphp5.so模块解析</li>
-<li>会将解析后的HTML文件给Apache</li>
-<li>最后返回给客户机</li>
-</ol>
-<p><strong>Web服务器的工作模式和端口：</strong></p>
-<p>​    工作模式是：B/S模式</p>
-<p>​    工作端口是：80/http 正常端口443/https SSL端口</p>
-<h2 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h2><h3 id="安装服务端（httpd）"><a href="#安装服务端（httpd）" class="headerlink" title="安装服务端（httpd）"></a>安装服务端（httpd）</h3><p>因为使用的是Centos，本人采用的是yum安装，共有两种安装方法：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第一种方法：</span></span><br><span class="line">yum -y <span class="keyword">install</span> httpd</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二种方法：</span></span><br><span class="line">yum <span class="keyword">install</span> httpd-devel</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>其中遇到的问题是：</strong></p>
-<blockquote>
-<p>如果是一个全新的服务器，可能不会出现端口冲突的情况，但是在老的服务器，较容易出现端口冲突。</p>
-<p><strong>解决方法是：</strong></p>
-<p>更改配置文件中conf/httpd.conf    修改其中的监听端口（*<em>Listen *</em>80）或者关闭80端口的进程</p>
-</blockquote>
-<h3 id="安装字符界面下的客户端：elinks"><a href="#安装字符界面下的客户端：elinks" class="headerlink" title="安装字符界面下的客户端：elinks"></a>安装字符界面下的客户端：elinks</h3><h4 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> elinks</span><br></pre></td></tr></table></figure>
-
-<h4 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h4><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">elinks <span class="string">"本机地址"</span></span><br><span class="line">elinks <span class="number">192.168</span><span class="number">.1</span><span class="number">.63</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="主配置文件介绍："><a href="#主配置文件介绍：" class="headerlink" title="主配置文件介绍："></a>主配置文件介绍：</h3><blockquote>
-<p>vim /etc/httpd/conf/httpd.conf    #通过vim修改</p>
-<p>ServerName 192.168.1.235:80     #服务器主机名</p>
-<p>PidFile run/httpd.pid#apache      #运行进程 ID 存放</p>
-<p>Timeout 60                        #超时时间，多少 s 没有反应就超时</p>
-<p>KeepAlive Off                     #是否允许一个永久的链接，设置为 OFF 的时候，不 能保持连接功能，传输效率比较低，设置为 ON 时，可以提高服务器传输文件的效率，建议开启</p>
-<p>MaxKeepAliveRequests 100       #设置 KeepAlive 为 ON 时，设置客户端每次连接允许 请求相应最大文件数，默认 100 个</p>
-<p>KeepAliveTimeout 15              #超时时间，同一个客户端下一个请求 15s 没收到就 超时</p>
-<p>Listen 80#监听端口，默认本地 IP，如果指定 ip 写上 IP:80</p>
-<IfModule prefork.c>
-
-<p>StartServers8                       #服务开始起启动 8 个进程</p>
-<p>MinSpareServers5                  #最小空闲 5 个进程</p>
-<p>MaxSpareServers20                 #最多空闲 20 个进程</p>
-<p>ServerLimit256                      #服务器允许配置进程数上线</p>
-<p>MaxClients256                       #最大连接数 256，超过要进入等候队列 </p>
-<p>MaxRequestsPerChild4000         #每个进程生存期内服务最大的请求数量，0 表示用不 结束</p>
-</IfModule>
-
-<Directory />
-
-<p>Options FollowSymLinks            #Options Indexes 目录浏览FollowSymLinks 用连接</p>
-<p>浏览</p>
-<p>AllowOverride None                #设置为 none，忽略.htaccess</p>
-</Directory>
-
-<p>LoadModule auth_basic_module modules/mod_auth_basic.so      #载入的库，模块</p>
-<p>● ● ● ● ● ●</p>
-<p>Include conf.d/*.conf               #conf.d 里面的 conf 文件也属有效配置文件</p>
-<p>User apache#apache                 #运行以哪个身份运行</p>
-<p>Group apache#apache               #运行以哪个组的身份运行</p>
-<p>ServerAdmin root@localhost       #管理员邮箱</p>
-<p>DocumentRoot “/var/www/html”   #默认的主目录，如果改动要改动两处，Directory</p>
-<p>&lt;Directory “/var/www/html”&gt; Options Indexes FollowSymLinks AllowOverride None</p>
-<p>Order allow,deny                   #这里默认后者生效，也就是 deny 生效</p>
-<p>Allow from all                       #这里说允许所有</p>
-</Directory>
-
-<p>LogLevel warn                         #日志等级</p>
-<p>DirectoryIndex index.html index.html.var  #首页 </p>
-<p>AccessFileName .htaccess              #access 文件名</p>
-<p>AddDefaultCharset UTF-8              #支持的语言，默认编码</p>
-<p>#配置文件的最后是虚拟主机的字段，其中你大部分字段做个了解即可，用到的时候去查 即可</p>
-</blockquote>
-<h3 id="安装rpm包（Mysql-PHP）"><a href="#安装rpm包（Mysql-PHP）" class="headerlink" title="安装rpm包（Mysql+PHP）"></a>安装rpm包（Mysql+PHP）</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第一种方法：</span></span><br><span class="line">yum install httpd  mysql mysql-server php php-mysql –y</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二种方法：</span></span><br><span class="line">yum install httpd-devel  mysql  mysql-server php php-mysql -y</span><br><span class="line"></span><br><span class="line"><span class="comment">#测试数据库</span></span><br><span class="line">service mysqld start</span><br><span class="line">chkconfig mysqld on</span><br><span class="line"></span><br><span class="line"><span class="comment">#测试apache是否支持php</span></span><br><span class="line">cd /var/www/html/</span><br><span class="line">vim index.php</span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gg5w2l71hjj31hc0scwir.jpg" alt="Image text"></p>
-<h3 id="至此环境已经安装完成"><a href="#至此环境已经安装完成" class="headerlink" title="至此环境已经安装完成"></a>至此环境已经安装完成</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/05/26/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tx.jpeg">
-      <meta itemprop="name" content="逸晨">
-      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="逸晨のBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/26/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">数据库基础操作</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-26 08:59:29 / 修改时间：09:19:14" itemprop="dateCreated datePublished" datetime="2020-05-26T08:59:29+08:00">2020-05-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MYSQL/" itemprop="url" rel="index"><span itemprop="name">MYSQL</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/26/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/26/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>18k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>16 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据库简介"><a href="#数据库简介" class="headerlink" title="数据库简介"></a>数据库简介</h1><h2 id="什么是数据库："><a href="#什么是数据库：" class="headerlink" title="什么是数据库："></a>什么是数据库：</h2><p>数据库（Database）是按照数据结构来组织、存储和管理数据的仓库，</p>
-<p>每个数据库都有一个或多个不同的API用于创建，访问，管理，搜索和复制所保存的数据。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/26/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1482,7 +1418,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1555,12 +1491,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">125k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

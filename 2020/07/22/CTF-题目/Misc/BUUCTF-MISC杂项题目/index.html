@@ -20,32 +20,35 @@
     var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Bugku-成绩单 注入测试分析： 寻找注入点： 寻找字段数：">
+  <meta name="description" content="BUUCTF-金三胖 隐约发现有红色的东西，一闪而过，所以直接拿它进行分解，发现居然是flag 最终得到是:flag{he11ohongke}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bugku-成绩单 注入测试">
-<meta property="og:url" content="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:title" content="BUUCTF-MISC">
+<meta property="og:url" content="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/Misc/BUUCTF-MISC%E6%9D%82%E9%A1%B9%E9%A2%98%E7%9B%AE/index.html">
 <meta property="og:site_name" content="逸晨のBlog">
-<meta property="og:description" content="Bugku-成绩单 注入测试分析： 寻找注入点： 寻找字段数：">
+<meta property="og:description" content="BUUCTF-金三胖 隐约发现有红色的东西，一闪而过，所以直接拿它进行分解，发现居然是flag 最终得到是:flag{he11ohongke}">
 <meta property="og:locale" content="zh—CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2sujr3zj30ym0evdh7.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2t3yqrrj315q0fgjsm.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2tdsddvj31730et75i.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2tojzzxj315l0fjwfr.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2thopnkj314h0edt9y.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2x0keunj30v90b60tp.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh4cxgp97j30wf0e275d.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh4ea80w0j30vw0a93zh.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh4mok1fmj310q09igmk.jpg">
-<meta property="article:published_time" content="2020-07-20T02:23:13.042Z">
-<meta property="article:modified_time" content="2020-07-22T06:48:01.247Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh34xs1n4xg3063056hdt.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh3512zs53j30j808jacx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh355c1xq1j30g006h0tg.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh357hcta3j30lh07w0sy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh35dzqozbj30nw01gglh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh35j10ucej30if081wff.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh35wr59yaj30p205lmxh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh364cgk3kj31aa09ktb2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh367nb6p6j30ii01tq31.jpg">
+<meta property="og:image" content="https://img-blog.csdn.net/20170706110508501?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGRzdTE2MTUzMDI0Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh36g0tmf0j30sh0j844y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh36pt41n0j30if081gmk.jpg">
+<meta property="article:published_time" content="2020-07-22T07:05:39.555Z">
+<meta property="article:modified_time" content="2020-08-05T07:43:46.163Z">
 <meta property="article:author" content="逸晨">
 <meta property="article:tag" content="信息安全">
 <meta property="article:tag" content="CTF-题目">
-<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="MISC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2sujr3zj30ym0evdh7.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh34xs1n4xg3063056hdt.gif">
 
-<link rel="canonical" href="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/">
+<link rel="canonical" href="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/Misc/BUUCTF-MISC%E6%9D%82%E9%A1%B9%E9%A2%98%E7%9B%AE/">
 
 
 <script id="page-configurations">
@@ -58,7 +61,7 @@
   };
 </script>
 
-  <title>Bugku-成绩单 注入测试 | 逸晨のBlog</title>
+  <title>BUUCTF-MISC | 逸晨のBlog</title>
   
 
 
@@ -207,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/Misc/BUUCTF-MISC%E6%9D%82%E9%A1%B9%E9%A2%98%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tx.jpeg">
@@ -220,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Bugku-成绩单 注入测试
+          BUUCTF-MISC
         </h1>
 
         <div class="post-meta">
@@ -230,14 +233,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-20 10:23:13" itemprop="dateCreated datePublished" datetime="2020-07-20T10:23:13+08:00">2020-07-20</time>
+              <time title="创建时间：2020-07-22 15:05:39" itemprop="dateCreated datePublished" datetime="2020-07-22T15:05:39+08:00">2020-07-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 14:48:01" itemprop="dateModified" datetime="2020-07-22T14:48:01+08:00">2020-07-22</time>
+                <time title="修改时间：2020-08-05 15:43:46" itemprop="dateModified" datetime="2020-08-05T15:43:46+08:00">2020-08-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,8 +268,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/Misc/BUUCTF-MISC%E6%9D%82%E9%A1%B9%E9%A2%98%E7%9B%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/Misc/BUUCTF-MISC%E6%9D%82%E9%A1%B9%E9%A2%98%E7%9B%AE/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -276,7 +279,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>73</span>
+              <span>597</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -295,17 +298,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Bugku-成绩单-注入测试"><a href="#Bugku-成绩单-注入测试" class="headerlink" title="Bugku-成绩单 注入测试"></a>Bugku-成绩单 注入测试</h2><h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2sujr3zj30ym0evdh7.jpg" alt="分析.png"></p>
-<h4 id="寻找注入点："><a href="#寻找注入点：" class="headerlink" title="寻找注入点："></a>寻找注入点：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2t3yqrrj315q0fgjsm.jpg" alt="注入点.png"></p>
-<h4 id="寻找字段数："><a href="#寻找字段数：" class="headerlink" title="寻找字段数："></a>寻找字段数：</h4><a id="more"></a>
+        <h2 id="BUUCTF-金三胖"><a href="#BUUCTF-金三胖" class="headerlink" title="BUUCTF-金三胖"></a>BUUCTF-金三胖</h2><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh34xs1n4xg3063056hdt.gif" alt="金三胖"></p>
+<p>隐约发现有红色的东西，一闪而过，所以直接拿它进行分解，发现居然是flag</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh3512zs53j30j808jacx.jpg" alt="flag1">最终得到是:flag{he11ohongke}</p>
+<a id="more"></a>
 
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2tdsddvj31730et75i.jpg" alt="字段数.png"></p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2tojzzxj315l0fjwfr.jpg" alt="字段数2.png"></p>
-<h4 id="寻找回显："><a href="#寻找回显：" class="headerlink" title="寻找回显："></a>寻找回显：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2thopnkj314h0edt9y.jpg" alt="回显.png"></p>
-<h4 id="爆所有库名："><a href="#爆所有库名：" class="headerlink" title="爆所有库名："></a>爆所有库名：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh2x0keunj30v90b60tp.jpg" alt="库名.png"></p>
-<h4 id="爆自己所查库下的所有表名："><a href="#爆自己所查库下的所有表名：" class="headerlink" title="爆自己所查库下的所有表名："></a>爆自己所查库下的所有表名：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh4cxgp97j30wf0e275d.jpg" alt="表名.png"></p>
-<h4 id="爆自己所查表下的所有字段名："><a href="#爆自己所查表下的所有字段名：" class="headerlink" title="爆自己所查表下的所有字段名："></a>爆自己所查表下的所有字段名：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh4ea80w0j30vw0a93zh.jpg" alt="字段名.png"></p>
-<h4 id="爆出flag："><a href="#爆出flag：" class="headerlink" title="爆出flag："></a>爆出flag：</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggh4mok1fmj310q09igmk.jpg" alt="爆出flag.png"></p>
+<h2 id="BUUCTF-二维码"><a href="#BUUCTF-二维码" class="headerlink" title="BUUCTF-二维码"></a>BUUCTF-二维码</h2><p>打开压缩包，发现是一张二维码，利用CQR扫一下，发现扫到的并不是flag</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh355c1xq1j30g006h0tg.jpg" alt="描述"></p>
+<p>用winhex打开看一下，发现里面存在压缩包</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh357hcta3j30lh07w0sy.jpg" alt="描述：压缩包"></p>
+<p>解压一下</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh35dzqozbj30nw01gglh.jpg" alt="图片存在密码"></p>
+<p>看到0900估计是存在加密了，那么就拿ARCHPR爆破一下</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh35j10ucej30if081wff.jpg" alt="flag2"></p>
+<p>爆破成功，拿到密码7639</p>
+<p>flag{vjpw_wnoei}</p>
+<h2 id="BUUCTF-N种方法解决"><a href="#BUUCTF-N种方法解决" class="headerlink" title="BUUCTF-N种方法解决"></a>BUUCTF-N种方法解决</h2><p>拿到发现是一个exe文件，用winhex打开吓一跳</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh35wr59yaj30p205lmxh.jpg" alt="winhex"></p>
+<p>直接用base64解码好像就完事了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh364cgk3kj31aa09ktb2.jpg" alt="base64"></p>
+<p>扫码解得flag{dca57f966e4e4e31fd5b15417da63269}</p>
+<h2 id="BUUCTF-大白"><a href="#BUUCTF-大白" class="headerlink" title="BUUCTF-大白"></a>BUUCTF-大白</h2><p>根据题目提示,应该是题目的尺寸有问题</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh367nb6p6j30ii01tq31.jpg" alt="image-20200725134943715"></p>
+<p>修改长和高，拿到flag</p>
+<p><img src="https://img-blog.csdn.net/20170706110508501?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGRzdTE2MTUzMDI0Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="大白"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh36g0tmf0j30sh0j844y.jpg" alt="dabai2"></p>
+<p>flag{He1l0_d4_bai}</p>
+<h2 id="BUUCTF-基础破解"><a href="#BUUCTF-基础破解" class="headerlink" title="BUUCTF-基础破解"></a>BUUCTF-基础破解</h2><p> 题目提示它是一个四位数加密的爆破题</p>
+<p>那么直接上爆破吧</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh36pt41n0j30if081gmk.jpg" alt="基础破解"></p>
+<p>打开文件，发现是一个base加密</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZmxhZ<span class="number">3</span>s<span class="number">3</span>MD<span class="name">M1</span><span class="symbol">NDMwMGE1</span>MTAwYmE<span class="number">3</span>ODA<span class="number">2</span>ODgw<span class="symbol">NTY2</span>MWI<span class="number">5</span><span class="name">M2</span>E<span class="number">1</span>Y<span class="number">30</span>=</span><br></pre></td></tr></table></figure>
+
+<p>解得flag{70354300a5100ba78068805661b93a5c}</p>
+<h2 id="BUUCTF-你竟然赶我走"><a href="#BUUCTF-你竟然赶我走" class="headerlink" title="BUUCTF-你竟然赶我走"></a>BUUCTF-你竟然赶我走</h2><p>发现是jpg，也就不考虑是lsb隐写的问题</p>
+<p>用winhex检查文件开头和结尾发现了flag</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">flag</span> IS <span class="built_in">flag</span>&#123;stego_is_s0_bor1ing&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -317,7 +346,7 @@
           <div class="post-tags">
               <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"># 信息安全</a>
               <a href="/tags/CTF-%E9%A2%98%E7%9B%AE/" rel="tag"># CTF-题目</a>
-              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/MISC/" rel="tag"># MISC</a>
           </div>
 
         
@@ -326,12 +355,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/17/WEB/%E5%88%9D%E8%AF%86%E8%9A%81%E5%89%91/" rel="prev" title="初识蚁剑">
-      <i class="fa fa-chevron-left"></i> 初识蚁剑
+    <a href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/WEB/BUUCTF-%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DEasySQL1/" rel="prev" title="BUUCTF-[极客大挑战 2019]EasySQL1">
+      <i class="fa fa-chevron-left"></i> BUUCTF-[极客大挑战 2019]EasySQL1
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/" rel="next" title="buuctf-[强网杯 2019]随便注 1">
-      buuctf-[强网杯 2019]随便注 1 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/07/23/CTF-%E9%A2%98%E7%9B%AE/Misc/7.23-MISC+Crypto%E7%BB%BC%E5%90%88%E9%A2%98/" rel="next" title="7.23 MISC+Crypto综合题">
+      7.23 MISC+Crypto综合题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -392,7 +421,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bugku-成绩单-注入测试"><span class="nav-number">1.</span> <span class="nav-text">Bugku-成绩单 注入测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析："><span class="nav-number">1.0.1.</span> <span class="nav-text">分析：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找注入点："><span class="nav-number">1.0.2.</span> <span class="nav-text">寻找注入点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找字段数："><span class="nav-number">1.0.3.</span> <span class="nav-text">寻找字段数：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找回显："><span class="nav-number">1.0.4.</span> <span class="nav-text">寻找回显：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爆所有库名："><span class="nav-number">1.0.5.</span> <span class="nav-text">爆所有库名：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爆自己所查库下的所有表名："><span class="nav-number">1.0.6.</span> <span class="nav-text">爆自己所查库下的所有表名：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爆自己所查表下的所有字段名："><span class="nav-number">1.0.7.</span> <span class="nav-text">爆自己所查表下的所有字段名：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爆出flag："><span class="nav-number">1.0.8.</span> <span class="nav-text">爆出flag：</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-金三胖"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF-金三胖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-二维码"><span class="nav-number">2.</span> <span class="nav-text">BUUCTF-二维码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-N种方法解决"><span class="nav-number">3.</span> <span class="nav-text">BUUCTF-N种方法解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-大白"><span class="nav-number">4.</span> <span class="nav-text">BUUCTF-大白</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-基础破解"><span class="nav-number">5.</span> <span class="nav-text">BUUCTF-基础破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF-你竟然赶我走"><span class="nav-number">6.</span> <span class="nav-text">BUUCTF-你竟然赶我走</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -408,7 +437,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -481,12 +510,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">125k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

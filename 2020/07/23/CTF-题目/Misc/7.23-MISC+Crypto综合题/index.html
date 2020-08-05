@@ -20,31 +20,34 @@
     var CONFIG = {"hostname":"yichennet.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="buuctf-[强网杯 2019]随便注 1初期探测过程： 探测注入点输入1’发现存在注入点   查询字段数输入1&#39; order by 5%23">
+  <meta name="description" content="7.23 MISC+Crypto综合题题目给了一个zip文件，打开了这个文件，发现了两个文件  然后又发现CRC校验和源文件大小也是一样的  那么毫无疑问，用ZIP明文攻击">
 <meta property="og:type" content="article">
-<meta property="og:title" content="buuctf-[强网杯 2019]随便注 1">
-<meta property="og:url" content="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-[%E5%BC%BA%E7%BD%91%E6%9D%AF-2019]%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/index.html">
+<meta property="og:title" content="7.23 MISC+Crypto综合题">
+<meta property="og:url" content="https://yichennet.github.io/2020/07/23/CTF-%E9%A2%98%E7%9B%AE/Misc/7.23-MISC+Crypto%E7%BB%BC%E5%90%88%E9%A2%98/index.html">
 <meta property="og:site_name" content="逸晨のBlog">
-<meta property="og:description" content="buuctf-[强网杯 2019]随便注 1初期探测过程： 探测注入点输入1’发现存在注入点   查询字段数输入1&#39; order by 5%23">
+<meta property="og:description" content="7.23 MISC+Crypto综合题题目给了一个zip文件，打开了这个文件，发现了两个文件  然后又发现CRC校验和源文件大小也是一样的  那么毫无疑问，用ZIP明文攻击">
 <meta property="og:locale" content="zh—CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8i9a06fj31gq05vq3v.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8la48p4j30ya096aax.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8mur76ej30v30bx0tq.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8o2tjvxj30xw0cut9u.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8qui6cej30yt0clgmx.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggxgzp804sj314a0d3t9x.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggxhf1hhqjj311t0czq4b.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggxhqxf6lbj30u10c6mye.jpg">
-<meta property="article:published_time" content="2020-07-20T02:49:27.728Z">
-<meta property="article:modified_time" content="2020-07-22T06:48:55.840Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0xnxj5zmj30gz032t8m.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0xx77sd0j314v0am0ur.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0y4en6r5j30x30mg7bh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0y60fxwbj30if081gmo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0y81f8z9j30qv0k8dgk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0yglt4kcj30fa0hxaac.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0ylggo9cj31f10jnq3n.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0ytlk524j30h608qjrm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0ywbh3e8j30oy037wei.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0yyt3cf8j30cd0d1dgd.jpg">
+<meta property="article:published_time" content="2020-07-23T08:15:24.624Z">
+<meta property="article:modified_time" content="2020-07-23T08:16:00.837Z">
 <meta property="article:author" content="逸晨">
 <meta property="article:tag" content="信息安全">
+<meta property="article:tag" content="Crypto">
 <meta property="article:tag" content="CTF-题目">
-<meta property="article:tag" content="WEB">
+<meta property="article:tag" content="MISC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8i9a06fj31gq05vq3v.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0xnxj5zmj30gz032t8m.jpg">
 
-<link rel="canonical" href="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-[%E5%BC%BA%E7%BD%91%E6%9D%AF-2019]%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/">
+<link rel="canonical" href="https://yichennet.github.io/2020/07/23/CTF-%E9%A2%98%E7%9B%AE/Misc/7.23-MISC+Crypto%E7%BB%BC%E5%90%88%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -57,7 +60,7 @@
   };
 </script>
 
-  <title>buuctf-[强网杯 2019]随便注 1 | 逸晨のBlog</title>
+  <title>7.23 MISC+Crypto综合题 | 逸晨のBlog</title>
   
 
 
@@ -206,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh—CN">
-    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-[%E5%BC%BA%E7%BD%91%E6%9D%AF-2019]%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/">
+    <link itemprop="mainEntityOfPage" href="https://yichennet.github.io/2020/07/23/CTF-%E9%A2%98%E7%9B%AE/Misc/7.23-MISC+Crypto%E7%BB%BC%E5%90%88%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tx.jpeg">
@@ -219,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          buuctf-[强网杯 2019]随便注 1
+          7.23 MISC+Crypto综合题
         </h1>
 
         <div class="post-meta">
@@ -228,16 +231,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-07-20 10:49:27" itemprop="dateCreated datePublished" datetime="2020-07-20T10:49:27+08:00">2020-07-20</time>
+              <time title="创建时间：2020-07-23 16:15:24 / 修改时间：16:16:00" itemprop="dateCreated datePublished" datetime="2020-07-23T16:15:24+08:00">2020-07-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 14:48:55" itemprop="dateModified" datetime="2020-07-22T14:48:55+08:00">2020-07-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -264,8 +261,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/buuctf-%5B%E5%BC%BA%E7%BD%91%E6%9D%AF-2019%5D%E9%9A%8F%E4%BE%BF%E6%B3%A8-1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/07/23/CTF-%E9%A2%98%E7%9B%AE/Misc/7.23-MISC+Crypto%E7%BB%BC%E5%90%88%E9%A2%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/23/CTF-%E9%A2%98%E7%9B%AE/Misc/7.23-MISC+Crypto%E7%BB%BC%E5%90%88%E9%A2%98/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -275,7 +272,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -294,45 +291,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="buuctf-强网杯-2019-随便注-1"><a href="#buuctf-强网杯-2019-随便注-1" class="headerlink" title="buuctf-[强网杯 2019]随便注 1"></a>buuctf-[强网杯 2019]随便注 1</h2><h3 id="初期探测过程："><a href="#初期探测过程：" class="headerlink" title="初期探测过程："></a>初期探测过程：</h3><ol>
-<li><h4 id="探测注入点"><a href="#探测注入点" class="headerlink" title="探测注入点"></a>探测注入点</h4><p>输入1’发现存在注入点</p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8i9a06fj31gq05vq3v.jpg" alt="1"></p>
-</li>
-<li><h4 id="查询字段数"><a href="#查询字段数" class="headerlink" title="查询字段数"></a>查询字段数</h4><p>输入<code>1&#39; order by 5%23</code></p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8la48p4j30ya096aax.jpg" alt="2"></p>
+        <h2 id="7-23-MISC-Crypto综合题"><a href="#7-23-MISC-Crypto综合题" class="headerlink" title="7.23 MISC+Crypto综合题"></a>7.23 MISC+Crypto综合题</h2><p>题目给了一个zip文件，打开了这个文件，发现了两个文件</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0xnxj5zmj30gz032t8m.jpg" alt="1"></p>
+<p>然后又发现CRC校验和源文件大小也是一样的</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0xx77sd0j314v0am0ur.jpg" alt="123"></p>
+<p>那么毫无疑问，用ZIP明文攻击</p>
 <a id="more"></a>
 
-<p>发现数值太大了，再次输入<code>1&#39; order by 3%23</code></p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8mur76ej30v30bx0tq.jpg" alt="3"></p>
-<p>发现数值还是大了，再次输入<code>1&#39; order by 2%23</code></p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8o2tjvxj30xw0cut9u.jpg" alt="4"></p>
-<p>发现2，回显正常，这道题的字段数为2</p>
-</li>
-<li><h4 id="查询回显"><a href="#查询回显" class="headerlink" title="查询回显"></a>查询回显</h4></li>
-</ol>
-<p>输入1’ select 1,2%23</p>
-<p>   <img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggx8qui6cej30yt0clgmx.jpg" alt="5"></p>
-<p>   发现过滤了</p>
-<h2 id="注入姿势"><a href="#注入姿势" class="headerlink" title="注入姿势"></a>注入姿势</h2><p>因为select被过滤了，所以union查询与盲注都好像不得行了。通过百度得知，采用堆叠注入比较合适</p>
-<p>参考大佬：<a href="https://www.zhihu.com/pedople/saucerman88" target="_blank" rel="noopener">saucerman</a>的文章</p>
-<p>文章链接：<a href="https://zhuanlan.zhihu.com/p/78989602" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/78989602</a></p>
-<h3 id="堆叠注入的绕过过滤"><a href="#堆叠注入的绕过过滤" class="headerlink" title="堆叠注入的绕过过滤"></a>堆叠注入的绕过过滤</h3><p>因为第一次尝试堆叠注入，用大佬的方法进行第一次尝试</p>
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggxgzp804sj314a0d3t9x.jpg" alt="test1"></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">发现尝试这个代码有用：</span><br><span class="line">1';<span class="keyword">show</span> <span class="keyword">tables</span>;%23</span><br></pre></td></tr></table></figure>
+<h3 id="zip明文攻击"><a href="#zip明文攻击" class="headerlink" title="zip明文攻击"></a>zip明文攻击</h3><p>打开ARCHPR</p>
+<p>将攻击类型设置为明文，并将两个zip也准备好</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0y4en6r5j30x30mg7bh.jpg" alt="zip明文攻击"></p>
+<p>点一下开始，就可以获得已经加密的文件</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0y60fxwbj30if081gmo.jpg" alt="因为长度问题"></p>
+<p>因为长度问题，所以没有找到口令</p>
+<p>但是它会自动变成一个已经解密的压缩包</p>
+<p>拿到了一串神秘字符</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0y81f8z9j30qv0k8dgk.jpg" alt="jiami"></p>
+<h3 id="Base"><a href="#Base" class="headerlink" title="Base"></a>Base</h3><p>我们看到这个神秘字符，需要第一时间回想自己所学过的编码特征</p>
+<blockquote>
+<p><strong>特征：</strong></p>
+<p>​    base64编码后的字符串的长度一定会被4整除，包括用作后缀的等号吧；如果明文字符数不能被3整除，余1时，1个字符转为2个，补2个等号，共4个字符；余2时，2个字符转为3个字符，补1个等号，共4个字符；其实归根结底就是一句话：经过base64编码后的字符串长度一定会被4整除（包括后缀等号）</p>
+</blockquote>
+<p>存在中英文大小写和数字，而且我用python跑了一下长度，是4的倍数，那么毫无疑问了，是base</p>
+<p>那就直接去网站上跑一下</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0yglt4kcj30fa0hxaac.jpg" alt="qwqwq"></p>
+<p>得出的结果是</p>
+<p>​    </p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pz%<span class="number">7</span>Brodavqv_b0%<span class="number">21</span>pclx_0%<span class="number">7</span>D</span><br></pre></td></tr></table></figure>
 
-<p>那么我们就可以通过一些sql语言进行简单查询了</p>
-<h4 id="利用desc"><a href="#利用desc" class="headerlink" title="利用desc"></a>利用desc</h4><p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggxhf1hhqjj311t0czq4b.jpg" alt="123"></p>
-<p>这个时候我们就已经查到我们想要的了</p>
-<h4 id="注入方式一"><a href="#注入方式一" class="headerlink" title="注入方式一"></a>注入方式一</h4><p>我们可以通过修改列名和列名的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1&#39;; alter table words rename to words1;alter table &#96;1919810931114514&#96; rename to words;alter table words change flag id varchar(50);#</span><br><span class="line"></span><br><span class="line">拆分开来如下</span><br><span class="line">1&#39;;</span><br><span class="line">alter table words rename to words1;</span><br><span class="line">alter table &#96;1919810931114514&#96; rename to words;</span><br><span class="line">alter table words change flag id varchar(50);</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><p>因为我们发现，上一步得出的结果是有百分号和数字的</p>
+<p>让我们回忆一下</p>
+<blockquote>
+<p>URL 编码：</p>
+<p>​    使用 <code>百分号% + 十六进制数字</code> 在URL中表示特殊字符的编码方式。</p>
+</blockquote>
+<p>那么我们再去url编码那边解一下密</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0ylggo9cj31f10jnq3n.jpg" alt="123"></p>
+<p>来了来了，感觉来了</p>
+<p>感觉越来越像提示信息里面的内容</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctf&#123;<span class="strong">*****</span><span class="emphasis">***</span>&#125;</span><br><span class="line">pz&#123;rodavqv<span class="emphasis">_b0!pclx_</span>0&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="注入方法二"><a href="#注入方法二" class="headerlink" title="注入方法二"></a>注入方法二</h4><p>通过concat函数，预编译的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set用于设置变量名和值</span><br><span class="line">prepare用于预备一个语句，并赋予名称，以后可以引用该语句</span><br><span class="line">execute执行语句</span><br><span class="line">deallocate prepare用来释放掉预处理的语句</span><br></pre></td></tr></table></figure>
+<h3 id="栅栏密码"><a href="#栅栏密码" class="headerlink" title="栅栏密码"></a>栅栏密码</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>所谓栅栏密码，就是把要加密的明文分成N个一组，然后把每组的第1个字连起来，形成一段无规律的话。 不过栅栏密码本身有一个潜规则，就是组成栅栏的字母一般不会太多。（一般不超过30个，也就是一、两句话</p>
+<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><p>总体来说字母内容不变，仅是字母顺序被“打乱”；加密的时候要选择组数，所以解密的话只能逆推所有组数，然后选择一个适合的</p>
+<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><p>因为我们要把我们的flag格式和提示的差不多，所以我们用栅栏开始尝试</p>
+<p>我最后尝试出来是3</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0ytlk524j30h608qjrm.jpg" alt="asas"></p>
+<p>最后拿到了</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">pvpzqc</span><span class="template-variable">&#123;vlr_xob_d00a!&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>执行结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-1&#39;;Set @sql &#x3D; CONCAT(&#39;se&#39;,&#39;lect * from &#96;1919810931114514&#96;;&#39;);Prepare stmt from @sql;EXECUTE stmt;#</span><br><span class="line"></span><br><span class="line">拆分开来如下：</span><br><span class="line">-1&#39;;</span><br><span class="line">Set @sql &#x3D; CONCAT(&#39;se&#39;,&#39;lect * from &#96;1919810931114514&#96;;&#39;);</span><br><span class="line">Prepare stmt from @sql;</span><br><span class="line">EXECUTE stmt;</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p>为什么我判断最后一个是ASII而不是其他，其实我们只要进行简单的对比</p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0ywbh3e8j30oy037wei.jpg" alt="asas"></p>
+<p>不难发现的是，他是随着一定的规律发生改变，于是我就想到了ASCII</p>
+<p>我用python写了一个脚本，解除答案</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">'pvpzqc&#123;vlr_xob_d00a!&#125;'</span></span><br><span class="line">test=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    x=ord(i)</span><br><span class="line">    <span class="keyword">if</span> x&gt;<span class="number">96</span> <span class="keyword">and</span> x&lt;<span class="number">123</span>:</span><br><span class="line">        x+=<span class="number">3</span></span><br><span class="line">        <span class="keyword">if</span> x&gt;<span class="number">122</span>:</span><br><span class="line">            x-=<span class="number">26</span></span><br><span class="line">    test+=chr(x)</span><br><span class="line">print(test)</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1ggxhqxf6lbj30u10c6mye.jpg" alt="1"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006ZDEGPly1gh0yyt3cf8j30cd0d1dgd.jpg" alt="12"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>学习了：</strong></p>
+<blockquote>
+<p>base特征，url特征，提升了逻辑思维</p>
+</blockquote>
+<p>本次做题，逻辑不太清晰，做题时间太长了，可能是第一次遇到微难的ctf题目，综合了之前所学的</p>
 
     </div>
 
@@ -343,8 +361,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"># 信息安全</a>
+              <a href="/tags/Crypto/" rel="tag"># Crypto</a>
               <a href="/tags/CTF-%E9%A2%98%E7%9B%AE/" rel="tag"># CTF-题目</a>
-              <a href="/tags/WEB/" rel="tag"># WEB</a>
+              <a href="/tags/MISC/" rel="tag"># MISC</a>
           </div>
 
         
@@ -353,12 +372,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/20/CTF-%E9%A2%98%E7%9B%AE/Bugku-%E6%88%90%E7%BB%A9%E5%8D%95%20%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95/" rel="prev" title="Bugku-成绩单 注入测试">
-      <i class="fa fa-chevron-left"></i> Bugku-成绩单 注入测试
+    <a href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/Misc/BUUCTF-MISC%E6%9D%82%E9%A1%B9%E9%A2%98%E7%9B%AE/" rel="prev" title="BUUCTF-MISC">
+      <i class="fa fa-chevron-left"></i> BUUCTF-MISC
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/07/22/CTF-%E9%A2%98%E7%9B%AE/http123.57.233.792222%20upload%E5%AE%9E%E6%88%98/" rel="next" title="http://123.57.233.79:2222/ upload实战">
-      http://123.57.233.79:2222/ upload实战 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/07/23/C++/C%E8%AF%AD%E8%A8%80/%E9%93%BE%E8%A1%A8/" rel="next" title="C++/C语言/链表">
+      C++/C语言/链表 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -419,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#buuctf-强网杯-2019-随便注-1"><span class="nav-number">1.</span> <span class="nav-text">buuctf-[强网杯 2019]随便注 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初期探测过程："><span class="nav-number">1.1.</span> <span class="nav-text">初期探测过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#探测注入点"><span class="nav-number">1.1.1.</span> <span class="nav-text">探测注入点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询字段数"><span class="nav-number">1.1.2.</span> <span class="nav-text">查询字段数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询回显"><span class="nav-number">1.1.3.</span> <span class="nav-text">查询回显</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入姿势"><span class="nav-number">2.</span> <span class="nav-text">注入姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆叠注入的绕过过滤"><span class="nav-number">2.1.</span> <span class="nav-text">堆叠注入的绕过过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用desc"><span class="nav-number">2.1.1.</span> <span class="nav-text">利用desc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入方式一"><span class="nav-number">2.1.2.</span> <span class="nav-text">注入方式一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入方法二"><span class="nav-number">2.1.3.</span> <span class="nav-text">注入方法二</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-23-MISC-Crypto综合题"><span class="nav-number">1.</span> <span class="nav-text">7.23 MISC+Crypto综合题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zip明文攻击"><span class="nav-number">1.1.</span> <span class="nav-text">zip明文攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Base"><span class="nav-number">1.2.</span> <span class="nav-text">Base</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL编码"><span class="nav-number">1.3.</span> <span class="nav-text">URL编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栅栏密码"><span class="nav-number">1.4.</span> <span class="nav-text">栅栏密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">1.4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征"><span class="nav-number">1.4.2.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实践"><span class="nav-number">1.4.3.</span> <span class="nav-text">实践</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ASCII"><span class="nav-number">1.5.</span> <span class="nav-text">ASCII</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -435,7 +454,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -508,12 +527,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">125k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
